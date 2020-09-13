@@ -103,7 +103,15 @@
             <li><span>Parentele:</span> {{ personage.relationship }}</li>
             <li><span>Amicizie:</span> {{ personage.friendship }}</li>
             <li><span>Note del fato: </span> {{ personage.fateNote|default("-") }}</li>
-			<li><span>Musica:</span> {{ personage.music }}</li>
+			<li><span>Musica:</span> 
+				                 <iframe  allow='autoplay; encrypted-media' frameborder='0' style='height: 2px; width: 2%' src='https://www.youtube.com/embed/{{ personage.music }}?autoplay=1&loop=1'>							 
+								 </iframe> ( {{ personage.musicName }} )
+     
+			
+			</li>
+			  
+			
+			
         </ul>
     </div>
 </div>
