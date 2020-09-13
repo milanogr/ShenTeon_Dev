@@ -1,0 +1,17 @@
+<h3>{{ title }}</h3>
+
+<form id="diary-new-page" action="{{ url }}" method="POST">
+    {{ form_label(form.title) }}
+    {{ form_errors(form.title) }}
+    {{ form_widget(form.title) }}
+
+    {{ form_label(form.body) }}
+    {{ form_errors(form.body) }}
+    {{ form_widget(form.body) }}
+
+    {{ form_rest(form) }}
+
+    <div class="text-centered">
+        <button class="submit-page" type="submit">Salva la pagina</button>
+    </div>
+</form>

@@ -1,0 +1,41 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-admin">
+
+        <h2><span>Admin - Assegna oggetto in inventario</span></h2>
+
+        <div class="centered-form">
+            <div class="errors">
+                {% for flashMessage in app.session.flashbag.get('success') %}
+
+                    <p><strong>{{ flashMessage }}</strong></p>
+                {% endfor %}
+                {% for error in errors %}
+                    <p><strong>{{ error }}</strong></p>
+                {% endfor %}
+            </div>
+
+            <form action="" method="POST">
+                <label>ID oggetto</label>
+                {{ form_widget(form.item) }}
+
+                <label>Quantità</label>
+                {{ form_widget(form.quantity) }}
+
+                <label>Nome destinatario</label>
+                {{ form_widget(form.destinatario) }}
+
+                {{ form_rest(form) }}
+
+                <button type="submit">Inserisci in Inventario</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

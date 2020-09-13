@@ -1,0 +1,16 @@
+<div class="market-filter">
+
+    {% if position == 'bottom' %}
+        <hr>
+    {% endif %}
+
+    {% for category in categories %}
+        {% if category.id == currentCategory.id %}
+           {% set class = 'class="active"' %}
+        {% else %}
+            {% set class = '' %}
+        {% endif %}
+
+        <a {{ class|raw }} href="{{ path('market-items', {'mercato': market.id, 'categoria': category.id, 'livello': level}) }}">{{ category.name }}</a>
+    {% endfor %}
+</div>

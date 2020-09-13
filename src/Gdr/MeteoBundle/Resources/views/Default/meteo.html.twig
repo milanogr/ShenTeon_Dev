@@ -1,0 +1,16 @@
+{% if isDay %}
+    {% set img = vich_uploader_asset(meteo.condition, 'image') %}
+{% else %}
+    {% set img =vich_uploader_asset(meteo.condition, 'imageNight') %}
+{% endif %}
+
+<span id="meteo-ajax">
+    <li class="meteo status">
+        <img src="{{ img }}" class="gdrtooltip"
+             title="{{ meteo.condition.name }} | {{ meteo.temp }}°">
+    </li>
+    <li class="meteo wind">
+        <img src="{{ uploadPath('meteo') ~ meteo.wind.imageName }}" class="gdrtooltip"
+             title="{{ meteo.wind.name }}">
+    </li>
+</span>

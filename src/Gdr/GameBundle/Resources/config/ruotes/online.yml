@@ -1,0 +1,15 @@
+online-index:
+    path: /index
+    defaults: { _controller: GdrGameBundle:Online:index }
+
+refresh-user:
+    path: /refresh-user
+    defaults: { _controller: GdrGameBundle:Online:refreshUser }
+    options:
+        expose: true
+
+logged-in-out:
+    path: /show-in-and-out
+    defaults: { _controller: GdrGameBundle:Online:showLoggedInOut }
+    options:
+        expose: true

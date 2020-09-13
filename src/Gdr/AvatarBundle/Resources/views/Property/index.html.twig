@@ -1,0 +1,118 @@
+{% if is_owner %}
+    <h2><span>Chiavi d'accesso</span></h2>
+
+    <table class="spaced abitazioni chiavi">
+
+        {% for key in keys %}
+            <tr>
+                <td class="dark img">
+                    <img src="{{ vich_uploader_asset(key.item, 'image') }}">
+                    {% if is_owner %}
+                        {% if isInGame %}
+                            <button class="small">Non puoi cambiare chat finché sei in gioco</button>
+                        {% else %}
+                            <a class="button small entra-chat"
+                               href="{{ path('change_location', {id: key.item.canAccessLocation.id}) }}">
+                                ENTRA IN CHAT
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td class="description">
+                    <p><span>Nome: </span>{{ key.item.name }}</p>
+
+                    <p><span>Descrizione: </span>{{ key.item.shortDescription }}</p>
+                </td>
+                <td class="abita">
+                    <label>Abita</label>
+                    <input type="checkbox" name="abita" data-href="{{ path('property-address', {key: key.item.id}) }}"
+                           {% if personage.address == key.item.canAccessLocation %}checked="checked"{% endif %}>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td class="text-centered">Al momento non disponi di chiavi che ti permettono di abitare da qualche
+                    parte. Se
+                    sei il proprietario di qualche abitazione, prima devi generare gli oggetti chiave.
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+{% endif %}
+
+<h2><span>Abitazioni</span></h2>
+
+<table class="spaced abitazioni">
+
+    {% for house in houses %}
+        <tr>
+            <td class="dark img">
+                <img src="{{ vich_uploader_asset(house, 'image') }}" alt="{{ house.name }}">
+                {% if is_owner %}
+                    <button class="small mostra-chiavi" data-href="{{ path('property-show-keys', {id: house.id}) }}">
+                        Gestisci chiavi
+                    </button>
+                    <button data-href="{{ path('property-create-keys', {id: house.id}) }}" class="small crea-chiavi">
+                        Crea chiavi
+                    </button>
+                    <button class="sell small" data-href="{{ path('property-sell', {id: house.id}) }}">Vendi</button>
+                {% endif %}
+            </td>
+            <td class="description">
+                <p><span>Nome: </span>{{ house.name }}</p>
+
+                <p><span>Descrizione: </span> {{ house.description }}</p>
+
+                <p><span>Valore: </span> {{ house.price }} Mori</p>
+
+                <p><span>Tassa mensile: </span> {{ house.tax }} Mori {% if is_owner %}<abbr title="Visibile solo a te">
+                        al {{ house.nextTaxAt|date("d/m/y H:i") }} (circa)</abbr>{% endif %}</p>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td class="text-centered">Il personaggio non dispone di Abitazioni.</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<hr>
+
+<h2><span>Botteghe/Terreni</span></h2>
+<table class="spaced abitazioni">
+    {% for activity in activities %}
+        <tr>
+            <td class="dark img">
+                <img src="{{ vich_uploader_asset(activity, 'image') }}" alt="{{ activity.name }}">
+                {% if is_owner %}
+                    <button class="small show-items" data-href="{{ path('property-items', {id: activity.id}) }}">
+                        Prodotti
+                    </button>
+                    <button class="sell small" data-href="{{ path('property-sell', {id: activity.id}) }}">Vendi</button>
+                {% endif %}
+            </td>
+            <td class="description">
+                <p><span>Nome: </span>{{ activity.name }}</p>
+
+                <p><span>Descrizione: </span> {{ activity.description }}</p>
+
+                <p><span>Valore: </span> {{ activity.price }} Mori</p>
+
+                <p><span>Tassa mensile: </span> {{ activity.tax }} Mori {% if is_owner %}<abbr
+                            title="Visibile solo a te">al {{ activity.nextTaxAt|date("d/m/y H:i") }}
+                        (circa)</abbr>{% endif %}</p>
+                {% if is_owner %}
+                    <p>
+                        <abbr title="Visibile solo a te"><span>Prossima produzione il: </span>{{ activity.nextProductionAt|date("d/m/y H:i") }}
+                            (circa)</abbr>
+                    </p>
+                {% endif %}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td class="text-centered">Il personaggio non dispone di Botteghe o Terreni.</td>
+        </tr>
+    {% endfor %}
+</table>

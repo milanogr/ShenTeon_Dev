@@ -1,0 +1,3 @@
+avatar-index:
+    path: /{name}
+    defaults: { _controller: GdrAvatarBundle:Default:index, name: null }

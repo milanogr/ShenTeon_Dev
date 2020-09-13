@@ -1,0 +1,15 @@
+/web/bundles/
+/web/uploads/*
+/app/bootstrap.php.cache
+/app/cache/*
+/app/logs/*
+/app/config/parameters.yml
+/build/
+/vendor/
+/bin/
+/composer.phar
+/.idea
+.sass-cache/
+/web/css/*
+/web/js/*
+app/Sessions/*

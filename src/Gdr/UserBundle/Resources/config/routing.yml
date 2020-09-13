@@ -1,0 +1,70 @@
+login:
+    pattern: /login/{isIncluded}
+    defaults: { _controller: GdrUserBundle:Login:login, isIncluded: 0 }
+
+login_beta:
+    path: /beta/login/{isIncluded}
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: login
+        permanent: true
+        isIncluded: 0
+
+logout:
+    pattern: /logout
+    defaults: { _controller: GdrUserBundle:Login:logout }
+
+login_check:
+    pattern: /login_check
+
+user_register:
+    pattern: /registrati.html
+    defaults: { _controller: GdrUserBundle:Registration:register }
+
+user_post_register:
+    pattern: /registrazione-completata.html
+    defaults: { _controller: GdrUserBundle:Registration:postRegister }
+
+user_new_pg:
+    pattern: /utente/crea-nuovo-personaggio.html
+    defaults: { _controller: GdrUserBundle:Login:newPersonage}
+
+user_new_pg_step:
+    pattern: /utente/crea-nuovo-personaggio-passo-2.html
+    defaults: { _controller: GdrUserBundle:Login:newPersonage, step: 2}
+
+user_choose_pg:
+    pattern: /utente/scegli-personaggio.html
+    defaults: { _controller: GdrUserBundle:Login:choosePersonage }
+
+user_choose_pg_id:
+    pattern: /utente/scegli-personaggio/{id}
+    defaults: { _controller: GdrUserBundle:Login:choosePersonage }
+
+user_choose_dead_pg_id_action:
+    pattern: /utente/scegli-personaggio-morto/{id}-{action}
+    defaults: { _controller: GdrUserBundle:Login:chooseDeadPersonage }
+
+user_choose_dead_pg_id:
+    pattern: /utente/scegli-personaggio-morto/{id}
+    defaults: { _controller: GdrUserBundle:Login:chooseDeadPersonage }
+
+user_do_reset:
+    pattern: /recupera-password/{token}/{email}
+    defaults: { _controller: GdrUserBundle:Login:doReset }
+
+user_reset:
+    pattern: /recupera-password.html
+    defaults: { _controller: GdrUserBundle:Login:reset }
+
+user_show_race:
+    pattern: /login/razza/{id}
+    defaults: { _controller: GdrUserBundle:Login:showRace }
+    options:
+        expose: true
+
+user_show_attr_age:
+    pattern: /login/razza/parametri/{race}/{age}
+    defaults: { _controller: GdrUserBundle:Login:showAttrAge }
+    options:
+        expose: true

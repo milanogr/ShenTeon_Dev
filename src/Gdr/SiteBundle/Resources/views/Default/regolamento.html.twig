@@ -1,0 +1,17 @@
+{% extends "GdrSiteBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ regolamento.title }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-regolamento">
+        <div class="breadcrumb">
+            <a href="{{ path("site_regolamenti") }}">Regolamenti</a> > {{ regolamento.title }}
+        </div>
+
+        {{ regolamento.body|raw }}
+
+    </div>
+{% endblock %}

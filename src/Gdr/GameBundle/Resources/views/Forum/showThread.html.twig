@@ -1,0 +1,79 @@
+<div class="text-centered">
+    {{ knp_pagination_render(paginator) }}
+</div>
+
+<h4 class="forum-title">
+    {% if thread.status == threadAnnounce %}
+        <strong>[Annuncio] </strong>
+    {% elseif thread.status == threadImportant %}
+        <strong>[In evidenza] </strong>
+    {% endif %}
+    {{ thread.title }}
+</h4>
+<table class="posts spaced">
+    <tbody>
+    <tr class="dark">
+        <th>Autore e Data</th>
+        <th>Testo</th>
+    </tr>
+    {% for post in paginator %}
+
+        {% set isOwner = post.author.id == pgId %}
+        {% set canEdit = (post.isLastPost and isOwner) or isMod %}
+        {% set canDelete = (post.isLastPost and isOwner) or isMod %}
+
+        <tr class="post">
+            <td class="dark name">
+                {% if post.nameAsMod %}
+                    <span class="author-mod">
+                                Moderatore {% if isAdmin %}<abbr
+                                title="Info per la Gestione">({{ post.authorName }})</abbr>{% endif %}
+                            </span>
+                {% elseif post.nameAsAdmin %}
+                    <span class="author-admin">
+                                Gestione {% if isAdmin %}<abbr
+                                title="Info per la Gestione">({{ post.authorName }})</abbr>{% endif %}
+                            </span>
+                {% else %}
+                    {% if post.authorLevelIcon %}
+                        <img src="{{ uploadPath('enclave') ~ post.authorLevelIcon }}"
+                             title="{{ post.authorLevelName }}" class="gdrtooltip">
+                    {% else %}
+                        <img title="Appartenenza ad Enclavi sconosciuta" class="gdrtooltip"
+                             src="{{ asset('bundles/gdrgame/images/chat/no-enclave.png') }}">
+                    {% endif %}
+                    <a href="{{ path('avatar-index', {name: post.authorName}) }}"
+                       title="Apri l'avatar di {{ post.authorName }}">
+                        <img src="{{ uploadPath('race') ~ post.authorRaceIcon }}"
+                             alt="{{ post.authorRaceName }}">
+                    </a>
+                    <span>{{ post.authorName }}</span>
+                {% endif %}
+                <span class="date">{{ post.createdAt|date('d/m/Y H:i') }}</span>
+
+                <div class="mod">
+                    {% if canEdit %}
+                        <a href="{{ path('bacheca-edit-post', {id: post.id}) }}">[modifica]</a>
+
+                    {% endif %}
+                    {% if canDelete %}
+                        <a class="delete-post" data-href="{{ path('bacheca-delete-post', {id: post.id}) }}">[cancella]</a>
+                    {% endif %}
+                </div>
+            </td>
+            <td class="body">
+                {{ post.body|raw }}
+
+                {% if post.updatedBy %}
+                    <p class="updated">Modificato il {{ post.updatedAt|date('d/m/Y H:i') }}
+                        da {{ post.updatedBy }}.</p>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="text-centered">
+    {{ knp_pagination_render(paginator) }}
+</div>

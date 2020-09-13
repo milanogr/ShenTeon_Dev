@@ -1,0 +1,9 @@
+avatar-experience:
+    path:  /{name}
+    defaults: { _controller: GdrAvatarBundle:Experience:index, name:null }
+
+avatar-experience-visibility:
+    path:  /visibility/{id}
+    defaults: { _controller: GdrAvatarBundle:Experience:changeVisibility }
+    requirements:
+        id: \d+

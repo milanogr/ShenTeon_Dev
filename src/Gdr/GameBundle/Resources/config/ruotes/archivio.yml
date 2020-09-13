@@ -1,0 +1,11 @@
+archivio-index:
+    path: /sezioni
+    defaults: { _controller: GdrGameBundle:Archivio:index}
+
+archivio-show:
+    path: /sezione/{id}
+    defaults: { _controller: GdrGameBundle:Archivio:show}
+
+archivio-show-book:
+    path: /sezione/documento/{id}
+    defaults: { _controller: GdrGameBundle:Archivio:showBook}

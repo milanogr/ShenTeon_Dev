@@ -1,0 +1,47 @@
+<table id="chat-online">
+    <thead>
+    <tr>
+        <th class="count">Nr.</th>
+        <th class="pg">Personaggio</th>
+        <th class="type">Tipo PG</th>
+        <th class="dress">Vestito</th>
+        <th class="inGame">In gioco</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for online in onlines %}
+        <tr>
+            <td class="count">{{ loop.index }}/{{ loop.length }}</td>
+            <td class="pg">
+                {% if online.gender == 1 %}
+                    <img title="{{ online.race }}" src="{{ path_race }}/{{ online.maleIcon }}">
+                {% else %}
+                    <img title="{{ online.race }}" src="{{ path_race }}/{{ online.femaleIcon }}">
+                {% endif %}
+                <a href="{{ url('avatar-index', {name: online.name}) }}">{{ online.name }}</a>
+            </td>
+            <td class="type">
+                {% if online.isGestore %}
+                    <img src="{{ asset('bundles/gdrgame/images/online/gestore.png') }}" title="Gestore" class="gdrtooltip">
+                {% endif %}
+                {% if online.isModeratore %}
+                    <img src="{{ asset('bundles/gdrgame/images/online/moderatore.png') }}" title="Moderatore" class="gdrtooltip">
+                {% endif %}
+                {% if online.isGuida %}
+                    <img src="{{ asset('bundles/gdrgame/images/online/guida.png') }}" title="Informatore" class="gdrtooltip">
+                {% endif %}
+            </td>
+            <td class="dress">
+                {% if online.isDead %}
+                    <span>(anima)</span>
+                {% else %}
+                    <img class="gdrtooltip" src="{{ path_item }}/{{ online.itemImage }}" title="{{ online.item }}">
+                {% endif %}
+            </td>
+            <td class="inGame">
+                {% if online.isInGame %}Sì{% else %}No{% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

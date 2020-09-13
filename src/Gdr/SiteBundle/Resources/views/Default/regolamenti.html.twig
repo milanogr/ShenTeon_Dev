@@ -1,0 +1,54 @@
+{% extends "GdrSiteBundle::layout.html.twig" %}
+
+{% block title 'I Regolamenti ed i Manuali di gioco' %}
+
+    {% block content %}
+
+        <div class="page-regolamenti">
+            <h1><span>Regolamenti di Shenteon</span></h1>
+
+            <p>
+                La quantità di innovazioni e di automatismi che Shenteon propone è notevole.
+                Non vi fate ingannare però. Non si tratta di cose astruse o di metodologie che necessitano di anni di
+                studio. Gran parte del “lavoro” è svolto dal sistema che abbiamo studiato e che si nasconde dietro il
+                sito
+                stesso. Voi siete i fruitori del sito ed è lui al vostro servizio, non il contrario. <br><br>
+
+                Di seguito trovate uno spaccato delle principali caratteristiche di Shenteon, per lo più esposto in
+                maniera
+                discorsiva. Se siete curiosi, e noi lo speriamo, concedetevi una manciata di minuti per leggerlo.
+            </p>
+
+            {#<div id="google-search">#}
+                {#<script>#}
+                    {#(function() {#}
+                        {#var cx = '017029597386673014888:ps0cg-6kb4u';#}
+                        {#var gcse = document.createElement('script');#}
+                        {#gcse.type = 'text/javascript';#}
+                        {#gcse.async = true;#}
+                        {#gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +#}
+                        {#'//www.google.com/cse/cse.js?cx=' + cx;#}
+                        {#var s = document.getElementsByTagName('script')[0];#}
+                        {#s.parentNode.insertBefore(gcse, s);#}
+                    {#})();#}
+                {#</script>#}
+                {#<gcse:searchbox></gcse:searchbox>#}
+            {#</div>#}
+            {#<div id="google-search-results">#}
+                {#<gcse:searchresults></gcse:searchresults>#}
+            {#</div>#}
+
+            <ul>
+                {% for regolamento in regolamenti %}
+                    <li>
+                        <a title="Leggi {{ regolamento.title }}" href="{{ path('site_regolamento', {slug: regolamento.slug}) }}">
+                            <span>{{ loop.index }}.</span> {{ regolamento.title }}
+                        </a>
+                    </li>
+                {% else %}
+                    <li>Non ci sono regolamenti.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    {% endblock %}

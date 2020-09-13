@@ -1,0 +1,12 @@
+title_dashboard: Dashboard
+dashboard_link_title: Dashboard
+
+breadcrumb.link_eye_color_list: Fottiti
+form.label_name: Nome
+
+
+breadcrumb:
+    link_enclave_rank_list: test
+
+form:
+    label_name: Test

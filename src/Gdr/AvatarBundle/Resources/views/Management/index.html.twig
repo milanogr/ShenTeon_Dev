@@ -1,0 +1,100 @@
+{{ render(controller('GdrAvatarBundle:Management:formCommon')) }}
+{{ render(controller('GdrAvatarBundle:Management:formUser')) }}
+
+<hr>
+<h3>Programma Referral</h3>
+
+<table class="table spaced" style="width: 350px">
+    <tr>
+        <td class="dark">Personaggio</td>
+    </tr>
+
+    {% for ref in pgRef %}
+        {% if ref.newPersonage %}
+            <tr>
+                <td>{{ ref.newPersonage.name }}</td>
+            </tr>
+        {% endif %}
+    {% else %}
+        <tr>
+            <td>Al momento nessun personaggio ha dichiarato di essersi registrato grazie a te. Invita i tuoi amici per
+                guadagnare
+                qualche moneta!
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+<hr>
+<h3>Gestione della Morte</h3>
+
+{% if personage.isDead == false %}
+    <a class="button medium kill" data-href="{{ path('avatar-management-kill', {suicide: false}) }}">Dichiara
+        l'uccisione del PG</a>
+    <a class="button medium kill" data-href="{{ path('avatar-management-kill', {suicide: true}) }}">Dichiara il suicidio
+        del PG</a>
+{% else %}
+    <p>Il tuo personaggio risulta essere un anima.</p>
+{% endif %}
+
+
+{% if (personage.canManageEnclave or personage.canManageClan) %}
+    <hr>
+    <h3>Gestione Enclave</h3>
+
+    {% if(personage.canManageEnclave) %}
+        <a class="button medium" href="{{ path("master-enclave-index") }}">Gestisci Enclave</a>
+    {% endif %}
+
+    {% if(personage.canManageEnclave) %}
+        <a class="button medium" href="{{ path("master-forum-enclave-admin") }}">Gestisci Forum Enclave</a>
+    {% endif %}
+
+    {% if(personage.canManageClan) %}
+        <a class="button medium" href="{{ path("master-clan-index") }}">Gestisci Enclave Razziale</a>
+    {% endif %}
+
+    {% if(personage.canManageClan) %}
+        <a class="button medium" href="{{ path("master-forum-clan-admin") }}">Gestisci Forum Enclave Razziale</a>
+    {% endif %}
+{% endif %}
+
+
+{% if(canMarry) %}
+    <hr>
+
+    <h3>Gestione Matrimoni</h3>
+
+    <a class="button medium" href="{{ path("matrimoni-index") }}">Officia matrimoni</a>
+{% endif %}
+
+{% if(isFate) %}
+    <hr>
+
+    <h3>Gestione Fato</h3>
+
+    <a class="button medium" href="{{ path("fato-index") }}">Gestione Fato</a>
+{% endif %}
+
+{% if is_granted('ROLE_ADMIN') %}
+    <hr>
+
+    <h3>Gestione Admin</h3>
+
+    <a class="button medium" href="{{ path('g-admin-items') }}">Assegna oggetti</a>
+    <a class="button medium" href="{{ path('g-show-locations') }}">Gestione location</a>
+    <a class="button medium" href="{{ path('g-edit-pg') }}">Cambia razza/età/connotati</a>
+    <a class="button medium" href="{{ path('g-shop-list') }}">Lista botteghe</a>
+{% endif %}
+
+{% if isMod %}
+    <hr>
+
+    <h3>Gestione Moderatori</h3>
+
+    <a class="button medium" href="{{ path('mod-esilio') }}">Pannello Esilio</a>
+    <a class="button medium" href="{{ path("mod-last-registered") }}">Lista ultimi PG registrati</a>
+    <a class="button medium" href="{{ path("mod-same-ips") }}">Lista controllo IP uguali</a>
+{% endif %}
+
+<span class="fix-grafico"></span>

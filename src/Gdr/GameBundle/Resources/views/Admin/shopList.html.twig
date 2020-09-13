@@ -1,0 +1,41 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-admin">
+
+        <h2><span>Admin - Lista botteghe</span></h2>
+
+
+        <table id="table-online" class="solited">
+            <thead>
+            <tr>
+                <th>Personaggio</th>
+                <th>Bottega</th>
+                <th>Prox. Tassa</th>
+                <th>Prox. Prod</th>
+                <th>Tassa</th>
+                <td>Frequenza</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for shop in shops %}
+                <tr>
+                    <td>{{ shop.owner.name }} <u>({{ shop.owner.id }})</u></td>
+                    <td>{{ shop.name }} <u>({{ shop.id }})</u></td>
+                    <td>{{ shop.nextTaxAt|date("d/m/Y") }}</td>
+                    <td>{{ shop.nextProductionAt|date("d/m/Y") }}</td>
+                    <td>{{ shop.tax }}</td>
+                    <td>{{ shop.frequencyItems }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,5 @@
+{% if location.description %}
+    {{ location.description|raw }}
+{% else %}
+    Non c'è ancora nessuna descrizione per {{ location.name }}!
+{% endif %}

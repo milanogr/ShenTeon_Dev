@@ -1,0 +1,126 @@
+<table class="items-table-container dress solited">
+    <thead>
+    <tr>
+        <th colspan="4">Vestiti</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in paginator %}
+        <tr class="item-row">
+            <td class="item-preview">
+                <img src="{{ upload_path }}{{ item.itemImageName }}" alt="{{ item.itemName }}">
+                {% if is_owner or is_granted('ROLE_ADMIN') %}
+                    <button class="button small esamina-item"
+                            data-href="{{ path('avatar-inventory-item', {id: item.0.id}) }}">Esamina
+                    </button>
+                {% endif %}
+            </td>
+            <td class="item-dress-icon">
+                <img src="{{ upload_path }}{{ item.itemDressIconImageName }}" alt="{{ item.itemName }}">
+            </td>
+            <td class="item-infos">
+                <ul>
+                    <li><span>Nome:</span> {{ item.itemName }}</li>
+                    <li><span>Peso/Ingombro:</span> {{ item.itemWeight }}</li>
+                    <li><span>Descrizione:</span> {{ item.itemShortDescription }}</li>
+
+                    {% if item.inventoryExpireAt %}
+                        <li><span>Scadenza:</span> {{ item.inventoryExpireAt|date('d/m/Y') }}</li>
+                    {% endif %}
+
+                    {# Visibile solo dal proprietario #}
+                    {% if is_owner or is_granted('ROLE_ADMIN') %}
+                        <li class="divider">Informazioni visibili solo dal proprietario:</li>
+
+                        {% if item.itemActiveDescription %}
+                            <li class="effect">
+                                <span>Attiva:</span>
+                                {% if item.itemShowActiveDescription %}
+                                    <i>{{ item.itemActiveDescription }}</i>
+                                {% else %}
+                                    <i>Effetto nascosto.</i>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+
+                        {% if item.itemExpendableDescription %}
+                            <li class="effect">
+                                <span>Effetto:</span>
+                                {% if item.itemShowExpendableDescription %}
+                                    <i>{{ item.itemExpendableDescription }}</i>
+                                {% else %}
+                                    <i>Effetto nascosto</i>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+
+                        {% if (item.itemExpendableDescription is null) and (item.itemActiveDescription is null) %}
+                            <li class="effect">
+                                <i>Nessun effetto attivabile</i>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+            </td>
+            <td class="item-actions">
+                {# Azioni consentite solo dal proprietario #}
+                {% if is_owner %}
+                    <label>In Borsa</label>
+                    <input class="checkbox-equipped"
+                           type="checkbox" {% if item.inventoryIsDressed %} disabled="disabled" {% endif %}
+                           data-url="{{ url('avatar-inventory-change-equipped', {id: item.inventoryId}) }}"
+                            {% if item.inventoryIsEquipped %} checked="checked" {% endif %}>
+
+                    <label>
+                        <abb title="Oggetto non visibile dagli altri personaggi">Invisibile</abb>
+                    </label>
+                    <input class="checkbox-visibility"
+                           type="checkbox" {% if item.inventoryIsDressed %} disabled="disabled" {% endif %}
+                           data-url="{{ url('avatar-inventory-change-visibility', {id: item.inventoryId}) }}"
+                            {% if item.inventoryIsInvisible %} checked="checked" {% endif %}>
+
+                    {% if item.itemIsResalable %}
+                        <button data-url="{{ url('avatar-inventory-sell', {id: item.inventoryId}) }}"
+                                class="small button sell-item">Vendi a {{ item.itemPrice / 2 |number_format }} Mori
+                        </button>
+                    {% endif %}
+
+                    {% if item.itemIsTransferable %}
+                        <button data-url="{{ url('avatar-item-send', {id: item.inventoryId}) }}"
+                                class="small button send-item"> Recapita a...
+                        </button>
+                    {% endif %}
+
+                    <label>Indosso</label>
+                    <input type="radio" name="isDressed" class="radio-dressed {% if item.inventoryIsDressed %}selected{% endif %}"
+                           data-url="{{ url('avatar-inventory-change-dressed', {id: item.inventoryId}) }}" {% if item.inventoryIsDressed %} checked="checked" {% endif %}>
+
+                {% endif %}
+
+                {# Il proprietario può cancellare solo se è presente la specifica; gli admin sempre. #}
+                {% if (is_owner and item.itemIsDestructible) or (is_granted('ROLE_ADMIN')) %}
+                    <button data-url="{{ url('avatar-inventory-delete', {id: item.inventoryId}) }}"
+                            class="small button delete-item">Distruggi
+                    </button>
+                {% endif %}
+
+                {# Se sono admin e sto visualizzando un altro inventario, posso vedere se è invisibile #}
+                {% if is_granted('ROLE_ADMIN') and item.inventoryIsInvisible and is_owner == false %}
+                    <span><abbr title="Info visibile solo dagli admin">(invisibile)</abbr></span>
+                {% endif %}
+
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4" class="text-centered">Non hai ancora acquistato alcun vestito.</td>
+        </tr>
+    {% endfor %}
+
+    <tr>
+        <td colspan="4" class="table-pagination">
+            {{ knp_pagination_render(paginator) }}
+        </td>
+    </tr>
+    </tbody>
+</table>

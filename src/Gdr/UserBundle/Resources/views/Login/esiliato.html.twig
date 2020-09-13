@@ -1,0 +1,13 @@
+{% extends 'GdrSiteBundle::layout.html.twig' %}
+
+{% block content %}
+
+        <h2>Accesso negato</h2>
+
+        <p><strong>Attenzione:</strong> il tuo account è stato esiliato dal gioco fino
+            al {{ ban.until|date("d/m/Y H:i") }} per la seguente motivazione: {{ ban.reason }}
+        </p>
+
+        <p>Se vuoi contestare questo provvedimento, scrivi a <a href="mailto:gestione@shenteon.com">gestione@shenteon.com</a>.</p>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+<form id="form-passa-oggetti" method="post" action="{{ url('chat-passa-oggetti', {formSended: true}) }}">
+
+    <label>Seleziona oggetto/i da passare:</label>
+    {{ form_widget(form.inventories, {'attr': {'class': 'inventories'}}) }}
+
+    {{ form_row(form.destinatario) }}
+
+    {{ form_rest(form) }}
+
+    <div><button type="submit">Passa Oggetto/i</button></div>
+
+    <p class="error"></p>
+</form>
+
+<script>
+    $(document).ready(function() {
+        $('.inventories').select2({
+            'allowClear': true,
+            'placeholder': 'Seleziona oggetto/i:'
+        });
+    });
+</script>

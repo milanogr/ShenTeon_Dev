@@ -1,0 +1,60 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/enclavi.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+
+    <div id="online-container">
+        <h1><span>Presenti</span></h1>
+
+        <div class="legenda">
+            <span><img src="{{ asset('bundles/gdrgame/images/online/gestore.png') }}" title="Gestore"
+                       class="gdrtooltip">
+            Gestore</span>
+            <span><img src="{{ asset('bundles/gdrgame/images/online/moderatore.png') }}" title="Moderatore"
+                       class="gdrtooltip"> Moderatore</span>
+            <span><img src="{{ asset('bundles/gdrgame/images/online/guida.png') }}" title="Guida"
+                       class="gdrtooltip">
+            Guida</span>
+        </div>
+        <div class="legenda">
+            <span><img class="gdrtooltip" title="Disponibile al gioco"
+                       src="{{ asset('bundles/gdrgame/images/online/disponibile.png') }}"> Disponibile al gioco</span>
+            <span><img class="gdrtooltip" title="Sto giocando"
+                       src="{{ asset('bundles/gdrgame/images/online/giocando.png') }}"> Sto giocando</span>
+            <span><img class="gdrtooltip" title="Occupato"
+                       src="{{ asset('bundles/gdrgame/images/online/occupato.png') }}"> Occupato</span>
+        </div>
+
+        {% include '@GdrGame/Online/list.html.twig' %}
+
+        <hr>
+
+        <div class="centered-form status">
+            <form action="{{ path('online-index') }}" method="post">
+                <label>Modifica il tuo status</label>
+                {{ form_widget(form.status) }}
+
+                {% if canBeInvisibile %}
+                    <label>Sono invisibile?</label>
+                    {{ form_widget(form.isInvisible) }}
+                {% endif %}
+
+                {{ form_rest(form) }}
+                <button type="submit">Salva</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

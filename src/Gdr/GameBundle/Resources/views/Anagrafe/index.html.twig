@@ -1,0 +1,29 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="anagrafe-container">
+        <h1><span>Anagrafe cittadina</span></h1>
+        <div class="filter">
+            <a {% if typePage == 1 %}class="active"{% endif %} href="{{ path("anagrafe-index") }}">Anagrafe</a>
+            <a {% if typePage == 2 %}class="active"{% endif %} href="{{ path("anagrafe-matrimoni") }}">Matrimoni</a>
+            <a {% if typePage == 3 %}class="active"{% endif %} href="{{ path("anagrafe-divorzi") }}">Divorzi</a>
+        </div>
+
+        {% include '@GdrGame/Anagrafe/filter.html.twig' with {filter: filter, route: "anagrafe-index"} %}
+        {% include '@GdrGame/Anagrafe/letters.html.twig' with {filter: filter, route: "anagrafe-index"} %}
+
+        {{ knp_pagination_render(paginator, null, filter) }}
+        {% include '@GdrGame/Anagrafe/list.html.twig' with {personages: paginator} %}
+        {{ knp_pagination_render(paginator, null, filter) }}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="editti-container">
+        <h1><span>Editti della Signora di Teon</span></h1>
+        {% for editto in editti %}
+            {{ editto.body|raw }}
+        {% endfor %}
+    </div>
+{% endblock %}

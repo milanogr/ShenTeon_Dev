@@ -1,0 +1,32 @@
+<div id="total-pg-online">
+    {% if online == 1 %}
+        <a href="{{ path('online-index') }}">{{ online }} presente</a>
+    {% else %}
+        <a href="{{ path('online-index') }}">{{ online }} presenti</a>
+    {% endif %}
+</div>
+<ul>
+    {% for personage in all %}
+        {% if personage.gender == 1 %}
+            {% set icon = personage.raceMaleIcon %}
+        {% else %}
+            {% set icon = personage.raceFemaleIcon %}
+        {% endif %}
+
+        {% if personage.lastLogin >= time and personage.lastLogin > personage.lastLogout %}
+            <li>
+                <a href="{{ path('avatar-index', {name: personage.name}) }}">
+                    <img src="{{ uploadPath('race') ~ icon }}" class="gdrtooltip" title="{{ personage.raceName }}">
+                </a>
+                <strong>{{ personage.name }}</strong> è in giro...
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ path('avatar-index', {name: personage.name}) }}">
+                    <img src="{{ uploadPath('race') ~ icon }}" class="gdrtooltip" title="{{ personage.raceName }}">
+                </a>
+                {{ personage.name }} si allontana...
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

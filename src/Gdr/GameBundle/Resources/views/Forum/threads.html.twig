@@ -1,0 +1,27 @@
+{% extends 'GdrGameBundle:Forum:index.html.twig' %}
+
+{% block content %}
+
+    <div id="forum-container">
+        <h1><span>{{ category.forum.name }}</span></h1>
+
+
+        <a class="button" href="{{ path('bacheca-index') }}">← Torna alla bacheca</a>
+
+        {% if canWriteSoul %}
+            <a class="button" href="{{ path('bacheca-create-thread', {category: category.id}) }}">Crea thread</a>
+        {% else %}
+            <a class="button">Le anime non possono scrivere qui</a>
+        {% endif %}
+
+        {% include '@GdrGame/Forum/listThreads.html.twig' %}
+
+        <a class="button" href="{{ path('bacheca-index') }}">← Torna alla bacheca</a>
+
+        {% if canWriteSoul %}
+            <a class="button" href="{{ path('bacheca-create-thread', {category: category.id}) }}">Crea thread</a>
+        {% else %}
+            <a class="button">Le anime non possono scrivere qui</a>
+        {% endif %}
+    </div>
+{% endblock %}

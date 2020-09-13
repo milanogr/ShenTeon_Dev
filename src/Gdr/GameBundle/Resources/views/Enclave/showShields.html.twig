@@ -1,0 +1,13 @@
+{% for enclave in enclavi %}
+    <div style="width: 48%; display: inline-block">
+
+        <h2>
+            <a class="show-enclave" href="#" data-href="{{ path('enclave-show', {id: enclave.id}) }}" title="Vedi i dettagli dell'Enclave">
+                {% if enclave.shieldName %}
+                    <img src="{{ vich_uploader_asset(enclave, 'shield') }}">
+                {% endif %}
+                <span style="display: block; background-color: transparent">{{ enclave.name }}</span>
+            </a>
+        </h2>
+    </div>
+{% endfor %}

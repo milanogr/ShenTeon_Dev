@@ -1,0 +1,811 @@
+$container-width: 1050px;
+$red-dark: #30130b;
+$gold: #beae6c;
+$headingsFontFamily: 'Trajan';
+
+@import "compass/typography/text/replacement",
+"compass/css3",
+"typography",
+"../../../../GameBundle/Resources/public/sass/plugins/tooltipster";
+
+@import 'icons/*.png';
+@include all-icons-sprites;
+
+html {
+  background: url(../images/background-shenteon.jpg) no-repeat center center fixed;
+  @include background-size(cover);
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: transparent;
+  overflow: hidden;
+}
+
+input[type="submit"], button {
+  @include inset-shadow(false);
+}
+
+.button-primary {
+  @include button-base;
+  @include button-size($button-sml);
+  @include button-style($primary-color, false);
+  opacity: 0.9;
+}
+
+.button, button, input, textarea {
+  @include border-radius(2px);
+}
+
+#ie-alert {
+  @include alert-base;
+  @include alert-style($alert-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 50px 8px 50px;
+  z-index: 100;
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
+}
+
+#body-container {
+  position: relative;
+  width: 1100px;
+  height: 100%;
+  padding-top: 70px;
+  margin: 0 auto;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: url(../images/header-top.png) no-repeat top center;
+  width: 100%;
+  height: 79px;
+  z-index: 50;
+
+  nav {
+    position: relative;
+    width: 800px;
+    margin: 0 auto;
+    height: 70px;
+
+    ul {
+      list-style: none;
+      margin: 0;
+
+      li {
+        position: absolute;
+        width: 52px;
+        height: 174px;
+        background-repeat: no-repeat !important;
+
+        &.icons-home {
+          top: 31px;
+          left: 59px;
+          height: 108px;
+        }
+        &.icons-regolamenti {
+          top: 9px;
+          left: 118px;
+          height: 171px;
+        }
+        &.icons-ambientazione {
+          top: 9px;
+          left: 176px;
+          height: 179px;
+        }
+        &.icons-registrati {
+          top: 28px;
+          left: 240px;
+          height: 156px;
+        }
+        &.icons-news {
+          top: 52px;
+          left: 300px;
+          height: 105px;
+        }
+
+        a {
+          @include hide-text();
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    #login-box {
+      position: absolute;
+      top: 57px;
+      right: 180px;
+      width: 229px;
+      height: 129px;
+      background: url(../images/login-box.png);
+      padding: 15px 12px 10px 7px;
+      font-size: 14px;
+      line-height: 16px;
+
+      .fullrow {
+        width: 100%;
+        @include clearfix;
+        padding-left: 13px;
+
+        .width-70 {
+          width: 63%;
+          float: left;
+          padding-top: 3px;
+        }
+        .width-30 {
+          width: 37%;
+          float: left;
+        }
+      }
+
+      a {
+        font-size: 11px;
+      }
+
+      input {
+        height: 20px;
+        padding: 3px;
+        width: 143px;
+        float: right;
+      }
+
+      label {
+        padding-top: 2px;
+      }
+
+      button {
+        float: right;
+        margin: 0 13px 0 0;
+        width: 55px;
+        padding: 5px;
+      }
+
+      p {
+        text-align: center;
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 78px;
+  background: url(../images/footer.jpg) no-repeat center;
+  @include box-shadow(0px -1px 17px #000);
+
+  .footer-inner {
+    width: 740px;
+    margin: 0 auto;
+    position: relative;
+    height: 78px;
+
+    .footer-stats {
+      text-align: left;
+      margin-top: 33px;
+      margin-left: 17px;
+      ul {
+        li {
+          display: block;
+          font-size: 11px;
+          color: $primary-color;
+          margin-bottom: -4px;
+          font-family: Tahoma, Verdana, Segoe, sans-serif;
+        }
+      }
+    }
+  }
+
+  #footer-top {
+    position: absolute;
+    bottom: 38px;
+    right: 0;
+    left: 0;
+    text-align: center;
+    z-index: 20;
+
+    ul {
+      li {
+        display: inline-block;
+        margin-right: 20px;
+      }
+    }
+  }
+  #footer-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    text-align: center;
+    ul.browsers {
+      position: absolute;
+      bottom: -18px;
+      right: 45px;
+      list-style: none;
+      li {
+        display: inline-block;
+        margin-right: 8px;
+
+        &.icons-facebook {
+          margin-right: 30px;
+        }
+
+        a {
+          display: block;
+          width: 35px;
+          height: 35px;
+          @include hide-text;
+        }
+      }
+    }
+  }
+}
+
+#chain {
+  position: absolute;
+  top: 79px;
+  right: 106px;
+  background: url(../images/pattern-catena.png);
+  width: 27px;
+  bottom: 77px;
+}
+
+#lanterna {
+  position: absolute;
+  top: 210px;
+  right: -35px;
+  background: url(../images/lanterna.png);
+  width: 157px;
+  height: 257px;
+}
+
+#pegi {
+  position: absolute;
+  top: 346px;
+  right: 90px;
+  background: url(../images/pegi.png);
+  //  background: url(../images/home/pegi-natale.png);
+  width: 63px;
+  height: 205px;
+  //  height: 208px;
+}
+
+#middle-container {
+  position: relative;
+  width: 960px;
+  margin: 0 auto;
+  height: 100%;
+
+  #radio-riv {
+    position: absolute;
+    top: -47px;
+    right: 62px;
+    background: url(../images/radio-riv.png);
+    width: 190px;
+    height: 197px;
+    z-index: 98;
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      @include hide-text;
+    }
+  }
+}
+
+#content {
+  position: absolute;
+  top: 132px;
+  right: 0;
+  left: 0;
+  bottom: 78px;
+  width: 742px;
+  background: url(../images/pergamena-pattern.jpg) repeat;
+  margin-left: 109px;
+  padding: 20px 12px 5px 12px;
+  z-index: 0;
+  line-height: 1.5em;
+
+  #pergamena-top {
+    position: absolute;
+    top: -9px;
+    left: 0;
+    background: url(../images/pergamena-top.png) center top no-repeat;
+    width: 742px;
+    height: 118px;
+  }
+
+  #pergamena-sx {
+    position: absolute;
+    top: -9px;
+    left: -34px;
+    background: url(../images/pergamena-corner-sx.png);
+    width: 34px;
+    height: 74px;
+  }
+
+  .text-content {
+    height: 100%;
+    overflow: auto;
+    position: relative;
+    z-index: 20;
+    padding: 0 8px;
+  }
+
+  #teon-container {
+    position: relative;
+    width: 334px;
+    height: 198px;
+
+    #teon-cornice {
+      position: relative;
+      z-index: 10;
+    }
+    #teon-tela {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  #teon-cintura {
+    position: absolute;
+    width: 716px;
+    height: 110px;
+    top: 424px;
+    left: -20px;
+    background: url(../images/home/cintura.png);
+    z-index: 20;
+    text-align: center;
+    padding-top: 34px;
+    padding-left: 62px;
+
+    #luna, #vento, #condizione {
+      display: inline-block;
+      margin-right: 50px;
+    }
+  }
+}
+
+hr {
+  border-color: $gold;
+  width: 90%;
+  margin-left: 0;
+}
+
+.condizioni {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 6px;
+  img {
+    display: inline-block;
+    margin: 4px 20px;
+  }
+}
+
+.home-teon {
+  margin-bottom: 15px;
+  @include clearfix;
+
+  .home-left {
+    width: 334px;
+    float: left;
+  }
+  .home-right {
+    width: 360px;
+    float: left;
+    padding-left: 15px;
+  }
+}
+
+.news-container {
+  article {
+    margin: 10px 0;
+    border-left: 2px solid $primary-color;
+    padding-left: 5px;
+
+    h2 {
+      font-size: 27px;
+      margin-bottom: -2px;
+      line-height: 37px;
+      color: $primary-color;
+    }
+
+    .date {
+      color: #464444;
+      font-style: italic;
+      font-size: 12px;
+      font-weight: 500
+    }
+
+    p {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .divider {
+    background: url(../images/divider.png) top center no-repeat;
+    width: 100%;
+    height: 39px;
+  }
+}
+
+.personage-container {
+  @include clearfix;
+
+  .choose-personage {
+    position: relative;
+    text-align: center;
+    background: url(../images/selezione-pg.png) no-repeat;
+    width: 281px;
+    height: 322px;
+    float: left;
+    margin-left: 30px;
+    margin-bottom: 25px;
+
+    &.dead {
+      background: url(../images/selezione-pg-morto.png) no-repeat;
+      height: 326px;
+    }
+
+    &:nth-child(odd) {
+      margin-right: 45px;
+    }
+
+    .name {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 22px;
+      color: $gold;
+      display: block;
+    }
+    .race {
+      margin-top: 172px;
+      display: block;
+      font-size: 18px;
+      color: $gold;
+      small {
+        font-size: 15px;
+        color: $gold;
+      }
+    }
+    .level, .letters {
+      margin-top: -1px;
+      display: block;
+      font-size: 16px;
+      color: $gold;
+      small {
+        font-size: 15px;
+        color: $gold;
+      }
+    }
+    .buttonS {
+      margin-top: 25px;
+      display: block;
+      a {
+        font-size: 16px;
+        color: $gold;
+      }
+    }
+    .avatar {
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      top: 45px;
+      left: 65px;
+    }
+  }
+  .new-personage {
+    position: relative;
+    text-align: center;
+    background: url(../images/crea-pg.png) no-repeat;
+    width: 281px;
+    height: 322px;
+    float: left;
+    margin-left: 19px;
+    margin-bottom: 25px;
+
+    a {
+      position: absolute;
+      bottom: 13px;
+      left: 83px;
+      font-size: 16px;
+      color: $gold;
+    }
+  }
+}
+
+.page-register {
+  input {
+    width: 350px;
+  }
+
+  p.help {
+    color: #5c5c5c;
+    font-size: 11px;
+  }
+  ul {
+    li {
+      color: #730000;
+      font-weight: 500;
+      &:first-child {
+        margin-top: -12px;
+      }
+    }
+  }
+  a {
+    font-weight: 700;
+    text-decoration: underline;
+  }
+  input[type="submit"] {
+    margin-top: 15px;
+  }
+}
+
+.reveal-modal {
+  max-height: 655px;
+  overflow: auto;
+  a {
+    font-weight: 700;
+    color: $primary-color;
+  }
+}
+
+#recaptcha_area input[type="text"] {
+  display: inline-block;
+  height: auto;
+}
+
+#recaptcha_widget_div {
+  margin-top: 3px;
+  margin-bottom: 10px !important;
+}
+
+.page-create-step1 {
+  select {
+    width: 250px;
+  }
+  .race-container {
+    .image {
+      @include clearfix;
+
+      img {
+        border: 1px solid $primary-color;
+        float: left;
+        &:first-child {
+          margin-right: 58px;
+        }
+      }
+    }
+    .description {
+      margin-top: 20px;
+      hr {
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+.page-create-step2 {
+  input, select, label {
+    width: 95%;
+  }
+  ul {
+    li {
+      color: #730000;
+      font-weight: 500;
+      &:first-child {
+        margin-top: -12px;
+      }
+    }
+  }
+
+  .left, .right {
+    width: 50%;
+    float: left;
+  }
+
+  .caratteristiche {
+    margin-bottom: 8px;
+    div:first-child {
+      margin-bottom: 4px;
+    }
+  }
+  input[type="submit"] {
+    width: 98%;
+    margin-top: 8px;
+  }
+}
+
+.page-death {
+  td {
+    padding: 10px;
+  }
+  .dark {
+    width: 160px;
+    padding: 0;
+  }
+  table {
+    a {
+      display: block;
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+table {
+  width: 100%;
+
+  tr, td, tbody {
+    border: 1px solid $table-border-color;
+  }
+
+  thead {
+    th {
+      padding: 7px;
+    }
+  }
+}
+
+table.spaced {
+  border-collapse: separate;
+  border-spacing: 2px;
+  width: 100%;
+
+  img {
+    vertical-align: baseline;
+  }
+  td {
+    background-color: darken($table-bg, 3%);
+  }
+  tr.dark {
+    th {
+      background-color: darken($table-even-row-bg, 3%);
+      font-weight: 700;
+      border: 1px solid $table-border-color;
+    }
+  }
+  .dark {
+    background-color: darken($table-even-row-bg, 3%);
+  }
+}
+
+table.spaced.alternate {
+  tr:nth-child(even) {
+    background-color: darken($table-even-row-bg, 3%);
+    td {
+      background-color: darken($table-even-row-bg, 3%);
+    }
+  }
+}
+
+.breadcrumb {
+  margin-bottom: 15px;
+}
+
+.page-regolamenti {
+
+  @include clearfix;
+
+  ul {
+    list-style: none;
+    margin: 0 0 3px 0;
+
+    span {
+      font-weight: 700;
+    }
+
+    li {
+      float: left;
+      width: 50%;
+    }
+  }
+
+  .half {
+    float: left;
+    width: 50%;
+  }
+}
+
+.page-regolamento {
+  ul {
+    margin-left: 15px;
+    list-style-type: disc;
+    li {
+      list-style-type: disc;
+    }
+  }
+}
+
+.flash-success, .flash-error {
+  p {
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+form {
+  ul {
+    list-style: none;
+    li {
+      color: #730000;
+      font-weight: 500;
+      &:first-child {
+        margin-top: -12px;
+      }
+    }
+  }
+}
+
+.form-centered {
+  width: 380px;
+
+  button {
+    width: 100%;
+  }
+}
+
+ul.riepilogo {
+  margin: 15px 0 0 0;
+  list-style: none;
+}
+
+.manual-filter {
+  a {
+    font-weight: 700;
+  }
+}
+
+#google-search {
+  background-color: transparent !important;
+
+  div, table {
+    background-color: transparent !important;
+  }
+
+  tbody, tr, td {
+    border: none !important;
+  }
+}
+
+html.christmas {
+  background: url(../images/home/shenteon-natale.jpg) no-repeat center center fixed;
+
+  #middle-container {
+
+    #radio-riv {
+      top: -51px;
+      right: 68px;
+      background: url(../images/home/corvo-natale.png);
+    }
+  }
+
+  #pegi {
+      background: url(../images/home/pegi-natale.png);
+  }
+}

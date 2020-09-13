@@ -1,0 +1,13 @@
+<form id="save-chat-form" action="{{ path('chat-save') }}" method="post">
+    <p>
+        Con questo strumento hai la possibilità di salvare la chat di gioco attuale in formato .html
+    </p>
+
+    <label>
+        <input type="checkbox" name="whisperOn" value="1"> Salva anche i sussurri
+    </label>
+<br>
+    <button type="submit" class="btn small">Scarica</button>
+</form>
+
+<iframe id="download_xls" name="download_xls" width="0" height="0" scrolling="no" frameborder="0"></iframe>

@@ -1,0 +1,7 @@
+parameters:
+#    items.example.class: Gdr\ItemsBundle\Example
+
+services:
+#    items.example:
+#        class: %items.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

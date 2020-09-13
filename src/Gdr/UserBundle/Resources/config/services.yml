@@ -1,0 +1,37 @@
+parameters:
+    user.listener.activity.class: Gdr\UserBundle\Listener\Activity
+    request_injector: Gdr\UserBundle\Listener\RequestInjector
+    authentication_handler: Gdr\UserBundle\Handler\AuthenticationHandler
+    user.listener.encoderPassword.class: Gdr\UserBundle\Listener\EncoderPassword
+
+services:
+    request_injector:
+        class: %request_injector%
+        public: false
+        arguments: ['@service_container']
+
+    user.listener.activity:
+        class: %user.listener.activity.class%
+        arguments: [@security.context, @doctrine, @router, @request_injector]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }
+
+    user.encoder.password:
+        class: %user.listener.encoderPassword.class%
+        arguments: [@security.encoder_factory]
+
+    authentication_handler:
+        arguments:  [@router, @doctrine.orm.entity_manager, @security.context, @session]
+        class: %authentication_handler%
+
+
+    monolog.formatter.ip_request:
+        class: Monolog\Formatter\LineFormatter
+        arguments:
+            - "[%%datetime%%] [%%extra.ip%%] %%channel%%.%%level_name%%: %%message%%\n"
+
+    monolog.processor.ip_request:
+        class: Gdr\GameBundle\IpRequestProcessor
+        arguments:  ["@service_container"]
+        tags:
+            - { name: monolog.processor, method: processRecord }

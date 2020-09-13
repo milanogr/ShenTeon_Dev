@@ -1,0 +1,1 @@
+<?php return unserialize('C:42:"Vich\\UploaderBundle\\Metadata\\ClassMetadata":109:{a:6:{i:0;s:34:"Gdr\\MeteoBundle\\Entity\\MeteoStatus";i:1;a:0:{}i:2;a:0:{}i:3;a:0:{}i:4;i:1581756273;i:5;a:0:{}}}');

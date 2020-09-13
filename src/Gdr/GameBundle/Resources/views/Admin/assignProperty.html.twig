@@ -1,0 +1,46 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-admin">
+
+        <h2><span>Admin - Assegna proprietà</span></h2>
+
+        <div class="centered-form">
+            <div class="errors">
+                {% for flashMessage in app.session.flashbag.get('success') %}
+
+                    <p><strong>{{ flashMessage }}</strong></p>
+                {% endfor %}
+                {% for error in errors %}
+                    <p><strong>{{ error }}</strong></p>
+                {% endfor %}
+            </div>
+
+            <table class="table spaced">
+                <tr>
+                    <td>Nome</td>
+                    <td>Assegna a</td>
+                </tr>
+                {% for property in properties %}
+                    <tr>
+                        <td>{{ property.name }}</td>
+                        <td>
+                            <form action="" method="POST">
+                                <label>Personaggio</label>
+                                <input type="text" name="nome">
+
+                                <button type="submit">Assegna</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+<h3>Skill di livello {{ level }} {% if canLearn %}<span>1 skill da imparare</span>{% endif %}</h3>
+
+{% for skill in skills %}
+    <a {% if canLearn %}href="{{ url('skill-learn', {id: skill.id}) }}"{% endif %}
+       title="<strong>Nome: </strong>{{ skill.name }} <br>
+            <strong>Si riattiva in: </strong> {{ skill.hoursToReload }} ore <br>
+            {{ skill.description }}"
+       class="skill{% if skill.isLearned == false %} not-learned{% endif %}{% if canLearn %} can-learn{% endif %}">
+        <img src="{{ uploadPath ~ skill.imageName }}" alt="{{ skill.name }}">
+    </a>
+{% endfor %}
+
+
+<span class="skill-plus-random">+</span>
+
+{% if randomSkill %}
+    <img src="{{ uploadPath ~ randomSkill.skill.imageName }}"
+         alt="{{ randomSkill.skill.name }}"
+         class="skill-random"
+         title="<strong>Nome: </strong>{{ randomSkill.skill.name }} <br>
+                <strong>Si riattiva in: </strong> {{ randomSkill.skill.hoursToReload }} ore <br>
+                {{ randomSkill.skill.description }}"
+            >
+{% else %}
+    {% if canLearnRandom %}
+        <a class="can-learn-random gdrtooltip" data-href="{{ path('skill-random-learn', {'level': level}) }}"
+           data-price="{{ priceForRandom }}" title="Acquista una pozione per imparare una skill in maniera casuale">
+            <img src="{{ asset('bundles/gdrgame/images/avatar/pozione_skill.jpg') }}">
+        </a>
+    {% else %}
+        <img src="{{ asset('bundles/gdrgame/images/avatar/pozione_skill_disabled.png') }}" class="cant-drink gdrtooltip" title="Non puoi ancora acquistare una pozione per questo livello di Skill">
+    {% endif %}
+
+{% endif %}

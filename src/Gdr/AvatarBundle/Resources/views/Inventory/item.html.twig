@@ -1,0 +1,25 @@
+<div class="inventory-item" style="clear:both">
+
+    <table class="spaced" style="margin-top: 13px;">
+        <tr>
+            <td class="text-centered">
+                <h2>{{ item.name }}</h2>
+
+                {% if item.imageName %}
+                    <img style="margin-bottom: 8px" src="{{ vich_uploader_asset(item, 'image') }}" title="{{ item.name }}">
+                {% endif %}
+
+                {% if item.longDescription %}
+                    {{ item.longDescription|raw }}
+                {% else %}
+                    <p>{{ item.shortDescription|raw }}</p>
+                {% endif %}
+
+                {% if item.bigImageName %}
+                    <hr style=" width: 70%; margin: 10px auto">
+                    <img src="{{ vich_uploader_asset(item, 'bigImage') }}" title="{{ item.name }}">
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,27 @@
+grimory-index:
+    path: /
+    defaults: { _controller: GdrAvatarBundle:Grimory:index }
+
+grimory-show-spell:
+    path: /spell/show/{id}
+    defaults: { _controller: GdrAvatarBundle:Grimory:showSpell }
+
+grimory-total-spells:
+    path: /total-spells/{level}
+    defaults: { _controller: GdrAvatarBundle:Grimory:totalSpellsLearned }
+
+grimory-categories:
+    path: /spells/categories/level/{level}
+    defaults: { _controller: GdrAvatarBundle:Grimory:categorySpells }
+
+grimory-spells:
+    path: /spells/list/{categoryId}/level/{level}
+    defaults: { _controller: GdrAvatarBundle:Grimory:spells }
+
+grimory-select:
+    path: /spell/select/{spellId}
+    defaults: { _controller: GdrAvatarBundle:Grimory:selectSpell }
+
+grimory-study:
+    path: /spells/study
+    defaults: { _controller: GdrAvatarBundle:Grimory:studySpells }

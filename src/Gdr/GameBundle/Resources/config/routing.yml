@@ -1,0 +1,95 @@
+game_homepage:
+    path:  /
+    defaults: { _controller: GdrGameBundle:Default:index }
+
+locations:
+    resource: "@GdrGameBundle/Resources/config/ruotes/location.yml"
+    prefix:   /location
+
+chats:
+    resource: "@GdrGameBundle/Resources/config/ruotes/chat.yml"
+    prefix:   /chat
+
+location:
+    path: /newloc
+    defaults: { _controller: GdrGameBundle:Default:location }
+
+letters:
+    resource: "@GdrGameBundle/Resources/config/ruotes/letters.yml"
+    prefix:     /missive
+
+onlines:
+    resource: "@GdrGameBundle/Controller/OnlineController.php"
+    type:     annotation
+
+markets:
+    resource: "@GdrGameBundle/Resources/config/ruotes/market.yml"
+    prefix:   /mercato
+
+banks:
+    resource: "@GdrGameBundle/Resources/config/ruotes/bank.yml"
+    prefix:   /bank
+
+enclavi:
+    resource: "@GdrGameBundle/Resources/config/ruotes/enclave.yml"
+    prefix:   /enclave
+
+online:
+    resource: "@GdrGameBundle/Resources/config/ruotes/online.yml"
+    prefix:   /presenti
+
+forum:
+    resource: "@GdrGameBundle/Resources/config/ruotes/bacheca.yml"
+    prefix:   /bacheca
+
+erario:
+    resource: "@GdrGameBundle/Resources/config/ruotes/erario.yml"
+    prefix:   /erario
+
+lavoro:
+    resource: "@GdrGameBundle/Resources/config/ruotes/lavoro.yml"
+    prefix:   /lavoro
+
+editti:
+    resource: "@GdrGameBundle/Resources/config/ruotes/editti.yml"
+    prefix:   /editti
+
+biblioteca:
+    resource: "@GdrGameBundle/Resources/config/ruotes/biblioteca.yml"
+    prefix:   /biblioteca
+
+manuale:
+    resource: "@GdrGameBundle/Resources/config/ruotes/manuale.yml"
+    prefix:   /manuale
+
+meteos:
+    resource: "@GdrMeteoBundle/Resources/config/routing.yml"
+    prefix:   /meteo
+
+anagrafe:
+    resource: "@GdrGameBundle/Resources/config/ruotes/anagrafe.yml"
+    prefix:   /anagrafe
+
+adminGestione:
+    resource: "@GdrGameBundle/Resources/config/ruotes/admin.yml"
+    prefix:   /admin
+
+cimitero:
+    resource: "@GdrGameBundle/Resources/config/ruotes/cimitero.yml"
+    prefix:   /cimitero
+
+marque:
+    resource: "@GdrGameBundle/Resources/config/ruotes/marque.yml"
+    prefix: /marque
+
+museo:
+    resource: "@GdrGameBundle/Resources/config/ruotes/museo.yml"
+    prefix: /museo
+
+archivio:
+    resource: "@GdrGameBundle/Resources/config/ruotes/archivio.yml"
+    prefix: /archivio
+
+wises:
+    resource: "@GdrGameBundle/Resources/config/ruotes/wise.yml"
+    prefix: /saggio-di-teon

@@ -1,0 +1,25 @@
+market:
+    path: /
+    defaults: { _controller: GdrGameBundle:Market:index }
+
+market-items:
+    path: /lista/mercato/{mercato}/livello/{livello}/categoria/{categoria}
+    defaults: { _controller: GdrGameBundle:Market:listItems, mercato: 1, livello: 0, categoria: null }
+    requirements:
+        mercato: 1|2|3|4|5
+        livello: 0|1|2|3|4|5
+        categoria: \d+
+
+market-buy:
+    path: /acquisto/{itemId}/{quantity}
+    defaults: { _controller: GdrGameBundle:Market:buyItems}
+    options:
+        expose: true
+    requirements:
+        itemId: \d+
+        quantity: \d+
+    methods:  [GET]
+
+market-test:
+    path: /test/
+    defaults: { _controller: GdrGameBundle:Market:test}

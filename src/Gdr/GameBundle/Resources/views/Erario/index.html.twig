@@ -1,0 +1,26 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2'
+    'bundles/gdrgame/javascripts/erario.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block content -%}
+    <div class="erario-container">
+        <h1><span>Erario</span></h1>
+
+        {% include 'GdrGameBundle:Erario:filter.html.twig' with {'currentType': currentType, 'position': 'top'} %}
+
+        {% include 'GdrGameBundle:Erario:list.html.twig' with {'currentType': currentType, 'paginator': paginator} %}
+
+        {% include 'GdrGameBundle:Erario:filter.html.twig' with {'currentType': currentType, 'position': 'bottom'} %}
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+<table class="spaced" style="margin-top: 15px">
+    {% for item in items %}
+        <tr>
+            <td class="dark" style="width: 90px">
+                <img src="{{ vich_uploader_asset(item, 'image') }}" alt="{{ item.name }}"
+            </td>
+            <td>
+                <p style="margin-bottom: 0"><strong>Nome: </strong>{{ item.name }}</p>
+                <p><strong>Descrizione: </strong>{{ item.shortDescription }}</p>
+            </td>
+        </tr>
+    {% else %}
+    <tr>
+        <td class="centered">Questo immobile non produce nulla al momento.</td>
+    </tr>
+    {% endfor %}
+</table>

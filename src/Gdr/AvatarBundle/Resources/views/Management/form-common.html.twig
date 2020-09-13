@@ -1,0 +1,14 @@
+<h3>Gestione del personaggio</h3>
+<form id="form-management-common" action="{{ url('avatar-management-form-common') }}" method="POST"
+      novalidate="novalidate" {{ form_enctype(form) }}>
+
+    {{ form_label(form.avatar) }}
+    {{ form_widget(form.avatar) }}
+    {% if personage.avatarName %}
+        <a target="_blank" href="{{ vich_uploader_asset(personage, 'avatar') }}" title="Guarda il tuo avatar">Mostra avatar attuale</a>
+    {% endif %}
+
+    {{ form_rest(form) }}
+
+    <button type="submit">Salva</button>
+</form>

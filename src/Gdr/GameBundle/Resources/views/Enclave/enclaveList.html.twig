@@ -1,0 +1,13 @@
+{% for category in categoriesEnclave %}
+    <table class="enclavi shields solited">
+        <tr>
+            <th colspan="2">{{ category.name }}</th>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center">
+                {{ render(controller('GdrGameBundle:Enclave:showShields', {id: category.id, isClan: isClan, notOfficial: notOfficial})) }}
+            </td>
+        </tr>
+        <tfoot class="hide data-target-details"></tfoot>
+    </table>
+{% endfor %}

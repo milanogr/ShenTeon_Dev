@@ -1,0 +1,39 @@
+cron-letters-remove:
+    path: /letters-remove
+    defaults: { _controller: GdrGameBundle:Cron:deleteLetters }
+
+cron-generate-products:
+    path: /property/generate-products
+    defaults: { _controller: GdrGameBundle:Cron:generateItemsFromProperties }
+
+cron-tax-properties:
+    path: /property/apply-taxes
+    defaults: { _controller: GdrGameBundle:Cron:applyTaxFromProperties }
+
+cron-delete-old-items:
+    path: /items/delete-old
+    defaults: { _controller: GdrGameBundle:Cron:expireOldItems }
+
+cron-check-moon:
+    path: /moon/check
+    defaults: { _controller: GdrGameBundle:Cron:checkMoon }
+
+cron-check-meteo:
+    path: /meteo/check
+    defaults: { _controller: GdrGameBundle:Cron:checkMeteo }
+
+cron-check-birthdays:
+    path: /personages/check-birthdays
+    defaults: { _controller: GdrGameBundle:Cron:checkBirthdays }
+
+cron-check-overage:
+    path: /personages/check-overage
+    defaults: { _controller: GdrGameBundle:Cron:checkOverAge }
+
+cron-xp:
+    path: /personages/xp/{confirm}
+    defaults: { _controller: GdrGameBundle:Cron:assignXp }
+
+test-email:
+    path: /test-email
+    defaults: { _controller: GdrGameBundle:Cron:testEmail }

@@ -1,0 +1,153 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/jquery-ui-1.10.3.custom.min.js'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/craftmap.js'
+    '@GdrGameBundle/Resources/public/javascripts/maps.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="maps-and-location">
+        <h2><span>{{ map.name }}</span></h2>
+
+        <div id="container-map" class="relative">
+            <div class="map">
+
+                {% if isDay %}
+                    <img src="{{ vich_uploader_asset(map, 'map') }}" class="imgMap"/>
+                {% else %}
+                    <img src="{{ vich_uploader_asset(map, 'mapNight') }}" class="imgMap"/>
+                {% endif %}
+
+                {% for location in locations %}
+
+{#                    {{ dump(location) }}#}
+
+                    {% if location.requireKey %}
+                        {% set requireKey = ". Questa chat richiede una chiave." %}
+                    {% else %}
+                        {% set requireKey = "" %}
+                    {% endif %}
+
+
+                    {% if location.isStreet == false %}
+
+                        {% if location.requireKey %}
+                            {% set requireKey = ". Questa chat richiede una chiave." %}
+                            <a class="marker location" title="{{ location.name ~ requireKey }}"
+                               data-coords="{{ location.iconPosX }}, {{ location.iconPosY }}"
+                               href="{{ path('change_location', {'id': location.id, 'ajax': 1}) }}"
+                               style="background: url({{ vich_uploader_asset(location, 'icon') }})">
+                            </a>
+                        {% else %}
+
+                            {% if location.id in activeLocations %}
+                                {% set locIcon = asset('bundles/gdrgame/images/mappe/chat-aperta-gioco.gif') %}
+                            {% elseif location.isClosed %}
+                                {% set locIcon = asset('bundles/gdrgame/images/mappe/chat-chiusa.png') %}
+                            {% else %}
+                                {% set locIcon = asset('bundles/gdrgame/images/mappe/chat-aperta.png') %}
+{#                                {{ dump(location.iconName) }}#}
+                                {% set locIcon = vich_uploader_asset(location, 'icon') %}
+
+                            {% endif %}
+
+                            <a class="marker location" title="{{ location.name ~ requireKey }}"
+                               data-coords="{{ location.iconPosX }}, {{ location.iconPosY }}"
+                               href="{{ path('change_location', {'id': location.id, 'ajax': 1}) }}"
+                               style="background: url({{ locIcon }})">
+                            </a>
+
+                        {% endif %}
+
+                    {% else %}
+                        <a class="marker street no-ajax" title="{{ location.name }}"
+                           data-coords="{{ location.iconPosX }}, {{ location.iconPosY }}"
+                           style="background: url({{ vich_uploader_asset(location, 'icon') }})">
+                        </a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if map.name == "Mappa di Teon" %}
+                    <a class="marker location no-ajax" title="Biblioteca"
+                       data-coords="100, 510"
+                       {#data-coords="270, 457"#}
+                       href="{{ path('biblioteca-index') }}"
+                       style="background: url({{ asset('bundles/gdrgame/images/mappe/chat-servizio.png') }})">
+                    </a>
+                    <a class="marker location no-ajax" title="Anagrafe"
+                       data-coords="475, 533"
+                       {#data-coords="475, 533"#}
+                       href="{{ path('anagrafe-index') }}"
+                       style="background: url({{ asset('bundles/gdrgame/images/mappe/chat-servizio.png') }})">
+                    </a>
+                    <a class="marker location no-ajax" title="Banca"
+                       data-coords="281, 317"
+                       {#data-coords="303, 358"#}
+                       href="{{ path('bank-index') }}"
+                       style="background: url({{ asset('bundles/gdrgame/images/mappe/chat-servizio.png') }})">
+                    </a>
+                    <a class="marker location no-ajax" title="Erario"
+                       data-coords="287, 173"
+                       {#data-coords="595, 409"#}
+                       href="{{ path('erario-index', {type: 1}) }}"
+                       style="background: url({{ asset('bundles/gdrgame/images/mappe/chat-servizio.png') }})">
+                    </a>
+                    <a class="marker location no-ajax" title="Cimitero Lapidi"
+                       data-coords="994, 678"
+                       {#data-coords="216, 577"#}
+                       href="{{ path('cimitero-index') }}"
+                       style="background: url({{ asset('bundles/gdrgame/images/mappe/chat-servizio.png') }})">
+                    </a>
+                    <a class="marker location no-ajax" title="Palazzo del Lavoro"
+                       data-coords="401, 191"
+                       {#data-coords="700, 313"#}
+                       href="{{ path('lavoro-index') }}"
+                       style="background: url({{ asset('bundles/gdrgame/images/mappe/chat-servizio.png') }})">
+                    </a>
+                    <a class="marker location no-ajax" title="Museo di Teon"
+                       data-coords="490, 256"
+                       {#data-coords="563, 304"#}
+                       href="{{ path('museo-index') }}"
+                       style="background: url({{ asset('bundles/gdrgame/images/mappe/chat-servizio.png') }})">
+                    </a>
+                    <a class="marker location no-ajax" title="Archivio di Teon"
+                       data-coords="506, 632"
+                            {#data-coords="496, 448"#}
+                       href="{{ path('archivio-index') }}"
+                       style="background: url({{ asset('bundles/gdrgame/images/mappe/chat-servizio.png') }})">
+                    </a>
+                    <a class="marker location no-ajax" title="Saggio di Teon"
+                       data-coords="400, 586"
+                       {#data-coords="469, 603"#}
+                       href="{{ path('wise.index') }}"
+                       style="background: url({{ asset('bundles/gdrgame/images/mappe/chat-servizio.png') }})">
+                    </a>
+                {% endif %}
+            </div>
+            <div class="legenda">
+                <ul>
+                    <li><img src="{{ asset('bundles/gdrgame/images/mappe/chat-aperta-gioco.gif') }}"> Chat Attiva</li>
+                    <li><img src="{{ asset('bundles/gdrgame/images/mappe/chat-aperta.png') }}"> Chat Aperta</li>
+                    <li><img src="{{ asset('bundles/gdrgame/images/mappe/chat-chiusa.png') }}"> Chat Chiusa</li>
+                    <li><img src="{{ asset('bundles/gdrgame/images/mappe/chat-servizio.png') }}"> Chat di Servizio</li>
+                    <li><img src="{{ asset('bundles/gdrgame/images/mappe/chat-privata.png') }}"> Chat di Enclave</li>
+                    <li><a id="show-streets" class="gdrtooltip"
+                           title="Fai click per mostrare o nascondere le vie della mappa" href="#">Mostra/Nascondi
+                            Vie</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

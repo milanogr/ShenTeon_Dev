@@ -1,0 +1,42 @@
+{% for chat in chats %}
+    {% set isCastI = chat.special == "cast-1" %}
+    {% set isCastII = chat.special == "cast-2" %}
+
+    {# Anima #}
+    {% if chat.special == 'soul' %}
+       {{  include('GdrGameBundle:Chat/Type:_soul.html.twig') }}
+    {% endif %}
+
+    {# Chat normale #}
+    {% if chat.type == 1 %}
+
+        {{  include('GdrGameBundle:Chat/Type:_normal.html.twig') }}
+
+    {% endif %}
+
+    {# Chat Azione #}
+    {% if chat.type == 2 %}
+        {{  include('GdrGameBundle:Chat/Type:_action.html.twig') }}
+    {% endif %}
+
+    {# Chat Sussurro #}
+    {% if chat.type == 3 %}
+
+        {{  include('GdrGameBundle:Chat/Type:_whisp.html.twig') }}
+
+    {% endif %}
+
+    {# Chat System Passaggio Mori, Oggetti, Dado #}
+    {% if chat.type == 4 %}
+
+        {{  include('GdrGameBundle:Chat/Type:_system.html.twig') }}
+
+    {% endif %}
+
+    {# Meteo #}
+    {% if chat.type == 5 %}
+
+        {% include 'GdrGameBundle:Chat/Type:_meteo.html.twig' %}
+
+    {% endif %}
+{% endfor %}

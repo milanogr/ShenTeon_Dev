@@ -1,0 +1,11 @@
+mod-esilio:
+    path: /
+    defaults: { _controller: GdrAvatarBundle:Mod:esilio }
+
+mod-last-registered:
+    path: /personages/last-registered
+    defaults: { _controller: GdrAvatarBundle:Mod:showLastRegistered }
+
+mod-same-ips:
+    path: /personages/same-ips
+    defaults: { _controller: GdrAvatarBundle:Mod:sameIps }

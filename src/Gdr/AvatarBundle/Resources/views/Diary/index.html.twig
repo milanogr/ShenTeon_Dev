@@ -1,0 +1,12 @@
+<h3>Pagine del Diario</h3>
+<div id="diary-pages">
+    {% include '@GdrAvatar/Diary/list.html.twig' with {paginator: paginator} %}
+</div>
+
+<hr>
+
+<div class="diary-content-form">
+   {% if is_owner %}
+       {% render(controller('GdrAvatarBundle:Diary:create', {name: name})) %}
+   {% endif %}
+</div>

@@ -1,0 +1,39 @@
+<p class="text-centered">
+    <i>"Da qui tu, in quanto giocatore, puoi votare i Personaggi che ritieni migliori per una delle categorie proposte."</i>
+</p>
+
+{% if isOwner %}
+    <h3>Riconoscimenti da votare</h3>
+    <div id="achievement-vote">
+        <i>Al momento non ci sono votazioni</i>
+    </div>
+{% endif %}
+
+<hr>
+
+<h3>Riconoscimenti del personaggio</h3>
+
+<table class="items-table-container">
+    <tbody>
+    {% for achievement in achievements %}
+        <tr class="item-row">
+            <td class="item-preview">
+                <img src="{{ vich_uploader_asset(achievement, 'image') }}" title="{{ achievement.name }}">
+            </td>
+            <td class="item-infos">
+                <ul>
+                    <li><span>Riconoscimento:</span> {{ achievement.name }}</li>
+                    <li><span>Data:</span> {{ achievement.createdAt|date("d/m/Y") }}</li>
+                    <li><span>Descrizione:</span> {{ achievement.description }}</li>
+                </ul>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="2" class="text-centered">Il personaggio non ha ancora ricevuto nessun riconoscimento
+                pubblico.
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,36 @@
+{% extends 'GdrSiteBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <h2>Cambia la password</h2>
+
+    <p>Ora puoi cambiare la tua password. Una volta cliccato conferma non riceverai la tua nuova password per email,
+        per cui sii sicuro di ricordartela.</p>
+
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="flash-success">
+            <p>{{ flashMessage }}</p>
+            <p>Ora puoi <a href="{{ path('login') }}" title="Login">effettuare il login</a> con la tua nuova password.</p>
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="flash-error">
+            <p>{{ flashMessage }}</p>
+        </div>
+    {% endfor %}
+
+    <form action="{{ path('user_do_reset', {token: token, email: email}) }}" method="POST">
+
+        {{ form_label(form.plainPassword.first) }}
+        {{ form_widget(form.plainPassword.first) }}
+        {{ form_errors(form.plainPassword.first) }}
+
+        {{ form_label(form.plainPassword.second) }}
+        {{ form_widget(form.plainPassword.second) }}
+        {{ form_errors(form.plainPassword.second) }}
+
+        {{ form_rest(form) }}
+
+        <button type="submit" formnovalidate>Conferma la nuova password</button>
+    </form>
+{% endblock %}

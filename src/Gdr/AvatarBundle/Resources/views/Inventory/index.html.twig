@@ -1,0 +1,23 @@
+<div class="categories-items-container">
+
+{% for category in categories %}
+
+    <a class="category-item-box data-inventory-items gdrtooltip"
+       title="{{ category.categoryName }}"
+        href="{{ url('avatar-inventory-items', {name: name, category: category.categoryId}) }}">
+        <img src="/uploads/itemsType/{{ category.categoryImage }}" alt="{{ category.categoryImage }}">
+    </a>
+
+{% else %}
+
+    <p class="text-centered">Non disponi di alcun oggetto.</p>
+
+{% endfor %}
+</div>
+
+
+<div class="js-inventory-items-container">
+
+<p class="text-center">Scegli una categoria per vedere gli oggetti.</p>
+
+</div>

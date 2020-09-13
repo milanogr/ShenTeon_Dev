@@ -1,0 +1,87 @@
+<div class="text-centered">
+    {{ knp_pagination_render(paginator) }}
+</div>
+
+<h4 class="forum-title">{{ category.name }}</h4>
+<table class="threads spaced">
+    <tbody>
+    <tr class="dark">
+        <th></th>
+        <th>Autore</th>
+        <th>Titolo e data</th>
+        <th>Letture</th>
+        <th>Risposte</th>
+        <th>Ultimo Intervento</th>
+    </tr>
+    {% for thread in paginator %}
+        {% set darkClass = thread.status != threadNormal ? 'dark' : "" %}
+        <tr>
+            <td class="nuovo-img dark">
+                {% if thread.threadReaded %}
+                    <img src="{{ asset('bundles/gdrgame/images/vecchio-thread.png') }}" title="Non ci sono nuove risposte dalla tua ultima visita" alt="Non ci sono nuove risposte dalla tua ultima visita">
+                {% else %}
+                    <img src="{{ asset('bundles/gdrgame/images/nuovo-thread.png') }}" title="Ci sono nuove risposte dalla tua ultima visita" alt="Ci sono nuove risposte dalla tua ultima visita">
+                {% endif %}
+            </td>
+            <td class="dark name">
+                {% if thread.nameAsMod %}
+                    <span class="author-mod">Moderatore</span>
+                {% elseif thread.nameAsAdmin %}
+                    <span class="author-admin">Gestione</span>
+                {% else %}
+                    {% if thread.authorLevelIcon %}
+                        <img src="{{ uploadPath('enclave') ~ thread.authorLevelIcon }}"
+                             title="{{ thread.authorLevelName }}" class="gdrtooltip">
+                    {% else %}
+                        <img title="Appartenenza ad Enclavi sconosciuta" class="gdrtooltip"
+                             src="{{ asset('bundles/gdrgame/images/chat/no-enclave.png') }}">
+                    {% endif %}
+                    <a href="{{ path('avatar-index', {name: thread.authorName}) }}"
+                       title="Apri l'avatar di {{ thread.authorName }}">
+                        <img src="{{ uploadPath('race') ~ thread.authorRaceIcon }}"
+                             alt="{{ thread.authorRace }}">
+                    </a>
+                    <span>{{ thread.authorName }}</span>
+                {% endif %}
+            </td>
+            <td class="body {{ darkClass }}">
+                <a href="{{ path('bacheca-show-thread', {id: thread[0].id}) }}">
+                    {% if thread.isLocked %}
+                        <img src="{{ asset('bundles/gdrgame/images/forum-locked.png') }}" alt="Discussione Chiusa"
+                             title="Discussione Chiusa">
+                    {% endif %}
+                    {% if thread.status == threadAnnounce %}
+                        <strong>[Annuncio] </strong>
+                    {% elseif thread.status == threadImportant %}
+                        <strong>[In evidenza] </strong>
+                    {% endif %}
+                    {{ thread[0].title }}
+                </a>
+                <span class="date">Teon, {{ thread[0].createdAt|date('d/m/Y H:i')|default('') }}</span>
+            </td>
+            <td class="letture {{ darkClass }}">
+                {{ thread[0].readed }}
+            </td>
+            <td class="risposte {{ darkClass }}">
+                {{ thread[0].replied }}
+            </td>
+            <td class="last-reply {{ darkClass }}">
+                {% if thread[0].lastPostAuthor %}
+                    <div><strong>{{ thread[0].lastPostAuthor }}</strong></div>
+                    <div class="date">{{ thread[0].lastPostTime|date('d/m/Y H:i') }}</div>
+                {% else %}
+                    <i>Nessuna risposta</i>
+                {% endif %}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="6" class="text-centered">Non ci sono thread</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="text-centered">
+    {{ knp_pagination_render(paginator) }}
+</div>

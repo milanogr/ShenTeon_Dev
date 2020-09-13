@@ -1,0 +1,31 @@
+property-index:
+    path:  /index/{name}
+    defaults: { _controller: GdrAvatarBundle:Property:index, name:null }
+
+property-address:
+    path:  /address/{key}
+    defaults: { _controller: GdrAvatarBundle:Property:setAddress }
+
+property-sell:
+    path:  /sell/{id}
+    defaults: { _controller: GdrAvatarBundle:Property:sell }
+
+property-items:
+    path:  /items/{id}
+    defaults: { _controller: GdrAvatarBundle:Property:showProducts }
+
+property-products:
+    path:  /sell/{id}
+    defaults: { _controller: GdrAvatarBundle:Property:sell }
+
+property-create-keys:
+    path:  /create/keys/{id}
+    defaults: { _controller: GdrAvatarBundle:Property:createKeys }
+    
+property-show-keys:
+    path:  /show/keys/{id}
+    defaults: { _controller: GdrAvatarBundle:Property:showKeys }
+
+property-remove-key:
+    path:  /remove/key/{inventoryId}/{propertyId}
+    defaults: { _controller: GdrAvatarBundle:Property:removeKey }

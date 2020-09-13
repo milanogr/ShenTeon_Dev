@@ -1,0 +1,129 @@
+#markets-centered {
+  // Firefox bug: border-box non supportato;
+  width: 685px;
+  margin: 0 auto;
+  @include clearfix;
+}
+
+table#emporium, table#black-market, table#potion-market {
+  width: 208px;
+  margin: 0;
+  float: left;
+
+  th {
+    background-color: $table-even-row-bg;
+  }
+
+  td {
+    text-align: center;
+  }
+  a{
+    text-decoration: underline;
+
+    &.help {
+      cursor: help;
+    }
+  }
+}
+
+table#emporium, table#black-market {
+  margin-right: 10px;
+}
+
+table.market-list {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.market-filter {
+  font-size: 15px;
+  text-align: center;
+
+  a {
+    margin-bottom: 7px;
+    display: inline-block;
+
+    &:after {
+      content: ' | ';
+      font-weight: normal !important;
+    }
+    &:last-child{
+      &:after {
+        content: '';
+        font-weight: normal !important;
+      }
+    }
+    &.active {
+      font-weight: 700;
+    }
+  }
+}
+
+table.market-item {
+  $table-row-padding: emCalc(7px) emCalc(10px);
+  $table-line-height: emCalc(16px);
+  width: 100%;
+
+  img {
+    border: 1px solid $table-head-bg;
+    width: 80px;
+  }
+
+  tr {
+    th, td {
+      padding: $table-row-padding;
+    }
+  }
+
+  .item-preview {
+    width: 130px;
+    height: 100px;
+    text-align: center;
+
+    figcaption {
+      margin-bottom: 2px;
+      font-weight: 700;
+    }
+
+    .dressIcon {
+      width: 25px;
+      height: 25px;
+      margin-top: 3px;
+    }
+  }
+
+  .item-quantity {
+    width: 50px;
+  }
+  .item-weight {
+    width: 50px;
+  }
+  
+  .item-price {
+    width: 50px;
+  }
+
+  .item-buy {
+    width: 60px;
+  }
+
+  .active-description {
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-style: italic;
+  }
+
+}
+
+.enclave-markets-container {
+  margin: 50px auto 0 auto;
+  width: 640px;
+
+  img:first-child {
+    margin-right: 15px;
+  }
+
+  a, img {
+    display: inline-block;
+  }
+}

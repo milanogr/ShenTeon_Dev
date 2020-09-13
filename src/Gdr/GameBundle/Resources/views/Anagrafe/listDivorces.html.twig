@@ -1,0 +1,22 @@
+<table id="table-online" class="spaced alternate">
+    <thead>
+    <tr>
+        <th>Nome sposo</th>
+        <th>Nome sposa</th>
+        <th>Officiante</th>
+        <th>Testo del provvedimento</th>
+        <th>Data</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for divorce in divorces %}
+        <tr>
+            <td>{{ divorce.getGroom.getName }}</td>
+            <td>{{ divorce.getBride.getName }}</td>
+            <td>{{ divorce.getOfficiateDivorce }}</td>
+            <td>{{ divorce.getOfficiateDivorce }} ha divorziato {{ divorce.getGroom.getName }} da {{ divorce.getBride.getName }}</td>
+            <td>{{ divorce.getEndedAt|date("d/m/Y")|teon_date(true) }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

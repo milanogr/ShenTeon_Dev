@@ -1,0 +1,34 @@
+{% extends 'GdrGameBundle:Default:index.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/jquery-ui-1.10.3.custom.min.js'
+    '@GdrGameBundle/Resources/public/javascripts/chat.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block body %}
+
+    <div id="chat-content">
+        {{ include('GdrGameBundle:Chat:chat.html.twig', {chats: chats}) }}
+    </div>
+
+    <div id="chat-bar">
+        {{ render(controller('GdrGameBundle:Chat:input')) }}
+    </div>
+
+    <div id="chat-expand-text" class="reveal-modal gdr medium">
+        <a class="close-reveal-modal">×</a>
+
+        <span class="hint">Premendo la "x" il testo sarà automaticamente salvato nella barra inferiore.</span>
+
+        <div class="reveal-content">
+            <textarea spellcheck=true
+                      placeholder="Questa finestra serve per scrivere più comodamente la tua azione. Una volta che hai completato la tua frase clicca sulla 'x' di questa finestra, il testo verrà copiato nella barra sottostante. Ricordati che hai la possibilità di trascinare a piacimento questa finestra all'interno del riquadro dalle chat."></textarea>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends '@GdrGame/Library/index.html.twig' %}
+
+{% block content %}
+    <div class="library-container">
+    <h2><span>Biblioteca - {{ section.getName }}</span></h2>
+
+    <p class="text-centered">
+        <a href="{{ path('biblioteca-index') }}">Torna all'ingresso della Biblioteca</a>
+    </p>
+
+    {% for book in books %}
+        {% if loop.first %}
+            <div class="ripiano">
+        {% endif %}
+
+        <a class="show-book gdrtooltip" data-href="{{ path('biblioteca-show-book', {id: book.id}) }}" title="Leggi {{ book.title }}">
+            <img src="{{ vich_uploader_asset(book, 'image') }}" alt="{{ book.getTitle }}">
+        </a>
+
+        {% if loop.index % 10 == 0 or loop.last %}
+            </div>
+        {% endif %}
+
+        {% if loop.index % 10 == 0 and loop.last == false %}
+            <div class="ripiano">
+        {% endif %}
+    {% endfor %}
+    </div>
+{% endblock %}

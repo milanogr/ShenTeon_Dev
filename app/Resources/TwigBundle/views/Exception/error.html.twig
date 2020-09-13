@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Si è verificato un errore: {{ status_text }}</title>
+
+    <style>
+        html, body {
+            background-color: black;
+            height: 100%;
+            width: 100%;
+            color: #e6e6e6;
+        }
+
+        .container {
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        a {
+            color: #e6e6e6;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Oops! Si è verificato un errore :(</h1>
+    <h2>Il server ha restituito un "{{ status_code }} {{ status_text }}".</h2>
+
+    <p><a href="{{ path('site_homepage') }}">Torna alla homepage</a></p>
+</div>
+</body>
+</html>

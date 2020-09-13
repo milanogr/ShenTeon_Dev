@@ -1,0 +1,38 @@
+{% extends 'GdrGameBundle:Letter:index.html.twig' %}
+
+{% block content -%}
+
+    <div id="missive-container">
+        <h1><span>Scrivi una nuova missiva</span></h1>
+
+        <a href="{{ path('missive-index') }}" class="button">
+            Torna alla lista
+        </a>
+
+        {% if thread %}
+            <div class="segnala-thread">
+                <p>Stai segnalando il thread <strong>{{ thread.title }}</strong> di {{ thread.author }}.</p>
+            </div>
+        {% endif %}
+
+        <form action="" method="post" {{ form_enctype(form) }}>
+
+            {{ form_row(form.category) }}
+
+            {% if isForGroup %}
+                {{ form_row(form.receiverGroup) }}
+            {% else %}
+                {{ form_row(form.receiverName) }}
+            {% endif %}
+
+            {{ form_widget(form.body) }}
+            {{ form_errors(form.body) }}
+
+            {{ form_rest(form) }}
+            <p class="text-centered">
+                <button type="submit">Invia la missiva</button>
+            </p>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,6 @@
+matrimoni-index:
+    path: /
+    defaults: { _controller: GdrAvatarBundle:Wedding:Index }
+matrimoni-divorzia:
+    path: /divorzia-{id}
+    defaults: { _controller: GdrAvatarBundle:Wedding:Divorce}

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="it-IT">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+
+    {% block stylesheets %}
+        {% stylesheets
+        'bundles/gdrgame/stylesheets/*'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ app.request.getSchemeAndHttpHost ~ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+    <style>
+        html, body {
+            width: auto;
+            overflow: auto;
+            height: 100%;
+        }
+        body {
+            padding: 5px;
+            background: url('http://shenteon.com/bundles/gdrgame/images/pattern-chat.jpg');
+        }
+
+        #chat-content {
+            position: static;
+            min-height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="chat-content">
+    {{ include('@GdrGame/Chat/chat.html.twig', {chats: chats}) }}
+</div>
+</body>
+</html>

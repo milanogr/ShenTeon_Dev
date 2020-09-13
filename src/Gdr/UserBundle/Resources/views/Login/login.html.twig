@@ -1,0 +1,18 @@
+{% extends "GdrSiteBundle::layout.html.twig" %}
+
+{% block content %}
+
+    <h2>Login - Accedi al gioco</h2>
+
+    <p>Attraverso questo form puoi effettuare l'accesso al gioco. Se non sei registrato, <a
+                href="{{ path('user_register') }}" title="Registrati ora">clicca qui</a> per farlo subito!</p>
+
+    <p>Ti suggeriamo di mantenere sempre il tuo browser aggiornato per usufruire al meglio di questo gioco.</p>
+
+    <div class="form-centered">
+        {% include '@GdrUser/Login/login.ajax.html.twig' %}
+    </div>
+
+    <p><a href="{{ path('user_reset') }}">Password dimenticata?</a></p>
+
+{% endblock %}

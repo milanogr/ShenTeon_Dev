@@ -1,0 +1,80 @@
+{% extends 'GdrGameBundle:Forum:index.html.twig' %}
+
+{% block content %}
+    {% set isAdmin = is_granted('ROLE_ADMIN') %}
+
+    <div id="forum-container">
+
+        <h1><span>{{ category.name }}</span></h1>
+
+        <div class="special-description">{{ category.description }}</div>
+
+        {% if category.name == strillone and isAdmin %}
+            <a class="button" href="{{ path('bacheca-create-thread', {category: category.id}) }}">Crea Thread</a>
+        {% endif %}
+
+        {% if category.name == araldo and canAraldo and canWriteSoul %}
+            <a class="button" href="{{ path('bacheca-create-thread', {category: category.id}) }}">Crea Thread</a>
+        {% endif %}
+
+        <div class="text-centered">
+            {{ knp_pagination_render(paginator) }}
+        </div>
+
+        {% for post in paginator %}
+            {% set isOwner = post.authorId == pgId %}
+
+            <h4 class="forum-title">
+                {{ post[0].title }}
+            </h4>
+            <table class="posts spaced special">
+                <tbody>
+                <tr class="post">
+                    <td class="dark name">
+                        {% if category.name == strillone %}
+                            <span class="author-admin">
+                                Gestione {% if isAdmin %}<abbr
+                                        title="Info per la Gestione">({{ post.authorName }})</abbr>{% endif %}
+                            </span>
+                        {% else %}
+                            {% if post.authorLevelIcon %}
+                                <img src="{{ uploadPath('enclave') ~ post.authorLevelIcon }}"
+                                     title="{{ post.authorLevelName }}" class="gdrtooltip">
+                            {% endif %}
+                            <a href="{{ path('avatar-index', {name: post.authorName}) }}"
+                               title="Apri l'avatar di {{ post.authorName }}">
+                                <img src="{{ uploadPath('race') ~ post.authorRaceIcon }}"
+                                     alt="{{ post.authorRace }}">
+                            </a>
+                            <span>{{ post.authorName }}</span>
+                        {% endif %}
+                        <span class="date">{{ post[0].createdAt|date('d/m/Y H:i') }}</span>
+
+                        <div class="mod">
+                            {% if isOwner or isAdmin %}
+                                <a href="{{ path('bacheca-edit-post', {id: post.postId}) }}">[modifica]</a>
+                                <a class="delete-post" data-href="{{ path('bacheca-delete-post', {id: post.postId}) }}">[cancella]</a>
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td class="body">
+                        {{ post.body|raw }}
+
+                        {% if post[0].updatedAt is defined and post[0].updatedAt != post[0].createdAt %}
+                            <p class="updated">Modificato il {{ post[0].updatedAt|date('d/m/Y H:i') }}.</p>
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        {% else %}
+            <table class="posts spaced">
+                <tbody>
+                <tr>
+                    <td class="text-centered">Non ci sono thread al momento.</td>
+                </tr>
+                </tbody>
+            </table>
+        {% endfor %}
+    </div>
+{% endblock %}

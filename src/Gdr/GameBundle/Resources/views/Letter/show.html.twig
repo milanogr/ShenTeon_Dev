@@ -1,0 +1,65 @@
+{% if showButtons is defined and showButtons == true %}
+    <a class="button" href="{{ path('missive-reply', {id: letter.id}) }}">Rispondi</a>
+    <a class="button" href="{{ path('missive-inoltra', {id: letter.id}) }}">Inoltra</a>
+    <a class="button" href="{{ path('missive-inoltra', {id: letter.id, isForGroup: true}) }}">Inoltra come ML</a>
+{% elseif showInoltra is defined and showInoltra == true %}
+    <a class="button" href="{{ path('missive-inoltra', {id: letter.id}) }}">Inoltra</a>
+{% endif %}
+<a class="button delete-single-letter" data-href="{{ path('missive-single-delete', {id: letter.id}) }}">Elimina</a>
+
+<table class="letter-read">
+    <thead>
+    <tr>
+        <td class="letter-title">
+            <span>{{ letter.special }} </span>
+            {% if letter.nameAsAdmin %}
+                <strong>GESTIONE</strong>
+            {% elseif letter.nameAsMod %}
+                <strong>MODERAZIONE</strong>
+            {% elseif letter.nameAsFate %}
+                <strong>FATO</strong>
+            {% elseif letter.sender is null %}
+                {{ letter.senderName }}
+            {% else %}
+                {% if letter.senderRaceIcon %}
+                    <a href="{{ path('avatar-index', {name: letter.senderName}) }}">
+                        <img title="{{ letter.senderRaceName }}" class="gdrtooltip"
+                             src="{{ uploadPath('race') ~ letter.senderRaceIcon }}">
+                    </a>
+                {% endif %}
+                {% if letter.senderLevelIcon %}
+                    <img title="{{ letter.senderRankName }}" class="gdrtooltip"
+                         src="{{ uploadPath('enclave') ~ letter.senderLevelIcon }}">
+                {% else %}
+                    <img title="Appartenenza ad Enclavi sconosciuta"
+                         src="{{ asset('bundles/gdrgame/images/chat/no-enclave.png') }}">
+                {% endif %}
+                {{ letter.senderName }}
+            {% endif %}
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        {% if letter.background %}
+            {% set backGround = uploadPath('generale') ~ letter.background.imageName %}
+        {% endif %}
+        <td {% if letter.background %}style="background-image: url('{{ backGround }}')"{% endif %}>
+            {% if letter.isForward %}<p><i>Missiva inoltrata: </i></p>{% endif %}
+            {{ letter.body|raw }}
+
+            <p class="date">Teon, {{ letter.createdAt|date("d/m/Y H.i") }}</p>
+        </td>
+    </tr>
+
+    {% if letter.oldBody %}
+        <tr>
+            <td {% if letter.background %}style="background-image: url('{{ backGround }}')"{% endif %}>
+                <p class="text-centered"><i>Risposte precedenti</i></p>
+                {{ letter.oldBody|raw }}
+            </td>
+        </tr>
+    {% endif %}
+
+    </tbody>
+</table>

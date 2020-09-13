@@ -1,0 +1,11 @@
+skill-index:
+    path: /index
+    defaults: { _controller: GdrAvatarBundle:Skill:index }
+
+skill-learn:
+    path: /learn/{id}
+    defaults: { _controller: GdrAvatarBundle:Skill:learnSkill }
+
+skill-random-learn:
+    path: /learn-random-skill
+    defaults: { _controller: GdrAvatarBundle:Skill:learnRandomSkill }

@@ -1,0 +1,29 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/manuale.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+{% block content %}
+    <div class="manuale-container">
+        <h1><span>Manuale di gioco</span></h1>
+        <table class="manuale spaced alternate">
+            <tbody>
+            {% for manuale in manuali %}
+                <tr>
+                    <td><a data-href="{{ path("manuale-show", {id: manuale.getId}) }}">{{ manuale.getTitle }}</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <img src="{{ asset('bundles/gdrgame/images/libro-regolamenti.jpg') }}">
+    </div>
+{% endblock %}

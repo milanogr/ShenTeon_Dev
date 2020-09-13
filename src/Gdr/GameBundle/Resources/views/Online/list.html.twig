@@ -1,0 +1,67 @@
+<table id="table-online" class="solited">
+    <thead>
+    <tr>
+        <th>Nr.</th>
+        <th>Nome</th>
+        <th>Posizione</th>
+        <th>In Gioco</th>
+        <th>Tipo PG</th>
+        <th>Status</th>
+        <th class="text-centered" >Scrivi</th>
+        <th class="text-centered">Raggiungi</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for online in onlines %}
+        <tr>
+            <td class="nr">
+                {{ loop.index }}/{{ loop.length }}
+            </td>
+            <td class="pg">
+                {% if online.pgGender == 1 %}
+                    <a href="{{ path('avatar-index', {name: online.pgName}) }}">
+                        <img src="{{ uploadPath('race') ~ online.raceMaleIcon }}">
+                    </a>
+                {% else %}
+                    <a href="{{ path('avatar-index', {name: online.pgName}) }}">
+                        <img src="{{ uploadPath('race') ~ online.raceFemaleIcon }}">
+                    </a>
+                {% endif %}
+                {{ online.pgName }}{% if online.isDead %} (Anima){% endif %}
+            </td>
+            <td class="location">
+                {{ online.locName }}
+            </td>
+            <td style="width: 65px; text-align: center">
+                {% if online.isInGame %} Sì {% else %} - {% endif %}
+            </td>
+            <td class="type">
+                {% if online.isGestore %}
+                    <img src="{{ asset('bundles/gdrgame/images/online/gestore.png') }}" title="Gestore" class="gdrtooltip">
+                {% endif %}
+                {% if online.isModeratore %}
+                    <img src="{{ asset('bundles/gdrgame/images/online/moderatore.png') }}" title="Moderatore" class="gdrtooltip">
+                {% endif %}
+                {% if online.isGuida %}
+                    <img src="{{ asset('bundles/gdrgame/images/online/guida.png') }}" title="Guida" class="gdrtooltip">
+                {% endif %}
+            </td>
+            <td class="status">
+                {% if online.status == 1 %}
+                    <img class="gdrtooltip" title="Disponibile al gioco" src="{{ asset('bundles/gdrgame/images/online/disponibile.png') }}">
+                {% elseif online.status == 2 %}
+                    <img class="gdrtooltip" title="Sto giocando" src="{{ asset('bundles/gdrgame/images/online/giocando.png') }}">
+                {% else %}
+                    <img class="gdrtooltip" title="Occupato" src="{{ asset('bundles/gdrgame/images/online/occupato.png') }}">
+                {% endif %}
+            </td>
+            <td class="scrivi" style="width: 60px">
+                <a class="button small" href="{{ path('missive-create', {isForGroup:0, destinatario: online.pgName}) }}">SCRIVI</a>
+            </td>
+            <td class="vai" style="width: 60px">
+                <a class="button small" href="{{ path('change_location', {id: online.locId}) }}">VAI</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,43 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/jquery-ui-1.10.3.custom.min.js'
+    '@GdrGameBundle/Resources/public/javascripts/admin-location.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-admin">
+
+        <h2><span>Admin - Modifica posizione sulla mappa</span></h2>
+
+        <div class="centered-form">
+            <label>Scegli la location da modificare</label>
+            <form id="choose-admin-location">
+                <select id="locations">
+                    <option>Scegli:</option>
+                    {% for loc in locations %}
+                        <option value="{{ path('g-select-location', {id: loc.id}) }}">{{ loc.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="button" type="submit">Mostra la posizione</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <div id="inject-map-ajax">
+
+        </div>
+    </div>
+
+{% endblock %}

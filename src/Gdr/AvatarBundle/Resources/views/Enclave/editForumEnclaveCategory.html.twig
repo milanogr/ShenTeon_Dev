@@ -1,0 +1,45 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="master-container">
+        <h2><span>Gestione Forum - {{ enclave.getName }}</span></h2>
+
+        <a class="button" href="{{ path('master-forum-enclave-admin') }}">Torna alla Gestione Forum</a>
+
+        <hr>
+
+        <h3 class="text-centered"><span>{{ category.getName }}</span></h3>
+
+        <div class="centered-form">
+            <form action="{{ path('master-forum-enclave-edit-category', {id: category.getId}) }}" method="POST">
+
+                <label>Nome categoria</label>
+                {{ form_widget(form.name) }}
+
+                <label>Descrizione</label>
+                {{ form_widget(form.description) }}
+
+                <label>Forum Collegato</label>
+                {{ form_widget(form.forum) }}
+
+                <label>Ordinamento nella lista (0: prima sezione, 1: seconda sezione...)</label>
+                {{ form_widget(form.sort) }}
+
+                <label>Livello carica minimo per la visualizzazione (0 aspirante|10 master)</label>
+                {{ form_widget(form.levelMin) }}
+
+                {{ form_rest(form) }}
+
+                <button type="submit" formnovalidate>Modifica</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

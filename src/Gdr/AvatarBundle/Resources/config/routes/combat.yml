@@ -1,0 +1,7 @@
+combat-index:
+    path: /index
+    defaults: { _controller: GdrAvatarBundle:Combat:index }
+
+combat-up:
+    path: /up/{id}
+    defaults: { _controller: GdrAvatarBundle:Combat:levelUp }

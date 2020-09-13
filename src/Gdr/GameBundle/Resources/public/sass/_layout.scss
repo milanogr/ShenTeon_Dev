@@ -1,0 +1,394 @@
+$container-width: 1050px;
+$bookMenuFontFamily: 'Requiem';
+$body-font-size: 13px;
+
+@font-face {
+  font-family: 'Trajan';
+  src: url('../fonts/trajanproregular.eot');
+  src: url('../fonts/trajanproregular.eot?#iefix') format('embedded-opentype'), url('../fonts/trajanproregular.svg#trajanproregular') format('svg'), url('../fonts/trajanproregular.woff') format('woff'), url('../fonts/trajanproregular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html, body, #container {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-size: $body-font-size;
+}
+
+#container {
+  position: relative;
+}
+
+table {
+  width: 100%;
+
+  tr, td, tbody {
+    border: 1px solid $table-border-color;
+  }
+
+  thead {
+    th {
+      padding: 7px;
+    }
+  }
+
+  &.solited {
+    border-width: 2px;
+    tr, td, tbody {
+      border: 2px solid $table-border-color;
+    }
+  }
+}
+
+.underlined {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+input[type="text"] {
+  height: 27px;
+  padding: 3px;
+}
+
+input[type="submit"], button {
+  @include inset-shadow(false);
+}
+
+.button-primary {
+  @include button-base;
+  @include button-size($button-sml);
+  @include button-style($primary-color, false);
+  opacity: 0.9;
+}
+
+button.alert, .button.alert {
+  color: #fff;
+}
+
+figure {
+  margin: 0;
+}
+
+.reveal-modal.gdr {
+  background-image: url(../images/popup/background.jpg);
+  border: 3px solid #6b5d4b;
+  padding: 0;
+
+  p:first-child {
+    margin-top: 7px;
+  }
+  p:last-child {
+    margin-bottom: 7px;
+  }
+
+  .close-reveal-modal {
+    z-index: 10;
+  }
+
+  .reveal-content {
+    margin: 4px;
+    border: 2px solid #6B5D4B;
+    padding: 11px 11px 0 11px;
+    height: 100%;
+
+    h1, h2, h3 {
+      &:before {
+        content: "";
+        border: none !important;
+      }
+    }
+
+    p {
+      //margin-bottom: 0.4em;
+    }
+
+    ul {
+      margin-left: 17px;
+    }
+  }
+
+  .reveal-top-left, .reveal-top-right, .reveal-bottom-left, .reveal-bottom-right {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+  }
+
+  .reveal-top-left {
+    top: -3px;
+    left: -3px;
+    background-image: url(../images/popup/corner-left-top.jpg);
+  }
+
+  .reveal-top-right {
+    top: -3px;
+    right: -3px;
+    background-image: url(../images/popup/corner-right-top.jpg);
+  }
+
+  .reveal-bottom-right {
+    bottom: -3px;
+    right: -3px;
+    background-image: url(../images/popup/corner-right-bottom.jpg);
+  }
+
+  .reveal-bottom-left {
+    bottom: -3px;
+    left: -3px;
+    background-image: url(../images/popup/corner-left-bottom.jpg);
+  }
+
+  .close-reveal-modal {
+    @include reveal-close($primary-color);
+  }
+}
+
+.reveal-modal.medium {
+  max-height: 80%;
+
+  .mCSB_container {
+    margin-right: 16px !important;
+  }
+  .mCSB_scrollTools {
+    border-left: 2px solid #6B5D4B !important;
+  }
+  .mCS_no_scrollbar {
+    margin-right: 0 !important;
+  }
+
+  .reveal-content {
+    overflow: hidden;
+    height: 97%;
+  }
+}
+
+.reveal-modal.gdr.small.close-reveal-modal {
+  top: -5px;
+  right: -2px;
+}
+
+p.buttons {
+  text-align: right;
+}
+
+.text-centered {
+  text-align: center;
+}
+
+.ajax-loader-inner {
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  margin: -15% 0 0 -25%;
+  background: url(../images/ajax-loader-inner.gif) no-repeat center center;
+  color: $primary-color;
+  text-align: center;
+  width: 80px;
+  height: 92px;
+
+  &:after {
+    content: "Attendi...";
+    font-style: italic;
+  }
+}
+
+button, .button {
+  @include box-shadow(none);
+}
+
+h1, h2 {
+  text-align: center;
+  position: relative;
+
+  &:before {
+    content: "";
+    display: block;
+    border-top: solid 1px $primary-color;
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+  }
+
+  span {
+    padding: 0 20px;
+    position: relative;
+    z-index: 5;
+    background-color: $inner-content-color;
+  }
+}
+
+.clearfix {
+  @include clearfix;
+}
+
+.pending {
+  @include opacity(0.4);
+  cursor: wait;
+
+  &.pending-animated {
+    background: url(../images/ajax-loader-inner.gif) no-repeat center center;
+    color: $primary-color;
+    text-align: center;
+    &:after {
+      content: "Attendi...";
+      font-style: italic;
+    }
+  }
+}
+
+.buttons {
+  button {
+    margin-bottom: 0;
+    @extend .small;
+  }
+}
+
+.popup-diary {
+  span.date {
+    display: block;
+    font-style: italic;
+    text-align: right;
+    font-size: 12px;
+  }
+}
+
+.no-margin {
+  margin: 0;
+  list-style: none;
+}
+
+table#chat-online {
+  margin-top: 12px;
+
+  img {
+    vertical-align: baseline;
+  }
+
+  .count, .dress, .inGame {
+    width: 40px;
+    text-align: center;
+  }
+  .inGame {
+    width: 50px;
+  }
+  .type {
+    width: 72px;
+    text-align: center;
+  }
+}
+
+form#form-passa-mori {
+  select {
+    width: auto;
+    min-width: 150px;
+  }
+  input {
+    width: 80px;
+  }
+}
+
+#form-passa-oggetti {
+  select {
+    width: auto;
+    min-width: 250px;
+  }
+  ul, li {
+    margin: 0;
+  }
+  .select2-container {
+    width: auto;
+    min-width: 250px;
+  }
+  .inventories {
+    margin-bottom: 5px;
+  }
+}
+
+table.spaced {
+  border-collapse: separate;
+  border-spacing: 2px;
+
+  img {
+    vertical-align: baseline;
+  }
+  td {
+    background-color: darken($table-bg, 3%);
+  }
+  tr.dark {
+    th {
+      background-color: darken($table-even-row-bg, 3%);
+      font-weight: 700;
+      border: 1px solid $table-border-color;
+    }
+  }
+  .dark {
+    background-color: darken($table-even-row-bg, 3%);
+  }
+}
+
+table.spaced.alternate {
+  tr:nth-child(even){
+    background-color: darken($table-even-row-bg, 3%);
+    td {
+      background-color: darken($table-even-row-bg, 3%);
+    }
+  }
+}
+
+
+// CKeditor
+.cke {
+  margin-bottom: 10px !important;
+}
+
+// Popup
+.inventory-item {
+  @include clearfix;
+
+  img {
+    margin-bottom: 5px;
+  }
+}
+
+@import "layout/columnLeft";
+
+@import "layout/columnRight";
+
+@import "layout/missive";
+
+.manual-filter {
+  display: none;
+}
+
+.container-send-item {
+  @include clearfix;
+
+  img {
+    float: right;
+    margin-top: 20px;
+    padding-right: 5px;
+  }
+
+  input {
+    width: 200px;
+  }
+}
+
+// CKeditor
+.cke_dialog_contents {
+  tr, td {
+    background-color: #fff;
+  }
+}
+
+.select2-results {
+  font-size: 11px !important;
+}

@@ -1,0 +1,23 @@
+{% extends 'GdrGameBundle:Forum:index.html.twig' %}
+
+{% block content %}
+
+    {% if canWriteSoul %}
+        <div id="forum-container">
+            <h1><span>Rispondi alla discussione</span></h1>
+
+            <a class="button" href="{{ path('bacheca-lista-threads', {category: thread.category.id}) }}">← Torna
+                indietro</a>
+
+            <form method="POST" action="{{ path('bacheca-create-post', {thread: thread.id}) }}">
+                {{ form_errors(form) }}
+
+                {{ form_rest(form) }}
+
+                <button type="submit">Scrivi Risposta</button>
+            </form>
+        </div>
+    {% else %}
+        <p>Le anime non possono scrivere qui.</p>
+    {% endif %}
+{% endblock %}

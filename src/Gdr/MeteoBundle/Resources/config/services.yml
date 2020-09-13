@@ -1,0 +1,8 @@
+parameters:
+#    gdr_meteo.example.class: Gdr\MeteoBundle\Example
+
+services:
+
+#    gdr_meteo.example:
+#        class: %gdr_meteo.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

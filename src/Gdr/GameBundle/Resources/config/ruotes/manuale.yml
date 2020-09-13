@@ -1,0 +1,7 @@
+manuale-index:
+    path: /lista
+    defaults: { _controller: GdrGameBundle:Manuale:index}
+
+manuale-show:
+    path: /visualizza-{id}
+    defaults: { _controller: GdrGameBundle:Manuale:show}

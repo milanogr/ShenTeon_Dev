@@ -1,0 +1,27 @@
+avatar-diary-list:
+    path:  /index/{name}
+    defaults: { _controller: GdrAvatarBundle:Diary:index, name:null }
+    options:
+        expose: true
+
+avatar-diary-show:
+    path: /show/{id}
+    defaults: { _controller: GdrAvatarBundle:Diary:show }
+    requirements:
+        id: \d+
+
+avatar-diary-create:
+    path: /create
+    defaults: { _controller: GdrAvatarBundle:Diary:create }
+
+avatar-diary-delete:
+    path: /delete/{id}
+    defaults: { _controller: GdrAvatarBundle:Diary:delete }
+    requirements:
+        id: \d+
+
+avatar-diary-edit:
+    path: /edit/{id}
+    defaults: { _controller: GdrAvatarBundle:Diary:edit }
+    requirements:
+        id: \d+

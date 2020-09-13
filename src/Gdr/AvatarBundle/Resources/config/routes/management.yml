@@ -1,0 +1,15 @@
+avatar-management:
+    path: /
+    defaults: { _controller: GdrAvatarBundle:Management:index }
+
+avatar-management-form-common:
+    path: /form/common
+    defaults: { _controller: GdrAvatarBundle:Management:formCommon }
+
+avatar-management-form-user:
+    path: /form/user
+    defaults: { _controller: GdrAvatarBundle:Management:formUser }
+
+avatar-management-kill:
+    path: /kill-me/{suicide}
+    defaults: { _controller: GdrAvatarBundle:Management:kill, suicide: false }

@@ -1,0 +1,39 @@
+gdr_meteo:
+    resource: "@GdrMeteoBundle/Resources/config/routing.yml"
+    prefix:   /meteo
+
+avatars:
+    resource: "@GdrAvatarBundle/Resources/config/routing.yml"
+    prefix:   /gdr/avatar
+
+items:
+    resource: "@GdrItemsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+race:
+    resource: "@GdrRaceBundle/Resources/config/routing.yml"
+    prefix:   /
+
+game:
+    resource: "@GdrGameBundle/Resources/config/routing.yml"
+    prefix:   /gdr
+
+user:
+    resource: "@GdrUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+site:
+    resource: "@GdrSiteBundle/Resources/config/routing.yml"
+    prefix:   /
+
+crons:
+    resource: "@GdrGameBundle/Resources/config/ruotes/cron.yml"
+    prefix:   /cron
+
+crons_v2:
+    resource: "@GdrGameBundle/Controller/Cron"
+    type: annotation
+    prefix:   /cron
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

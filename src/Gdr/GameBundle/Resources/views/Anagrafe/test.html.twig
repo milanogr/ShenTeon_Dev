@@ -1,0 +1,9 @@
+<ul>
+    {% for loggedIn in entered %}
+        <li>{{ loggedIn.name }} è entrato...</li>
+    {% endfor  %}
+
+    {% for loggedOut in leaved %}
+        <li>{{ loggedOut.name }} è uscito...</li>
+    {% endfor  %}
+</ul>

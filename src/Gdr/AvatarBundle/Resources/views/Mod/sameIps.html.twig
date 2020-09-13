@@ -1,0 +1,60 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-mod">
+
+        <h2><span>Moderazione - IP</span></h2>
+
+        <p class="text-centered">Attenzione: bisogna prendere con le pinze questa lista. Esistono svariati modi per
+            modificare il proprio ip e spesso molti provider (es. Fastweb) utilizzano una sorta di condivisione di
+            IP per più utenze (IP statico pubblico). Questa tabella è semplicemente uno strumento che indica
+            PROBABILMENTE un doppio account, ma non va trattato come tale. La tabella nasce con lo scopo di
+            effettuare
+            controlli
+            incrociati (conti di gioco, passaggi di oggetti...), e non come caccia all'IP uguale.</p>
+
+        <div class="form-centered centered-form">
+
+            {% set lastIp = null %}
+            {#{% for ip in ips %}#}
+
+                {#{% if (lastIp != ip.ip and loop.first == false) %}#}
+                    {#</table>#}
+                {#{% endif %}#}
+
+                {#{% if loop.first or lastIp != ip.ip %}#}
+                    {#<table class="spaced alternated">#}
+                    {#<tr class="dark">#}
+                        {#<th>Personaggi con stesso IP</th>#}
+                        {#<th>Data login</th>#}
+                    {#</tr>#}
+                {#{% endif %}#}
+                {#<tr>#}
+                    {#<td>#}
+                        {#<strong>{{ ip.personage.name }}</strong>#}
+                        {#{% if is_granted("ROLE_ADMIN") %}#}
+                            {#<abbr class="gdrtooltip" title="Info solo gestione">#}
+                                {#{{ ip.user.email }}#}
+                            {#</abbr>#}
+                        {#{% endif %}#}
+                    {#</td>#}
+                    {#<td>#}
+                        {#{{ ip.createdAt|date("d/m/Y H:i") }}#}
+                    {#</td>#}
+                {#</tr>#}
+
+                {#{% if loop.last %}#}
+                    {#</table>#}
+                {#{% endif %}#}
+                {#{% set lastIp = ip.ip %}#}
+            {#{% else %}#}
+                {#<p class="text-centered"><strong>Al momento non ci sono IP uguali.</strong></p>#}
+            {#{% endfor %}#}
+        </div>
+    </div>
+{% endblock %}

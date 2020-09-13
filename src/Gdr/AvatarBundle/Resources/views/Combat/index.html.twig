@@ -1,0 +1,30 @@
+<p class="text-centered" style="width: 800px; margin: 0 auto">
+    Il vostro Personaggio può apprendere diversi “stili” di combattimento, detti SET. <br>
+    Questi SET sono elencati in questa scheda dalla quale potete scegliere quali imparare e vedere l’evoluzione di quelli già conosciuti.
+    Questa evoluzione avviene attraverso l’acquisizione di Punti Abilità di Combattimento che dovranno poi essere spesi all’interno dei SET che conoscete. <br><br>
+    <a href="http://www.shenteon.com/regolamento/combattimento.html" target="_blank">APRI LA DOCUMENTAZIONE COMPLETA</a> <br><br>
+</p>
+
+<p class="text-centered">
+    <strong>Punti Esperienza Combattente: {{ personage.combatPoints }}</strong> <br>
+    Punti Esperienza Razziali necessari per il prossimo Punto Combattente: {{ points }}
+    {% if points < 0 %}
+        <i>(si aggiornerà correttamente alla tua prossima azione)</i>
+    {% endif %}
+</p>
+
+<table class="solited" style="width: 600px; margin: 0 auto;">
+    <tbody>
+    {% for set in sets %}
+        <tr>
+            <td style="width: 92px" class="text-centered">
+                <img style="margin-bottom: 3px" src="{{ vich_uploader_asset(set.0, 'image') }}" class="gdrtooltip" title="{{ set.0.name }}">
+                <a data-href="{{ path('combat-up', {id: set.0.id}) }}" data-upgrade style="width: 100%; margin-bottom: 0" class="button small">Migliora</a>
+            </td>
+            <td>
+                <img class="gdrtooltip" title="{{ set.level|combatSet }}" src="{{ asset('bundles/gdrgame/images/fight/Avanzamento_'~ set.level ~'.png') }}"
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

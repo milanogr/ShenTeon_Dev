@@ -1,0 +1,12 @@
+0 4 * * * curl -O http://www.shenteon.com/cron/maintenance/letters/clean-readed >/dev/null 2>&1
+1 4 * * * curl -O http://www.shenteon.com/cron/maintenance/letters/clean-not-readed >/dev/null 2>&1
+2 4 * * * curl -O http://www.shenteon.com/cron/property/generate-products >/dev/null 2>&1
+3 4 * * * curl -O http://www.shenteon.com/cron/property/apply-taxes >/dev/null 2>&1
+4 4 * * * curl -O http://www.shenteon.com/cron/items/delete-old >/dev/null 2>&1
+5 4 * * * curl -O http://www.shenteon.com/cron/personages/check-birthdays >/dev/null 2>&1
+6 4 * * * curl -O http://www.shenteon.com/cron/personages/check-overage >/dev/null 2>&1
+7 4 * * * curl -O http://www.shenteon.com/cron/player/randomly-killing >/dev/null 2>&1
+8 4 * * * curl -O http://www.shenteon.com/cron/maintenance/clean-chat >/dev/null 2>&1
+9 4 * * * curl -O http://www.shenteon.com/cron/maintenance/archive/clean >/dev/null 2>&1
+7 */6 * * * curl -O  http://www.shenteon.com/cron/moon/check >/dev/null 2>&1
+*/15 * * * * curl -O http://www.shenteon.com/cron/meteo/check >/dev/null 2>&1

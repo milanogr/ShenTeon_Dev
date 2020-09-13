@@ -1,0 +1,97 @@
+<tr>
+    <td class="enclave-members">
+        <h2>{{ enclave[0].name }}</h2>
+        <ul>
+            {% set lastRank = null %}
+            {% for e in enclave %}
+            {% if lastRank != e.rankName %}
+            {% if loop.first == false %}
+        </ul>
+        {% endif %}
+        <li>
+            {% if e.isClan == false %}
+                <img src="{{ uploadPath('enclave') ~ e.levelIcon }}">
+            {% endif %}
+            <img src="{{ uploadPath('enclave') ~ e.rankIcon }}">
+            <span class="rank-name">{{ e.rankName }}</span>
+        </li>
+        <ul class="{% if e.isClan == true %}clan{% endif %}">
+            {% endif %}
+
+            <li class="pg-name">
+                {% if e.pgName %}
+                    {# Nascondo il pg? #}
+                    {% set hideMe = false %}
+                    {% if e.isClan == true and e.pgHideClan == true %}
+                        {% set hideMe = true %}
+                    {% elseif e.isClan == false and e.pgHideEnclave == true %}
+                        {% set hideMe = true %}
+                    {% endif %}
+
+                    {% if hideMe %}
+                        {% if isMyEnclave %}
+                            <abbr title="Visibile solo agli appartenenti di Enclave">
+                                {% if e.pgGender == 1 %}
+                                    <a href="{{ path('avatar-index', {name: e.pgName}) }}">
+                                        <img src="{{ uploadPath('race') ~ e.raceMaleIcon }}">
+                                        {{ e.pgName }} (Ignoto)
+                                    </a>
+                                {% else %}
+                                    <a href="{{ path('avatar-index', {name: e.pgName}) }}">
+                                        <img src="{{ uploadPath('race') ~ e.raceFemaleIcon }}">
+                                        {{ e.pgName }} (Ignoto)
+                                    </a>
+                                {% endif %}
+                            </abbr>
+                        {% else %}
+                            <i class="ignote">Ignoto</i>
+                        {% endif %}
+                    {% else %}
+                        {% if e.pgGender == 1 %}
+                            <a href="{{ path('avatar-index', {name: e.pgName}) }}">
+                                <img src="{{ uploadPath('race') ~ e.raceMaleIcon }}">
+                                {{ e.pgName }}
+                            </a>
+                        {% else %}
+                            <a href="{{ path('avatar-index', {name: e.pgName}) }}">
+                                <img src="{{ uploadPath('race') ~ e.raceFemaleIcon }}">
+                                {{ e.pgName }}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </li>
+
+            {# Chiude la lista dei membri rimasta aperta #}
+            {% if loop.last %}
+        </ul>
+        {% endif %}
+
+        {% set lastRank = e.rankName %}
+        {% endfor %}
+        </ul>
+    </td>
+    <td class="enclave-info">
+
+        <img src="{{ uploadPath('enclave') ~ enclave[0].bannerName }}">
+
+        <a href="#" data-href="{{ path('enclave-statute', {id: enclave[0].id }) }}" title="Leggi la Licenza Statutaria" class="show-statute">
+            {% if enclave[0].notOfficial %}
+                Statuto
+            {% else %}
+                Licenza Statutaria
+            {% endif %}
+        </a>
+
+        {% if enclave[0].annex %}
+            <a href="#" data-href="{{ path('enclave-annex', {id: enclave[0].id }) }}" title="Appendice alla Statutaria" class="show-annex">
+                Appendice alla Licenza Statutaria
+            </a>
+        {% endif %}
+    </td>
+</tr>
+<tr>
+    <td colspan="2" style="text-align: center; padding-bottom: 7px">
+        <a href="#" data-restore-list >CHIUDI DETTAGLI</a>
+    </td>
+</tr>

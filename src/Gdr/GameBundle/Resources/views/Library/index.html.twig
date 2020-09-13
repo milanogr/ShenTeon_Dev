@@ -1,0 +1,34 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2'
+    'bundles/gdrgame/javascripts/library.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+    <div class="library-container">
+        <h1><span>Biblioteca</span></h1>
+
+        <p class="text-centered">
+            Benvenuto nella Biblioteca di Teon. Puoi consultare liberamente i libri in essa custoditi. <br>
+            Le sue antiche sale ti attendono. Forse riuscirai a trovare quel che cerchi. <br>
+        </p>
+
+        <div class="images">
+            {% for section in sections %}
+                <a class="gdrtooltip" href="{{ path("biblioteca-show", {id: section.getId}) }}"
+                   title="Accedi alla {{ section.getName }}">
+                    <img src="{{ vich_uploader_asset(section, 'image') }}" alt="{{ section.name }}">
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% set isAdmin = is_granted('ROLE_ADMIN') %}
+
+<div class="text-centered" style="margin-bottom: 15px">
+    {{ knp_pagination_render(paginator) }}
+</div>
+
+
+<table id="lista-missive" class="spaced">
+    <tr class="dark">
+        <th class="number">Nr.</th>
+        <th class="sender">Mittente</th>
+        <th class="category">Ambito</th>
+        <th class="date">Data ed ora</th>
+        <th class="preview">Anteprima</th>
+        <th>Converti</th>
+        <th class="delete"><input type="checkbox" id="letter-select-all" title="Seleziona tutte"></th>
+    </tr>
+
+    <form action="{{ path('missive-delete', {'page': page}) }}" method="POST" id="letter-delete-form">
+        {% for letter in paginator %}
+            <tr {% if letter.isRead == false %} class="to-read" {% endif %}>
+                <td>{{ loop.index }}/{{ paginator.getTotalItemCount }}</td>
+                <td>
+                    {% if letter.nameAsAdmin %}
+                        <strong>GESTIONE</strong> {% if isAdmin %}<abbr
+                            title="Solo per Gestori"> {{ letter.senderName }}</abbr>{% endif %}
+                    {% elseif letter.nameAsMod %}
+                        <strong>MODERAZIONE</strong>{% if isAdmin %}<abbr
+                            title="Solo per Gestori"> {{ letter.senderName }}</abbr>{% endif %}
+                    {% elseif letter.nameAsFate %}
+                        <strong>FATO</strong>{% if isAdmin %}<abbr
+                            title="Solo per Gestori"> {{ letter.senderName }}</abbr>{% endif %}
+                    {% elseif letter.sender is null %}
+                        {{ letter.senderName }}
+                    {% else %}
+                        {% if letter.senderRaceIcon %}
+                            <a href="{{ path('avatar-index', {name: letter.senderName}) }}">
+                                <img title="{{ letter.senderRaceName }}" class="gdrtooltip"
+                                     src="{{ uploadPath('race') ~ letter.senderRaceIcon }}">
+                            </a>
+                        {% endif %}
+                        {% if letter.senderLevelIcon %}
+                            <img title="{{ letter.senderRankName }}" class="gdrtooltip"
+                                 src="{{ uploadPath('enclave') ~ letter.senderLevelIcon }}">
+                        {% else %}
+                            <img title="Appartenenza ad Enclavi sconosciuta"
+                                 src="{{ asset('bundles/gdrgame/images/chat/no-enclave.png') }}"
+                                 class="gdrtooltip">
+                        {% endif %}
+                        {{ letter.senderName }}
+                    {% endif %}
+                </td>
+                <td class="text-centered">{{ categories[letter.category] }}</td>
+                <td class="date">{{ letter.createdAt|date('d/m/y H.i') }}</td>
+                <td>
+                    <a class="show-letter"
+                       data-href="{{ path('missive-show', { 'id': letter.id }) }}">
+                        {% if letter.special %}
+                            <span>{{ letter.special }}: </span>
+                            {{ letter.body|striptags|truncate(40)|raw }}
+                        {% else %}
+                            {{ letter.body|striptags|truncate(60)|raw }}
+                        {% endif %}
+                    </a>
+                </td>
+                <td class="converti">
+                    {% if letter.category == 0 %}
+                        <button data-href="{{ path('missive-convert', {id: letter.id}) }}" class="convert small">Crea
+                            oggetto
+                        </button>
+                    {% else %}
+                        <button class="small disabled gdrtooltip" disabled="disabled"
+                                title="Possono essere convertite solo le Missive di ambito ON">Crea oggetto
+                        </button>
+                    {% endif %}
+                </td>
+                <td class="text-centered">
+                    <input class="missiva-id" type="checkbox" name="missiva[]" value="{{ letter.id }}">
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" class="text-center">Non hai ricevuto nessuna missiva.</td>
+            </tr>
+        {% endfor %}
+    </form>
+
+</table>
+<div class="text-centered" style="margin-bottom: 15px">
+    {{ knp_pagination_render(paginator) }}
+</div>

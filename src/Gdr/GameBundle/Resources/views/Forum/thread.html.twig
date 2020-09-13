@@ -1,0 +1,68 @@
+{% extends 'GdrGameBundle:Forum:index.html.twig' %}
+
+{% block content %}
+    {% set isAdmin = is_granted('ROLE_ADMIN') %}
+
+
+    <div id="forum-container">
+
+        <h1><span>{{ thread.category.name }}</span></h1>
+
+        <a class="button" href="{{ path('bacheca-lista-threads', {category: thread.category.id}) }}">← Torna
+            indietro</a>
+
+        {% if following %}
+            <a class="button follow" href="{{ path('bacheca-follow', {id: thread.id}) }}">Non seguire più la discussione</a>
+        {% else %}
+            <a class="button follow" href="{{ path('bacheca-follow', {id: thread.id}) }}">Segui la discussione</a>
+        {% endif %}
+
+        {% if canWriteSoul == false %}
+            <a class="button" href="{{ path('bacheca-create-thread', {category: category.id}) }}">Crea thread</a>
+        {% elseif thread.isLocked %}
+            {% if isMod %}
+                <a class="button rispondi" data-href="{{ path('bacheca-create-post', {thread: thread.id}) }}">Rispondi
+                    (Chiusa)</a>
+            {% else %}
+                <a class="button">Discussione chiusa</a>
+            {% endif %}
+        {% else %}
+            <a class="button rispondi" data-href="{{ path('bacheca-create-post', {thread: thread.id}) }}">Rispondi</a>
+
+            {% if isMod %}
+                <a class="button close" href="{{ path('bacheca-close-thread', {id: thread.id}) }}">Chiudi discussione</a>
+            {% endif %}
+        {% endif %}
+
+        <a class="button" href="{{ path('missive-create', {destinatario: 0, isForGroup: 0, threadId: thread.id}) }}">[Segnala]</a>
+        <a class="button" href="{{ path('missive-create', {destinatario: 0, isForGroup: 1, threadId: thread.id}) }}">[Segnala
+            in ML]</a>
+
+
+        <div id="write-reply"></div>
+
+        {% include '@GdrGame/Forum/showThread.html.twig' %}
+
+        <a class="button" href="{{ path('bacheca-lista-threads', {category: thread.category.id}) }}">← Torna
+            indietro</a>
+
+        {% if canWriteSoul == false %}
+            <a class="button" href="{{ path('bacheca-create-thread', {category: category.id}) }}">Crea thread</a>
+        {% elseif thread.isLocked %}
+            {% if isMod %}
+                <a class="button rispondi" data-href="{{ path('bacheca-create-post', {thread: thread.id}) }}">Rispondi
+                    (Chiusa)</a>
+            {% else %}
+                <a class="button">Discussione chiusa</a>
+            {% endif %}
+        {% else %}
+            <a class="button rispondi" data-href="{{ path('bacheca-create-post', {thread: thread.id}) }}">Rispondi</a>
+        {% endif %}
+
+
+        <a class="button" href="{{ path('missive-create', {destinatario: 0, isForGroup: 0, threadId: thread.id}) }}">[Segnala]</a>
+        <a class="button" href="{{ path('missive-create', {destinatario: 0, isForGroup: 1, threadId: thread.id}) }}">[Segnala
+            in ML]</a>
+
+    </div>
+{% endblock %}

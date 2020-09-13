@@ -1,0 +1,162 @@
+stof_doctrine_extensions:
+    default_locale: it_IT
+    orm:
+        default:
+            timestampable: true
+            sluggable: true
+
+jms_di_extra:
+    locations:
+        all_bundles: false
+        bundles:
+          - GdrGameBundle
+          - GdrMeteoBundle
+        directories: ["%kernel.root_dir%/../src"]
+
+ivory_ck_editor:
+    configs:
+        base:
+            toolbar: "personage_toolbar"
+    toolbars:
+        configs:
+            personage_toolbar: [ "@clipboard", "@editing", "/", "@basicstyles", "-", "@styles" , "-", "@paragrapth" ]
+        items:
+            clipboard: [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ]
+            editing: [ 'Find','Replace','-','SelectAll','-', ]
+            basicstyles: [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat','-' ]
+            paragrapth: [ 'NumberedList','BulletedList','-','Outdent','Indent','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ]
+            styles: [ 'Styles','Format','Font','FontSize','TextColor', 'Image' ]
+
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        item_image:
+            uri_prefix: %item_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%item_upload_path%
+            namer: vich_uploader.namer_uniqid
+            inject_on_load:   true
+            delete_on_update: true
+            delete_on_remove: true
+        item_type:
+            uri_prefix: /uploads/itemsType
+            upload_destination: %kernel.root_dir%/../public_html/uploads/itemsType
+            namer: vich_uploader.namer_uniqid
+            inject_on_load:   true
+            delete_on_update: true
+            delete_on_remove: true
+        item_big_image:
+            uri_prefix: %item_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%item_upload_path%
+            namer: vich_uploader.namer_uniqid
+            inject_on_load:   true
+            delete_on_update: true
+            delete_on_remove: true
+        item_icon_dress_image:
+            uri_prefix: %item_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%item_upload_path%
+            namer: vich_uploader.namer_uniqid
+            inject_on_load:   true
+            delete_on_update: false
+            delete_on_remove: false
+        race_icon_male:
+            uri_prefix: %race_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%race_upload_path%
+            namer: vich_uploader.namer_uniqid
+            inject_on_load:   true
+            delete_on_update: false
+        race_icon_female:
+            uri_prefix: %race_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%race_upload_path%
+            namer: vich_uploader.namer_uniqid
+            inject_on_load:   true
+            delete_on_update: false
+            delete_on_remove: false
+        race_default_image:
+            uri_prefix: %race_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%race_upload_path%
+            namer: vich_uploader.namer_uniqid
+            inject_on_load:   true
+            delete_on_update: false
+            delete_on_remove: false
+        race_big_image:
+            uri_prefix: %race_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%race_upload_path%
+            namer: vich_uploader.namer_uniqid
+            inject_on_load:   true
+            delete_on_update: true
+            delete_on_remove: true
+        enclave_upload:
+            uri_prefix: %enclave_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%enclave_upload_path%
+            namer: vich_uploader.namer_uniqid
+            inject_on_load:   true
+            delete_on_update: false
+            delete_on_remove: false
+        avatar_image:
+            uri_prefix: %personage_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%personage_upload_path%
+            namer: vich_uploader.namer_uniqid
+            inject_on_load:   true
+            delete_on_update: true
+            delete_on_remove: true
+        skill_image:
+            uri_prefix: %skill_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%skill_upload_path%
+            namer: vich_uploader.namer_uniqid
+            inject_on_load:   true
+            delete_on_update: true
+            delete_on_remove: true
+        general_upload:
+            uri_prefix: %general_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%general_upload_path%
+            namer: vich_uploader.namer_uniqid
+            inject_on_load:   true
+            delete_on_update: false
+            delete_on_remove: false
+        meteo_image:
+            uri_prefix: %meteo_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%meteo_upload_path%
+            namer: vich_uploader.namer_origname
+            inject_on_load:   true
+            delete_on_update: false
+            delete_on_remove: false
+        book_image:
+            uri_prefix: %book_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%book_upload_path%
+            namer: vich_uploader.namer_origname
+            inject_on_load:   true
+            delete_on_update: false
+            delete_on_remove: false
+        moon_image:
+            uri_prefix: %book_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%book_upload_path%
+            namer: vich_uploader.namer_origname
+            inject_on_load:   true
+            delete_on_update: false
+            delete_on_remove: false
+        location_image:
+            uri_prefix: %location_upload_path%
+            upload_destination: %kernel.root_dir%/../public_html/%location_upload_path%
+            namer: vich_uploader.namer_origname
+            inject_on_load:   true
+            delete_on_update: false
+            delete_on_remove: false
+        achievement_image:
+            uri_prefix: /uploads/achievement
+            upload_destination: %kernel.root_dir%/../public_html/uploads/achievement
+            namer: vich_uploader.namer_origname
+            inject_on_load:   true
+            delete_on_update: true
+            delete_on_remove: true
+
+exercise_html_purifier:
+    default:
+        Cache.SerializerPath: '%kernel.cache_dir%/htmlpurifier'
+    custom:
+        Core.Encoding: 'UTF-8'
+
+knp_paginator:
+    template:
+        pagination: GdrGameBundle:Default:paginator.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template

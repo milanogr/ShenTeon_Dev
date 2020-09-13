@@ -1,0 +1,87 @@
+{% if chat.special == 'fate' %}
+    <p class="chat-row fate gdrtooltip"
+       title="Questa è una stringa del Fato. Descrive ciò che accade e deve essere presa in massima considerazione.">
+        {{ chat.body }}
+    </p>
+{% elseif chat.special == 'fate-img' %}
+    <p class="chat-row fate fate-img gdrtooltip"
+       title="Questa è un'immagine del Fato.">
+        <img src="{{ chat.body|raw }}">
+    </p>
+{% elseif chat.special == 'mod' %}
+    <p class="chat-row mod">
+        <span class="time">{{ chat.createdAt|date('H.i') }}</span>
+        <strong>MODERATORE</strong>: {{ chat.body }}
+    </p>
+{% elseif chat.special == 'soul' %}
+    {# Non faccio nulla #}
+{% else %}
+    <p class="chat-row normal {{ chat.cssClass|default(' ') }}">
+        <span class="time">{{ chat.createdAt|date('H.i') }}</span>
+
+        <a data-name="{{ chat.senderName }}" data-type="pg-info"
+           data-url="{{ url('chat-pg-infos', {name: chat.senderName}) }}"
+           class="tooltip-chat"
+           href="{{ path('avatar-index', {name: chat.senderName}) }}">
+            <img src="{{ app.request.getSchemeAndHttpHost ~ chat.senderRaceIcon }}">
+        </a>
+
+        <a data-name="{{ chat.senderName }}" class="tooltip-chat" data-type="pg-items"
+           data-url="{{ url('chat-pg-items', {name: chat.senderName}) }}">
+            <img src="{{ app.request.getSchemeAndHttpHost ~ asset('bundles/gdrgame/images/chat/show-equip.gif') }}">
+        </a>
+
+        {% if chat.senderRankName %}
+            <a class="standard-tooltip" title="{{ chat.senderRankName }}">
+                <img src="{{ app.request.getSchemeAndHttpHost ~ chat.senderLevelIcon }}">
+            </a>
+        {% else %}
+            <a class="standard-tooltip" title="Appartenenza ad Enclavi sconosciuta">
+                <img src="{{ app.request.getSchemeAndHttpHost ~ asset('bundles/gdrgame/images/chat/no-enclave.png') }}">
+            </a>
+        {% endif %}
+
+        <a class="sender">{{ chat.senderName }}</a>
+
+        <a href="{{ url('chat-show-item', {name: chat.senderDressName}) }}" class="tooltip-chat pg-dress"
+           data-name="{{ chat.senderDressName }}" data-type="pg-dress"
+           data-url="{{ url('chat-pg-dress', {name: chat.senderDressName}) }}">
+            <img src="{{ app.request.getSchemeAndHttpHost ~ chat.senderDressIcon }}">
+        </a>
+
+        {% if chat.combat and chat.combat != "0" %}
+            <a class="gdrtooltip" title="{{ chat.combat }}">
+                <img src="{{ app.request.getSchemeAndHttpHost ~ asset('bundles/gdrgame/images/chat/combat.png') }}">
+            </a>
+        {% endif %}
+
+        {% if chat.tag %}
+            <span class="tag">[{{ chat.tag }}{% if chat.freeTag %}|{{ chat.freeTag }}{% endif %}]</span>:
+        {% endif %}
+
+        <span class="body">
+                    {% spaceless %}
+                        {% if isCastI %}
+                            <span class="cast">*</span>
+                    {% elseif isCastII %}
+                            <span class="cast">**</span>
+                        {% endif %}
+
+                    {% if chat.language %}
+                        {{ chat.body|normalChat|raceChat(chat.raceLanguage)|trim|raw }}
+                    {% else %}
+                        {{ chat.body|normalChat|trim|raw }}
+                    {% endif %}
+
+                    {% if chat.special == 'skill' %}
+                        <span class="skill"><i> [{{ chat.skill }}]</i></span>
+                    {% endif %}
+                    {% if isCastI %}
+                        <span class="cast">*</span>
+                    {% elseif isCastII %}
+                        <span class="cast">** <i>[{{ chat.castBody }}]</i> **</span>
+                    {% endif %}
+                    {% endspaceless %}
+                </span>
+    </p>
+{% endif %}

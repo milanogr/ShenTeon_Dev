@@ -1,0 +1,11 @@
+museo-index:
+    path: /sezioni
+    defaults: { _controller: GdrGameBundle:Museo:index}
+
+museo-show:
+    path: /sezione/{id}
+    defaults: { _controller: GdrGameBundle:Museo:show}
+
+museo-show-book:
+    path: /sezione/manufatto/{id}
+    defaults: { _controller: GdrGameBundle:Museo:showBook}

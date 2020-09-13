@@ -1,0 +1,39 @@
+{% set can_edit = is_owner or is_granted('ROLE_ADMIN') %}
+
+<table class="table-experience solited">
+    <thead>
+    <tr>
+        <td>Data</td>
+        <td>Esperienza</td>
+        {% if can_edit %}
+        <td>Invisibile</td>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for e in paginator %}
+        <tr class="experience-row">
+            <td class="date">{{ e.createdAt|date('d/m/Y') }}</td>
+            <td class="experience">{{ e.body }}</td>
+            {% if is_owner %}
+            <td class="edit">
+                <input data-url="{{ url('avatar-experience-visibility', {id: e.id}) }}" type="checkbox" class="isHidden" {% if e.isInvisible %}checked="checked"{% endif %}>
+            </td>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') and (is_owner == false) %}
+                <td class="edit">
+                    {% if e.isInvisibile %}
+                        <abbr title="Informazione visibile sono dagli Admin"><i>Invisibile</i></abbr>
+                    {% endif %}
+                </td>
+            {% endif  %}
+        </tr>
+    {% else %}
+        <tr>
+            <td class="text-centered" colspan="{% if can_edit %} 3 {% else %} 2 {% endif %}">
+                <i>Al momento non c'è nessuna esperienza da segnalare.</i>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

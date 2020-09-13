@@ -1,0 +1,14 @@
+<div class="container-send-item">
+    <img src="{{ asset('bundles/gdrgame/images/avatar/carro_send_item.png') }}" class="right" style="margin-top: 30px; padding-left: 20px;">
+    <p>“Un lavorante verrà incaricato di consegnare i Vostri beni in cambio di una parcella variabile a seconda del valore e
+        dell'ingombro di ciò che trasporterà.”</p>
+
+    <form action="{{ url }}" method="post" class="avatar-send-item">
+        {{ form_label(form.destinatario) }}
+        {{ form_widget(form.destinatario) }}
+
+        <button type="submit" class="button">Trasferisci per {{ price }} Mori</button>
+
+        <span class="msg"></span>
+    </form>
+</div>

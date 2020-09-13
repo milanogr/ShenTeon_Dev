@@ -1,0 +1,7 @@
+wise.index:
+    path: /
+    defaults: { _controller: GdrGameBundle:Location/Wise:index }
+
+wise.ask:
+    path: /chiedi
+    defaults: { _controller: GdrGameBundle:Location/Wise:ask }

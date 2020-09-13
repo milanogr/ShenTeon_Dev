@@ -1,0 +1,50 @@
+{% extends 'GdrSiteBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="text-centered">
+        <h2>Scegli o crea il tuo personaggio</h2>
+
+        <p>Puoi creare al massimo <strong>quattro</strong> personaggi.</p>
+    </div>
+
+    <div class="personage-container">
+
+        {% for personage in personages %}
+
+            <div class="choose-personage {% if personage.isDead %}dead{% endif %}">
+                <span class="name">{{ personage.name }}</span>
+
+                {% if personage.avatarName %}
+                    <img class="avatar" src="{{ vich_uploader_asset(personage, 'avatar') }}"
+                         alt="Avatar di {{ personage.name }}"/>
+                {% else %}
+                    {% if personage.gender == 1 %}
+                        {% set img = vich_uploader_asset(personage.race, 'maleImage') %}
+                    {% else %}
+                        {% set img = vich_uploader_asset(personage.race, 'femaleImage') %}
+                    {% endif %}
+                    <img class="avatar" src="{{ img }}" alt="{{ personage.race.name }}"/>
+                {% endif %}
+
+                <span class="race"><small>Razza:</small> {{ personage.race.name }}</span>
+                <span class="level"><small>Liv. Razza:</small> {{ personage.raceLevel }}</span>
+                <span class="letters"><small>Missive da leggere:
+                    </small> {{ render(controller('GdrUserBundle:Login:showNotReadedLetters', {'id': personage.id})) }}</span>
+                <span class="buttonS">
+            {% if(personage.getIsDead and not personage.getIsSoul) %}
+                <a href="{{ path('user_choose_dead_pg_id', {id: personage.getId}) }}">Resuscita</a>
+            {% else %}
+                <a href="{{ path('user_choose_pg_id', {id: personage.getId}) }}">Seleziona</a>
+            {% endif %}
+                </span>
+            </div>
+
+        {% endfor %}
+
+        {% if canCreate %}
+            <div class="new-personage">
+                <a href="{{ path('user_new_pg') }}">Crea nuovo PG</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

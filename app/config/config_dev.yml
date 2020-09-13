@@ -1,0 +1,47 @@
+imports:
+    - { resource: config.yml }
+
+framework:
+    router:   { resource: "%kernel.root_dir%/config/routing_dev.yml" }
+    profiler: { only_exceptions: false }
+    #templating:
+        #assets_base_urls: http://gdr.dev/
+
+web_profiler:
+    toolbar: true
+#    intercept_redirects: true
+
+monolog:
+    handlers:
+        main:
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            level: debug
+#        firephp:
+#            type:  firephp
+#            level: info
+#        chromephp:
+#            type:  chromephp
+#            level: info
+
+assetic:
+    use_controller: true
+
+#swiftmailer:
+#    transport: gmail
+#    username:  diego.viola1
+#    password:
+#    #disable_delivery:  true
+#    delivery_address: diego.viola1@gmail.com
+#swiftmailer:
+#    transport: smtp
+#    host:      smtp.shenteon.com
+#    username:  gestione@shenteon.com
+#    password:  jL3yUdo5nXeVILa
+#    spool:     { type: memory }
+swiftmailer:
+    disable_delivery:  true
+
+
+bazinga_faker:
+    orm: doctrine

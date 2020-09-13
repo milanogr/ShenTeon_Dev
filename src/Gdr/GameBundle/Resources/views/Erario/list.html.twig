@@ -1,0 +1,39 @@
+{{ knp_pagination_render(paginator) }}
+
+<table class="erario">
+    <thead>
+    <tr>
+        <th>Immobile ed ubicazione</th>
+        <th>Descrizione</th>
+        {% if currentType == 1 %}
+            <th>Massimo abitanti</th>
+        {% endif %}
+            <th>Spesa mensile</th>
+        <th>Prezzo</th>
+        <th>Acquista</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for property in paginator %}
+        <tr>
+            <td class="immobile">
+                {{ property.name }}
+                <img src="{{ vich_uploader_asset(property, 'image') }}" alt="{{ property.name }}">
+            </td>
+            <td>{{ property.description | raw }}</td>
+            {% if currentType == 1 %}
+                <td class="max-people">{{ property.maxPeople }}</td>
+            {% endif %}
+            <td class="rendita">{{ property.tax }}</td>
+            <td class="price">{{ property.price }}</td>
+            <td class="buy">
+                <button class="button" data-href="{{ path('erario-buy', {id: property.id}) }}">Compra</button>
+            </td>
+        </tr>
+    {% else %}
+        <td colspan="5" class="text-centered">Al momento non ci sono immobili in vendita</td>
+    {% endfor %}
+    </tbody>
+</table>
+
+{{ knp_pagination_render(paginator) }}

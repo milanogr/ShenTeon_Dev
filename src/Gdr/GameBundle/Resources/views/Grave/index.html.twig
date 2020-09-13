@@ -1,0 +1,25 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="cimitero-container">
+
+        {% include "@GdrGame/Grave/incipt.html.twig" %}
+
+        <h3 class="text-centered">
+            <a href="{{ path('cimitero-singole') }}">Visita le Tombe</a>
+        </h3>
+
+
+        <h3 class="text-centered">
+            <a href="{{ path('cimitero-famiglia') }}">Visita le Tombe di Famiglia</a>
+        </h3>
+    </div>
+{% endblock %}

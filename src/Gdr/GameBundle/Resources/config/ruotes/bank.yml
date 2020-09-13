@@ -1,0 +1,27 @@
+bank-index:
+    path: /index
+    defaults: { _controller: GdrGameBundle:Location/Bank:index }
+
+bank-prelievo:
+    path: /prelievo/{quantity}
+    defaults: { _controller: GdrGameBundle:Location/Bank:prelievo }
+    options:
+        expose: true
+    requirements:
+        quantity: \d+
+
+bank-trasferimento:
+    path: /trasferimento
+    defaults: { _controller: GdrGameBundle:Location/Bank:trasferimento }
+    options:
+        expose: true
+
+bank-deposito:
+    path: /deposito
+    defaults: { _controller: GdrGameBundle:Location/Bank:deposito }
+    options:
+        expose: true
+
+bank-clean-oldest:
+    path: /oldest
+    defaults: { _controller: GdrGameBundle:Location/Bank:cleanOldest }

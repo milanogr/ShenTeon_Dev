@@ -1,0 +1,115 @@
+<span></span>
+{% if (is_owner or is_granted('ROLE_ADMIN')) %}
+    <div class="text-centered">
+        <h3>Oggetti in borsa: <span class="total-items">{{ totalItems }}</span></h3>
+
+        <h3 class="bag-stats">Peso-Ingombro: <span class="actual-weight">{{ totalWeight }}</span>/<span
+                    class="max-weight">{{ bag_limit }}</span></h3>
+    </div>
+{% endif %}
+
+{# Operazioni permesse: rimetti in inventario (no in gioco), distruggi (sempre), attiva (in gioco), sacrifica (in gioco) #}
+<div class="tab-bag">
+    <table class="items-table-container solited">
+        <thead>
+        <tr>
+            <th colspan="4">La borsa di {{ personage.name }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr class="item-row">
+                <td class="item-preview">
+                    <img src="{{ upload_path }}{{ item.itemImageName }}" alt="{{ item.itemName }}">
+                    {% if is_owner or is_granted('ROLE_ADMIN') %}
+                        <button class="button small esamina-item"
+                                data-href="{{ path('avatar-inventory-item', {id: item.0.id}) }}">Esamina
+                        </button>
+                    {% endif %}
+                </td>
+                <td class="item-dress-icon">
+                    {% if item.categoryName == categoryVestiti %}
+                        <img src="{{ upload_path }}{{ item.itemDressIconImageName }}" alt="{{ item.itemName }}">
+                    {% endif %}
+                </td>
+                <td class="item-infos">
+                    <ul>
+                        <li><span>Nome:</span> {{ item.itemName }}</li>
+                        <li><span>Peso/Ingombro:</span> {{ item.itemWeight }}</li>
+                        <li><span>Descrizione:</span> {{ item.itemShortDescription }}</li>
+
+                        {% if item.inventoryExpireAt %}
+                            <li><span>Scadenza:</span> {{ item.inventoryExpireAt|date('d/m/Y') }}</li>
+                        {% endif %}
+
+                        {# Visibile solo dal proprietario #}
+                        {% if is_owner or is_granted('ROLE_ADMIN') %}
+                            <li class="divider">Informazioni visibili solo dal proprietario:</li>
+
+                            {% if item.itemActiveDescription %}
+                                <li class="effect">
+                                    <span>Attiva:</span>
+                                    {% if item.itemShowActiveDescription %}
+                                        <i>{{ item.itemActiveDescription }}</i>
+                                    {% else %}
+                                        <i>Effetto nascosto.</i>
+                                    {% endif %}
+                                </li>
+                            {% endif %}
+
+                            {% if item.itemExpendableDescription %}
+                                <li class="effect">
+                                    <span>Effetto:</span>
+                                    {% if item.itemShowExpendableDescription %}
+                                        <i>{{ item.itemExpendableDescription }}</i>
+                                    {% else %}
+                                        <i>Effetto nascosto</i>
+                                    {% endif %}
+                                </li>
+                            {% endif %}
+
+                            {% if (item.itemExpendableDescription is null) and (item.itemActiveDescription is null) %}
+                                <li class="effect">
+                                    <i>Nessun effetto attivabile</i>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    </ul>
+
+                </td>
+                <td class="item-actions">
+                    {# Azioni consentite solo dal proprietario #}
+                    {% if is_owner %}
+
+                        {% if item.itemIsTransportable %}
+                            <button class="small button unequip-item"
+                                    data-url="{{ url('avatar-inventory-change-equipped', {id: item.inventoryId}) }}">In
+                                inventario
+                            </button>
+                        {% endif %}
+
+                        {% if item.categoryName == categoryVestiti %}
+                            <label>Indosso</label>
+                            <input type="radio" name="isDressed" class="radio-dressed {% if item.inventoryIsDressed %}selected{% endif %}"
+                                   data-url="{{ url('avatar-inventory-change-dressed', {id: item.inventoryId}) }}" {% if item.inventoryIsDressed %} checked="checked" {% endif %}>
+                        {% endif %}
+
+                        <label>
+                            <abb title="Oggetto non visibile dagli altri personaggi">Invisibile</abb>
+                        </label>
+                        <input class="checkbox-visibility" type="checkbox" {% if item.inventoryIsDressed %} disabled="disabled" {% endif %}
+                               data-url="{{ url('avatar-inventory-change-visibility', {id: item.inventoryId}) }}"
+                                {% if item.inventoryIsInvisible %} checked="checked" {% endif %}>
+
+                    {% endif %}
+
+                    {# Se sono admin e sto visualizzando un altra borsa, posso vedere se è invisibile #}
+                    {% if is_granted('ROLE_ADMIN') and item.inventoryIsInvisible and is_owner == false %}
+                        <span><abbr title="Info visibile solo dagli admin">(invisibile)</abbr></span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

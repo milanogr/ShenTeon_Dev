@@ -1,0 +1,9 @@
+<p class="chat-row system">
+    <span class="time">{{ chat.createdAt|date('H.i') }}</span>
+            <span class="body">
+                {{ chat.body|normalChat|trim|raw }}
+                {% if (personage.name == chat.receiverWhispered or personage.name == chat.senderName) and chat.extra %}
+                    ({{ chat.extra }})
+                {% endif %}
+            </span>
+</p>

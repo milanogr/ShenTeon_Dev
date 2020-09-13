@@ -1,0 +1,57 @@
+{% extends 'GdrGameBundle:Forum:index.html.twig' %}
+
+{% block content %}
+    {% set isAdmin = is_granted('ROLE_ADMIN') %}
+
+    <div id="forum-container">
+
+        <h1><span>{{ thread.category.name }}</span></h1>
+
+        {% if helpType == 1 %}
+            <a class="button" href="{{ path('bacheca-helpdesk', {type: 'gestione'}) }}">← Torna
+                indietro</a>
+        {% elseif helpType == 2 %}
+            <a class="button" href="{{ path('bacheca-helpdesk', {type: 'moderazione'}) }}">← Torna
+                indietro</a>
+        {% else %}
+            <a class="button" href="{{ path('bacheca-helpdesk', {type: 'fato'}) }}">← Torna
+                indietro</a>
+        {% endif %}
+
+        {% if thread.isLocked %}
+            {% if isMod %}
+                <a class="button rispondi" data-href="{{ path('bacheca-create-post', {thread: thread.id}) }}">Rispondi (Chiusa)</a>
+            {% else %}
+                <a class="button">Discussione chiusa</a>
+            {% endif %}
+        {% else %}
+            <a class="button rispondi" data-href="{{ path('bacheca-create-post', {thread: thread.id}) }}">Rispondi</a>
+        {% endif %}
+
+
+        <div id="write-reply"></div>
+
+        {% include '@GdrGame/Forum/showThread.html.twig' %}
+
+        {% if helpType == 1 %}
+            <a class="button" href="{{ path('bacheca-helpdesk', {type: 'gestione'}) }}">← Torna
+                indietro</a>
+        {% elseif helpType == 2 %}
+            <a class="button" href="{{ path('bacheca-helpdesk', {type: 'moderazione'}) }}">← Torna
+                indietro</a>
+        {% else %}
+            <a class="button" href="{{ path('bacheca-helpdesk', {type: 'fato'}) }}">← Torna
+                indietro</a>
+        {% endif %}
+
+        {% if thread.isLocked %}
+            {% if isMod %}
+                <a class="button rispondi" data-href="{{ path('bacheca-create-post', {thread: thread.id}) }}">Rispondi (Chiusa)</a>
+            {% else %}
+                <a class="button">Discussione chiusa</a>
+            {% endif %}
+        {% else %}
+            <a class="button rispondi" data-href="{{ path('bacheca-create-post', {thread: thread.id}) }}">Rispondi</a>
+        {% endif %}
+    </div>
+{% endblock %}

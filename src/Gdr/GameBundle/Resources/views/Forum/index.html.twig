@@ -1,0 +1,65 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/forum.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+
+    <div id="forum-container">
+
+        {% if is_granted("ROLE_ADMIN") %}
+            <div class="form-centered centered-form">
+                <select id="admin-switch-forum" class="select2">
+                    <option>Clicca da questa lista un'Enclave per visualizzare il suo Forum</option>
+                    {% for forum in hiddenForums %}
+                        <option value="{{ path('bacheca-lista-forum', {id: forum.enclave.id}) }}">Forum de {{ forum.enclave.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% endif %}
+
+        <h1><span>Forum pubblico</span></h1>
+        {% include '@GdrGame/Forum/listForum.html.twig' with {forums: forums} %}
+
+        {% if enclaveForums != null %}
+            <h1><span>Forum di Enclave</span></h1>
+            {% include '@GdrGame/Forum/listForum.html.twig' with {forums: enclaveForums} %}
+        {% endif %}
+
+        {% if clanForums != null %}
+            <h1><span>Forum di Enclave Razziale</span></h1>
+            {% include '@GdrGame/Forum/listForum.html.twig' with {forums: clanForums} %}
+        {% endif %}
+
+        {% if gestioneForums != null %}
+            <h1><span>Forum di Gestione</span></h1>
+            {% include '@GdrGame/Forum/listForum.html.twig' with {forums: gestioneForums} %}
+        {% endif %}
+
+        {% if modForums != null %}
+            <h1><span>Forum Moderatori</span></h1>
+            {% include '@GdrGame/Forum/listForum.html.twig' with {forums: modForums} %}
+        {% endif %}
+
+        {% if fateForums != null %}
+            <h1><span>Forum Fato</span></h1>
+            {% include '@GdrGame/Forum/listForum.html.twig' with {forums: fateForums} %}
+        {% endif %}
+
+        {% if masterForums != null %}
+            <h1><span>Forum Master</span></h1>
+            {% include '@GdrGame/Forum/listForum.html.twig' with {forums: masterForums} %}
+        {% endif %}
+    </div>
+
+{% endblock %}

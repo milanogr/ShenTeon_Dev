@@ -1,0 +1,6 @@
+<p>Ti basta muovere l'icona e lasciarla nel punto in cui vuoi che appaia. Non appena lasci il mouse lui salverà la
+    posizione (puoi farlo più volte di fila).</p>
+<div class="map" style="background: url({{ vich_uploader_asset(location.parentMap, 'map') }}) no-repeat">
+    <img data-id="{{ location.id }}" class="marker" style="top: {{ location.iconPosY|default(10) }}px; left: {{ location.iconPosX|default(10) }}px"
+         src="{{ vich_uploader_asset(location, 'icon') }}" title="{{ location.name }}">
+</div>

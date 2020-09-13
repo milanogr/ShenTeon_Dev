@@ -1,0 +1,46 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="cimitero-container">
+        <h1><span>Cimitero</span></h1>
+
+        <p class="text-centered">
+            <img src="{{ asset('bundles/gdrgame/images/cimitero.jpg') }}">
+        </p>
+
+        <p class="text-centered">In questo luogo, nel silenzio delle lapidi, delle edicole e dei vialetti, riposano le
+            spoglie di coloro che muoiono a Teon. <br>
+            Una visita a quest'ultimo lido equivale ad un viaggio nella storia di tutti noi.
+        </p>
+
+        <a href="{{ path("cimitero-index") }}" class="button right">Torna all'Entrata del Cimitero</a>
+        <h3>Tombe</h3>
+        <table class="spaced">
+            <tr class="dark">
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Data di morte</th>
+                <th>Epitaffio</th>
+            </tr>
+
+            {% for grave in paginator %}
+                <tr>
+                    <td class="nome dark">{{ grave.getNickname }}</td>
+                    <td class="cognome">{{ grave.surname }}</td>
+                    <td class="date">Morto/a il {{ grave.getDeathAt|date("d/m/Y")}} {{ grave.typeYear }} a {{ grave.deathAge }} anni.</td>
+                    <td class="epitaffio">{{ grave.getMessage }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        {{ knp_pagination_render(paginator) }}
+    </div>
+
+{% endblock %}

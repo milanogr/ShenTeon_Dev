@@ -1,0 +1,38 @@
+{% extends 'GdrGameBundle:Letter:index.html.twig' %}
+
+{% block content -%}
+
+    <div id="missive-container">
+        <h1><span>Inoltra la Missiva</span></h1>
+
+        <a href="{{ path('missive-index') }}" class="button">
+            Torna alla lista
+        </a>
+
+        <form action="{{ path('missive-inoltra', {id: id, isForGroup: isForGroup}) }}"
+              method="post" {{ form_enctype(form) }}>
+            {{ form_errors(form) }}
+
+            {% if isForGroup %}
+                {{ form_row(form.receiverGroup) }}
+            {% else %}
+                {{ form_row(form.receiverName) }}
+            {% endif %}
+
+            {{ form_widget(form.body) }}
+            {{ form_errors(form.body) }}
+
+            {{ form_rest(form) }}
+            <p class="text-centered">
+                <button type="submit">Inoltra la missiva</button>
+            </p>
+        </form>
+
+        <hr>
+
+        <div id="old-letter">
+            {{ oldLetter|raw }}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+cimitero-index:
+    path: /index
+    defaults: { _controller: GdrGameBundle:Grave:index }
+
+cimitero-singole:
+    path: /tombe
+    defaults: { _controller: GdrGameBundle:Grave:show }
+
+cimitero-famiglia:
+    path: /tombe-di-famiglia
+    defaults: { _controller: GdrGameBundle:Grave:showFamily }

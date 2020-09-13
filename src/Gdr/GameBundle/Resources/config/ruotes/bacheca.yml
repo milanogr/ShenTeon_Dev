@@ -1,0 +1,51 @@
+bacheca-index:
+    path: /index
+    defaults: { _controller: GdrGameBundle:Forum:index }
+
+bacheca-lista-forum:
+    path: /forum/lista-enclave/{id}
+    defaults: { _controller: GdrGameBundle:Forum:showPrivateForums }
+
+bacheca-lista-threads:
+    path: /threads/categoria/{category}
+    defaults: { _controller: GdrGameBundle:Forum:showThreads }
+
+bacheca-create-thread:
+    path: /thread/new/{category}
+    defaults: { _controller: GdrGameBundle:Forum:createThread }
+
+bacheca-show-thread:
+    path: /thread/show/{id}
+    defaults: { _controller: GdrGameBundle:Forum:showThread }
+
+bacheca-close-thread:
+    path: /thread/close/{id}
+    defaults: { _controller: GdrGameBundle:Forum:closeThread }
+
+bacheca-create-post:
+    path: /post/create/{thread}
+    defaults: { _controller: GdrGameBundle:Forum:createPost }
+
+bacheca-delete-post:
+    path: /post/delete/{id}
+    defaults: { _controller: GdrGameBundle:Forum:deletePost }
+
+bacheca-edit-post:
+    path: /post/edit/{id}
+    defaults: { _controller: GdrGameBundle:Forum:editPost }
+
+bacheca-special:
+    path: /special/{name}
+    defaults: { _controller: GdrGameBundle:Forum:showSpecialForum }
+
+bacheca-helpdesk:
+    path: /helpdesk/{type}
+    defaults: { _controller: GdrGameBundle:Forum:helpDesk }
+
+bacheca-set-readed:
+    path: /thread/all-readed/{id}
+    defaults: { _controller: GdrGameBundle:Forum:setThreadsReaded }
+
+bacheca-follow:
+    path: /thread/follow/{id}
+    defaults: { _controller: GdrGameBundle:Forum:follow }

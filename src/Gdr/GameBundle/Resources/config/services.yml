@@ -1,0 +1,93 @@
+services:
+
+  gdr.game.random_death:
+    class: Gdr\GameBundle\Service\Personage\RandomDeath
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@gdr.game.player.killer.randomly"
+      - "@gdr.game.utils.chance_generator"
+
+  gdr.game.player.killer:
+    class: Gdr\GameBundle\Service\Personage\Killer\Killer
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@event_dispatcher"
+
+  gdr.game.player.killer.age:
+    class: Gdr\GameBundle\Service\Personage\Killer\KillerAge
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@event_dispatcher"
+
+  gdr.game.player.killer.suicide:
+    class: Gdr\GameBundle\Service\Personage\Killer\KillerSuicide
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@event_dispatcher"
+
+  gdr.game.player.killer.randomly:
+    class: Gdr\GameBundle\Service\Personage\Killer\KillerRandom
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@event_dispatcher"
+
+  gdr.game.player.killer.notify_killed_randomly:
+    class: Gdr\GameBundle\Listener\Killer\NotifyKilledRandomly
+    arguments:
+      - "@gdr.notifier.letter"
+      - "@templating"
+    tags:
+      - { name: kernel.event_subscriber }
+
+  gdr.player.skill.random:
+    class: Gdr\GameBundle\Service\Personage\Trainer\RandomSkill
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@event_dispatcher"
+
+  gdr.player.notify_random_skill:
+    class: Gdr\GameBundle\Listener\Trainer\NotifyRandomSkillAssigned
+    arguments:
+      - "@gdr.notifier.letter"
+      - "@templating"
+    tags:
+      - { name: kernel.event_subscriber }
+
+  gdr.notifier.letter:
+    class: Gdr\GameBundle\Service\Notificator\LetterNotifier
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@gdr.game.utils.text_purifier"
+
+  # TRAINER
+  gdr.player.skiller:
+    class: Gdr\GameBundle\Service\Personage\Trainer\Skiller
+    arguments:
+      - "@doctrine.orm.entity_manager"
+
+  gdr.trading:
+    class: Gdr\GameBundle\Service\Money\Trading
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@gdr.banklogger"
+
+  # UTILITY
+  gdr.game.utils.chance_generator:
+    class: Gdr\GameBundle\Service\ChanceGenerator
+
+  gdr.game.utils.text_purifier:
+    class: Gdr\GameBundle\Service\TextPurifier
+    arguments:
+      - "@exercise_html_purifier.default"
+      - "@simple_html_dom"
+
+  twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+  gdr.logs.cron:
+        class: Gdr\GameBundle\Service\Logger\CronLogger
+        arguments: ["@logger"]
+        tags:
+            - { name: monolog.logger, channel: cron }

@@ -1,0 +1,6 @@
+erario-index:
+    path: /index/{type}
+    defaults: { _controller: GdrGameBundle:Erario:index }
+erario-buy:
+    path: /buy/{id}
+    defaults: { _controller: GdrGameBundle:Erario:buy }

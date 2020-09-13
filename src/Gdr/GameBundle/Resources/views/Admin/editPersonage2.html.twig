@@ -1,0 +1,80 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrSiteBundle/Resources/public/javascripts/age.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="page-create-step1">
+
+        <h2><span>Step 2 - Caratteristiche del Pg</span></h2>
+
+        <div class="form-centered centered-form">
+            <form action="" method="POST">
+
+                {{ form_label(form.age) }}
+                {{ form_widget(form.age) }}
+                {{ form_errors(form.age) }}
+
+                <div class="caratteristiche">
+                    <div>
+                        Forza: <span class="forza">{{ raceLevel.strength }}</span>
+                    </div>
+
+                    <div>
+                        Saggezza: <span class="saggezza">{{ raceLevel.wisdom }}</span>
+                    </div>
+                    <div style="margin-bottom: 4px">
+                        Fascia d'età: <span class="fascia">{{ raceLevel.name }}</span>
+                    </div>
+                    <span class="race hide">{{ race.id }}</span>
+                </div>
+
+                {{ form_label(form.weight) }}
+                {{ form_widget(form.weight) }}
+                {{ form_errors(form.weight) }}
+
+
+                {{ form_label(form.eyeColor) }}
+                {{ form_widget(form.eyeColor) }}
+                {{ form_errors(form.eyeColor) }}
+
+                {{ form_label(form.skinColor) }}
+                {{ form_widget(form.skinColor) }}
+                {{ form_errors(form.skinColor) }}
+
+                {{ form_label(form.furColor) }}
+                {{ form_widget(form.furColor) }}
+                {{ form_errors(form.furColor) }}
+
+                {{ form_label(form.hairColor) }}
+                {{ form_widget(form.hairColor) }}
+                {{ form_errors(form.hairColor) }}
+
+                {{ form_label(form.squamaColor) }}
+                {{ form_widget(form.squamaColor) }}
+                {{ form_errors(form.squamaColor) }}
+
+                {{ form_label(form.height) }}
+                {{ form_widget(form.height) }}
+                {{ form_errors(form.height) }}
+
+                {{ form_rest(form) }}
+
+                <div>
+                    <input class="button" type="submit" value="Conferma le modifiche" formnovalidate>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

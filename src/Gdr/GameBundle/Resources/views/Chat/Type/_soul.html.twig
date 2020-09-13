@@ -1,0 +1,20 @@
+<p class="chat-row action soul">
+    <span class="time">{{ chat.createdAt|date('H.i') }}</span>
+    <a data-name="{{ chat.senderName }}" data-type="pg-info"
+       data-url="{{ url('chat-pg-infos', {name: chat.senderName}) }}"
+       class="tooltip-chat"
+       href="{{ path('avatar-index', {name: chat.senderName}) }}">
+        <img src="{{ app.request.getSchemeAndHttpHost ~ chat.senderRaceIcon }}">
+    </a>
+    L'anima di <a class="sender">{{ chat.senderName }}</a>
+    {% if chat.tag %}
+        <span class="tag">[{{ chat.tag }}{% if chat.freeTag %}|{{ chat.freeTag }}{% endif %}]</span>
+    {% endif %}
+    <span class="body">
+                {% if chat.language %}
+                    {{ chat.body|normalChat|raceChat(chat.raceLanguage)|trim|raw }}
+                {% else %}
+                    {{ chat.body|normalChat|trim|raw }}
+                {% endif %}
+            </span>
+</p>

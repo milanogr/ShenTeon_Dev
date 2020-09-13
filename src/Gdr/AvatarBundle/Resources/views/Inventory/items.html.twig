@@ -1,0 +1,142 @@
+<div class="text-center">
+    <h2><span>{{ category.name }}</span></h2>
+</div>
+
+{% if need_paginator %}
+    <table>
+        <tr>
+            <td colspan="3" class="table-pagination">
+                {{ knp_pagination_render(paginator) }}
+            </td>
+        </tr>
+    </table>
+{% endif %}
+
+<div class="items-centered clearfix" style="">
+    {% for item in paginator %}
+
+        <div class="item-box" id="inventory-{{ item.inventoryId }}">
+
+            <img src="{{ upload_path }}{{ item.itemImageName }}" class="gdrtooltip" style="cursor: help"
+                 title="
+             <ul>
+                <li><strong>Nome:</strong> {{ item.itemName }}</li>
+                <li><strong>Peso/Ingombro:</strong> {{ item.itemWeight }}</li>
+                <li><strong>Descrizione:</strong> {{ item.itemShortDescription | truncate(150) }}</li>
+                {% if item.inventoryExpireAt %}
+                <li><span>Scadenza:</span> {{ item.inventoryExpireAt|date('d/m/Y') }}</li>
+                {% endif %}
+
+                {# Visibile solo dal proprietario #}
+                {% if is_owner or is_granted('ROLE_ADMIN') %}
+                    <li class='divider'><strong>Informazioni visibili solo dal proprietario:</strong></li>
+
+                    {% if item.itemActiveDescription %}
+                    <li class='effect'>
+                        <span>Attiva:</span>
+                        {% if item.itemShowActiveDescription %}
+                            <i>{{ item.itemActiveDescription }}</i>
+                        {% else %}
+                            <i>Effetto nascosto.</i>
+                        {% endif %}
+                    </li>
+                    {% endif %}
+
+                    {% if item.itemExpendableDescription %}
+                        <li class='effect'>
+                        <span>Effetto:</span>
+                        {% if item.itemShowExpendableDescription %}
+                            <i>{{ item.itemExpendableDescription }}</i>
+                        {% else %}
+                            <i>Effetto nascosto</i>
+                        {% endif %}
+                        </li>
+                    {% endif %}
+
+                    {% if (item.itemExpendableDescription is null) and (item.itemActiveDescription is null) %}
+                    <li class='effect'>
+                        <i>Nessun effetto attivabile</i>
+                    </li>
+                    {% endif %}
+                {% endif %}
+                </ul>
+            </ul>
+            ">
+
+            {% if is_owner or is_granted('ROLE_ADMIN') %}
+                <button class="button small esamina-item"
+                        data-href="{{ path('avatar-inventory-item', {id: item.0.id}) }}">Esamina
+                </button>
+            {% endif %}
+
+            {# Azioni consentite solo dal proprietario #}
+            {% if is_owner %}
+                {% if item.itemIsTransportable %}
+                    <div>
+                        <label>In Borsa</label>
+                        <input class="checkbox-equipped" type="checkbox" value=""
+                               data-url="{{ url('avatar-inventory-change-equipped', {id: item.inventoryId}) }}"
+                                {% if item.inventoryIsEquipped %} checked="checked" {% endif %}>
+                    </div>
+                {% endif %}
+
+                <div>
+                    <label>Invisibile</label>
+                    <input class="checkbox-visibility" type="checkbox" value=""
+                           data-url="{{ url('avatar-inventory-change-visibility', {id: item.inventoryId}) }}"
+                            {% if item.inventoryIsInvisible %} checked="checked" {% endif %}>
+                </div>
+
+                {% if item.itemIsResalable %}
+                    <div>
+                        <button data-url="{{ url('avatar-inventory-sell', {id: item.inventoryId}) }}"
+                                class="small button sell-item">Vendi a {{ item.itemPrice / 2 |number_format }} Mori
+                        </button>
+                    </div>
+                {% else %}
+                    <div>
+                        <button disabled
+                                class="small button sell-item">Vendi a...
+                        </button>
+                    </div>
+                {% endif %}
+
+                {% if item.itemIsTransferable %}
+                    <div>
+                        <button data-url="{{ url('avatar-item-send', {id: item.inventoryId}) }}"
+                                class="small button send-item"> Recapita a...
+                        </button>
+                    </div>
+                {% else %}
+                    <div>
+                        <button disabled
+                                class="small button send-item"> Recapita a...
+                        </button>
+                    </div>
+                {% endif %}
+
+            {% endif %}
+
+            {# Il proprietario può cancellare solo se è presente la specifica; gli admin sempre. #}
+            {% if (is_owner and item.itemIsDestructible) or (is_granted('ROLE_ADMIN')) %}
+                <div>
+                    <button data-url="{{ url('avatar-inventory-delete', {id: item.inventoryId}) }}"
+                            class="small button delete-item">Distruggi
+                    </button>
+                </div>
+            {% endif %}
+
+            {# Se sono admin e sto visualizzando un altro inventario, posso vedere se è invisibile #}
+            {% if is_granted('ROLE_ADMIN') and item.inventoryIsInvisible and is_owner == false %}
+                <div>
+                    <span><abbr title="Info visibile solo dagli admin">(invisibile)</abbr></span>
+                </div>
+            {% endif %}
+        </div>
+
+    {% else %}
+        <p>Non ci sono oggetti per questa categoria.</p>
+    {% endfor %}
+</div>
+
+<hr>

@@ -1,0 +1,25 @@
+change_location:
+    path: /posizione/{id}/{ajax}
+    defaults: { _controller: GdrGameBundle:Location:change, ajax: 0 }
+    options:
+        expose: true
+
+location_map:
+    path: /mappa
+    defaults: { _controller: GdrGameBundle:Location:map }
+
+location-info:
+    path: /informazioni
+    defaults: { _controller: GdrGameBundle:Location:renderLocationInfos }
+
+location-map-description:
+    path: /descrizione-cartografia
+    defaults: { _controller: GdrGameBundle:Location:renderDescriptionMap }
+
+locations_map:
+    path: /mappa-locations/{id}
+    defaults: { _controller: GdrGameBundle:Location:showMapAndLocations }
+
+toggle-audio:
+    path: /impostazioni/audio/{change}
+    defaults: { _controller: GdrGameBundle:Default:renderAudio, change: 0 }

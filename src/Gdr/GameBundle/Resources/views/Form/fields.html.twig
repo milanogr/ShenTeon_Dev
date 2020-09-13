@@ -1,0 +1,11 @@
+{% block form_widget_compound %}
+    {% spaceless %}
+        <span {{ block('widget_container_attributes') }}>
+            {% if form.parent is empty %}
+                {{ form_errors(form) }}
+            {% endif %}
+            {{ block('form_rows') }}
+            {{ form_rest(form) }}
+        </span>
+    {% endspaceless %}
+{% endblock form_widget_compound %}

@@ -1,0 +1,73 @@
+h4 {
+  text-align: center;
+}
+
+table#bank-transactions {
+  width: 100%;
+
+  .date {
+    width: 125px;
+  }
+  .type {
+    width: 115px;
+  }
+  .total {
+    width: 115px;
+  }
+}
+
+.operations-centered {
+  width: 361px;
+  margin: 0 auto;
+}
+
+.bank-prelievo-container, .bank-deposito-container {
+  float: left;
+  width: 160px;
+
+  input[type="text"] {
+    width: 150px;
+  }
+}
+
+.bank-prelievo-container {
+  border-left: 1px solid $primary-color;
+  padding-left: 30px;
+  width: 180px;
+
+  button {
+    margin-left: 38px;
+  }
+}
+
+.bank-deposito-container {
+  margin-right: 20px;
+  h4 {
+    margin-left: -5px;
+  }
+  button {
+    margin-left: 29px;
+  }
+}
+
+hr {
+  @include clearfix;
+}
+
+.bank-trasferimento-container {
+  @include clearfix;
+  margin-top: 10px;
+  
+  input {
+    width: 90%
+  }
+
+  button {
+    margin-left: 125px;
+  }
+
+  .half {
+    width: 50%;
+    float: left;
+  }
+}

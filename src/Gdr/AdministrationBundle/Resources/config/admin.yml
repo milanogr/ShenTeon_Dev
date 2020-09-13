@@ -1,0 +1,614 @@
+services:
+    sonata.admin.users.personage:
+        class: Gdr\AdministrationBundle\Admin\PersonageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Personaggi, label: "Gestione Personaggi" }
+        arguments:
+            - ~
+            - Gdr\UserBundle\Entity\Personage
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [PersonageAdmin]]
+    sonata.admin.users.personage.surname:
+        class: Gdr\AdministrationBundle\Admin\SurnameAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Personaggi, label: "Gestione Cognomi" }
+        arguments:
+            - ~
+            - Gdr\UserBundle\Entity\Surname
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [SurnameAdmin]]
+    sonata.admin.users.personage.experiences:
+        class: Gdr\AdministrationBundle\Admin\ExperienceAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Personaggi, label: "Gestione Esperienze" }
+        arguments:
+            - ~
+            - Gdr\AvatarBundle\Entity\Experience
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [ExperienceAdmin]]
+
+    sonata.admin.users.personage.skill:
+        class: Gdr\AdministrationBundle\Admin\SkillAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Personaggi, label: "Gestione Skill" }
+        arguments:
+            - ~
+            - Gdr\UserBundle\Entity\Skill
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [SkillAdmin]]
+
+    sonata.admin.users.personage.combat:
+        class: Gdr\AdministrationBundle\Admin\CombatSetAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Personaggi, label: "Gestione Set Combattimento" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\CombatSet
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [CombatSetAdmin]]
+
+    sonata.admin.users.personage.forbiddenName:
+        class: Gdr\AdministrationBundle\Admin\ForbiddenNameAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Personaggi, label: "Gestione Nomi Proibiti" }
+        arguments:
+            - ~
+            - Gdr\UserBundle\Entity\ForbiddenName
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [ForbiddenNameAdmin]]
+
+    sonata.admin.users.personage.esilio:
+        class: Gdr\AdministrationBundle\Admin\EsilioAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Personaggi, label: "Gestione Esilio" }
+        arguments:
+            - ~
+            - Gdr\UserBundle\Entity\Esilio
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [EsilioAdmin]]
+
+    sonata.admin.users.personage.language:
+        class: Gdr\AdministrationBundle\Admin\LanguageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Personaggi, label: "Gestione Lingua Imparate" }
+        arguments:
+            - ~
+            - Gdr\UserBundle\Entity\Language
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [LanguageAdmin]]
+
+    sonata.admin.users.personage.type:
+        class: Gdr\AdministrationBundle\Admin\PersonageTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Personaggi, label: "Gestione PG speciali" }
+        arguments:
+            - ~
+            - Gdr\UserBundle\Entity\PersonageType
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [PersonageTypeAdmin]]
+
+    sonata.admin.users.personage.achievement:
+        class: Gdr\AdministrationBundle\Admin\AchievementAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Personaggi, label: "Gestione Riconoscimenti" }
+        arguments:
+            - ~
+            - Gdr\UserBundle\Entity\Achievement
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AchievementAdmin]]
+
+########### race #######
+
+    sonata.admin.race:
+        class: Gdr\AdministrationBundle\Admin\RaceAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Razza, label: "Razze" }
+        arguments:
+            - ~
+            - Gdr\RaceBundle\Entity\Race
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [RaceAdmin]]
+
+    sonata.admin.race.level:
+        class: Gdr\AdministrationBundle\Admin\RaceLevelAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Razza, label: "Livelli razze" }
+        arguments:
+            - ~
+            - Gdr\RaceBundle\Entity\RaceLevel
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [RaceLevelAdmin]]
+
+    sonata.admin.race.eyeColor:
+        class: Gdr\AdministrationBundle\Admin\EyeColorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Razza, label: "Colore occhi" }
+        arguments:
+            - ~
+            - Gdr\RaceBundle\Entity\EyeColor
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [eyeColor]]
+
+    sonata.admin.race.hairColor:
+        class: Gdr\AdministrationBundle\Admin\HairColorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Razza, label: "Colore capelli"}
+        arguments:
+            - ~
+            - Gdr\RaceBundle\Entity\HairColor
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [HairColorAdmin]]
+
+    sonata.admin.race.skinColor:
+        class: Gdr\AdministrationBundle\Admin\SkinColorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Razza, label: "Carnagione" }
+        arguments:
+            - ~
+            - Gdr\RaceBundle\Entity\SkinColor
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [SkinColorAdmin]]
+
+    sonata.admin.race.furColor:
+        class: Gdr\AdministrationBundle\Admin\FurColorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Razza, label: "Pelo" }
+        arguments:
+            - ~
+            - Gdr\RaceBundle\Entity\FurColor
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [FurColorAdmin]]
+
+    sonata.admin.race.squamaColor:
+        class: Gdr\AdministrationBundle\Admin\SquamaColorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Razza, label: "Squame" }
+        arguments:
+            - ~
+            - Gdr\RaceBundle\Entity\SquamaColor
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [SquamaColorAdmin]]
+
+    sonata.admin.items.item:
+        class: Gdr\AdministrationBundle\Admin\ItemAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Oggetti, label: "Oggetti e Mercato" }
+        arguments:
+            - ~
+            - Gdr\ItemsBundle\Entity\Item
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [ItemAdmin]]
+    sonata.admin.items.itemType:
+        class: Gdr\AdministrationBundle\Admin\ItemTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Oggetti, label: "Categorie" }
+        arguments:
+            - ~
+            - Gdr\ItemsBundle\Entity\ItemType
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [ItemTypeAdmin]]
+    sonata.admin.items.property:
+        class: Gdr\AdministrationBundle\Admin\PropertyAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Oggetti, label: "Immobili" }
+        arguments:
+            - ~
+            - Gdr\ItemsBundle\Entity\Property
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [PropertyAdmin]]
+    sonata.admin.items.property.items:
+        class: Gdr\AdministrationBundle\Admin\PropertyItemAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Oggetti, label: "Gestione oggetti d'immobili" }
+        arguments:
+            - ~
+            - Gdr\ItemsBundle\Entity\PropertyItem
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [PropertyItemAdmin]]
+
+
+    sonata.admin.enclave:
+        class: Gdr\AdministrationBundle\Admin\EnclaveAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Enclavi, label: "Gestione enclavi" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\Enclave
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [EnclaveAdmin]]
+
+    sonata.admin.enclave.category:
+        class: Gdr\AdministrationBundle\Admin\EnclaveCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Enclavi, label: "Gestione Categorie" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\EnclaveCategory
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [EnclaviRankAdmin]]
+
+    sonata.admin.enclave.level:
+        class: Gdr\AdministrationBundle\Admin\EnclaveLevelAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Enclavi, label: "Livelli simboli" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\EnclaveLevel
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [EnclaviLevelAdmin]]
+
+    sonata.admin.enclave.rank:
+        class: Gdr\AdministrationBundle\Admin\EnclaveRankAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Enclavi, label: "Simboli" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\EnclaveRank
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [EnclaveRankAdmin]]
+
+    sonata.admin.enclave.title:
+        class: Gdr\AdministrationBundle\Admin\TitleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Enclavi, label: "Titoli Nobili" }
+        arguments:
+            - ~
+            - Gdr\UserBundle\Entity\Title
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [TitleAdmin]]
+
+    ######## GRIMORIO #######
+    sonata.admin.grimory.spell.category:
+        class: Gdr\AdministrationBundle\Admin\SpellCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Incanti, label: "Gestione categorie" }
+        arguments:
+            - ~
+            - Gdr\UserBundle\Entity\SpellCategory
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [SpellCategoryAdmin]]
+
+    sonata.admin.grimory.spell.spells:
+        class: Gdr\AdministrationBundle\Admin\SpellAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Incanti, label: "Gestione incanti" }
+        arguments:
+            - ~
+            - Gdr\UserBundle\Entity\Spell
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [SpellAdmin]]
+
+    sonata.admin.forum:
+        class: Gdr\AdministrationBundle\Admin\ForumAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Forum, label: "Gestione Forum"}
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\Forum
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [ForumAdmin]]
+
+    sonata.admin.forum.category:
+        class: Gdr\AdministrationBundle\Admin\ForumCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Forum, label: "Gestione Categorie" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\ForumCategory
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [ForumCategoryAdmin]]
+
+### METEO ###
+    sonata.admin.moon:
+        class: Gdr\AdministrationBundle\Admin\MoonAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Meteo, label: "Gestione lune" }
+        arguments:
+            - ~
+            - Gdr\MeteoBundle\Entity\Moon
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [MoonAdmin]]
+
+    sonata.admin.moon.status:
+        class: Gdr\AdministrationBundle\Admin\MoonStatusAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Meteo, label: "Gestione stato luna" }
+        arguments:
+            - ~
+            - Gdr\MeteoBundle\Entity\MoonStatus
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [MoonStatusAdmin]]
+
+    sonata.admin.meteo.month:
+        class: Gdr\AdministrationBundle\Admin\MeteoMonthAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Meteo, label: "Gestione mesi" }
+        arguments:
+            - ~
+            - Gdr\MeteoBundle\Entity\MeteoMonth
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [MeteoMonthAdmin]]
+
+    sonata.admin.meteo.season:
+        class: Gdr\AdministrationBundle\Admin\MeteoSeasonAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Meteo, label: "Gestione stagioni" }
+        arguments:
+            - ~
+            - Gdr\MeteoBundle\Entity\MeteoSeason
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [MeteoSeasonAdmin]]
+
+    sonata.admin.meteo.condition:
+        class: Gdr\AdministrationBundle\Admin\MeteoConditionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Meteo, label: "Gestione condizioni" }
+        arguments:
+            - ~
+            - Gdr\MeteoBundle\Entity\MeteoCondition
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [MeteoConditionAdmin]]
+
+    sonata.admin.meteo.wind:
+        class: Gdr\AdministrationBundle\Admin\MeteoWindAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Meteo, label: "Gestione venti" }
+        arguments:
+            - ~
+            - Gdr\MeteoBundle\Entity\MeteoWind
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [MeteoWindAdmin]]
+
+    sonata.admin.meteo.combination:
+        class: Gdr\AdministrationBundle\Admin\MeteoCombinationAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Meteo, label: "Gestione combinazioni" }
+        arguments:
+            - ~
+            - Gdr\MeteoBundle\Entity\MeteoCombination
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [MeteoCombinationAdmin]]
+
+    sonata.admin.meteo.message:
+        class: Gdr\AdministrationBundle\Admin\MeteoMessageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Meteo, label: "Gestione messaggi" }
+        arguments:
+            - ~
+            - Gdr\MeteoBundle\Entity\MeteoMessage
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [MeteoMessageAdmin]]
+
+    sonata.admin.meteo.status:
+        class: Gdr\AdministrationBundle\Admin\MeteoStatusAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Meteo, label: "Gestione stato" }
+        arguments:
+            - ~
+            - Gdr\MeteoBundle\Entity\MeteoStatus
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [MeteoStatusAdmin]]
+
+#### Lavoro ####
+    sonata.admin.work:
+        class: Gdr\AdministrationBundle\Admin\WorkAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Lavoro, label: "Gestione lavori" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\Work
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [WorkAdmin]]
+
+#### Biblioteca ####
+    sonata.admin.biblioteca.sezioni:
+        class: Gdr\AdministrationBundle\Admin\LibrarySectionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Biblioteca, label: "Gestione sezioni" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\LibrarySection
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [LibrarySectionAdmin]]
+
+    sonata.admin.biblioteca.libri:
+        class: Gdr\AdministrationBundle\Admin\LibraryBookAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Biblioteca, label: "Gestione libri" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\LibraryBook
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [LibraryBookAdmin]]
+
+#### Manuale ####
+    sonata.admin.manuale:
+        class: Gdr\AdministrationBundle\Admin\ManualeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Manuali, label: "Gestione manuali" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\Manuale
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [ManualeAdmin]]
+
+#### Editto ####
+    sonata.admin.editto:
+        class: Gdr\AdministrationBundle\Admin\EdittoAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Editti, label: "Gestione editti" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\Editto
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [EdittoAdmin]]
+
+#### location ####
+    sonata.admin.location:
+        class: Gdr\AdministrationBundle\Admin\LocationAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Location, label: "Gestione location" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\Location
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [LocationAdmin]]
+
+    sonata.admin.location.image:
+        class: Gdr\AdministrationBundle\Admin\LocationImageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Location, label: "Gestione Immagini" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\LocationImage
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [LocationImageAdmin]]
+
+    sonata.admin.location.tag:
+        class: Gdr\AdministrationBundle\Admin\TagChatAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Location, label: "Gestione Tag" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\TagChat
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [TagChatAdmin]]
+
+#### missive ####
+    sonata.admin.letter:
+        class: Gdr\AdministrationBundle\Admin\LetterAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Missive, label: "Gestione missive" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\Letter
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [LetterAdmin]]
+    sonata.admin.letter.background:
+        class: Gdr\AdministrationBundle\Admin\LetterBackgroundAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Missive, label: "Gestione sfondi" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\LetterBackground
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [LetterBackgroundAdmin]]
+
+#### Cimitero ####
+    sonata.admin.gravestone:
+        class: Gdr\AdministrationBundle\Admin\GravestoneAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Cimitero, label: "Gestione lapidi" }
+        arguments:
+            - ~
+            - Gdr\UserBundle\Entity\Gravestone
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [GravestoneAdmin]]
+
+#### Upload ####
+    sonata.admin.upload:
+        class: Gdr\AdministrationBundle\Admin\UploadAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Upload, label: "Gestione upload" }
+        arguments:
+            - ~
+            - Gdr\AdministrationBundle\Entity\Upload
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [UploadAdmin]]
+
+#### MARQUE ####
+    sonata.admin.marque:
+        class: Gdr\AdministrationBundle\Admin\MarqueAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Messaggi scorrevoli, label: "Gestione messaggi" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\Marque
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [MarqueAdmin]]
+
+    sonata.admin.news:
+        class: Gdr\AdministrationBundle\Admin\NewsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: News sito, label: "Gestione News" }
+        arguments:
+            - ~
+            - Gdr\AdministrationBundle\Entity\News
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [NewsAdmin]]
+
+#### WISE ####
+    sonata.admin.wise.sentence:
+        class: Gdr\AdministrationBundle\Admin\WiseSentenceAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Saggio, label: "Gestione frasi" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\Wise\WiseSentence
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [WiseSentenceAdmin]]
+
+    sonata.admin.wise.tag:
+        class: Gdr\AdministrationBundle\Admin\WiseTagAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Saggio, label: "Gestione tag" }
+        arguments:
+            - ~
+            - Gdr\GameBundle\Entity\Wise\WiseTag
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [WiseTagAdmin]]

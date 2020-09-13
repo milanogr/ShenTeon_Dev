@@ -1,0 +1,16 @@
+<table class="spaced" style="width: 300px; margin: 10px auto;">
+    {% for inv in inventories %}
+        <tr>
+            <td class="dark" style="width: 140px">
+                {{ inv.pgName }}
+            </td>
+            <td>
+                <button class="remove-key-property" style="width: 100%; margin: 0" data-href="{{ path('property-remove-key', {inventoryId: inv.id, propertyId: property.id}) }}">Elimina chiave</button>
+            </td>
+        </tr>
+    {% else %}
+    <tr>
+        <td class="centered">Non hai ancora creato delle chiavi per questo immobile.</td>
+    </tr>
+    {% endfor %}
+</table>

@@ -1,0 +1,55 @@
+gdr-avatars:
+    resource: "@GdrAvatarBundle/Resources/config/routes/avatar.yml"
+    prefix:   /
+
+inventories:
+    resource: "@GdrAvatarBundle/Resources/config/routes/inventory.yml"
+    prefix:   /inventory
+
+diaries:
+    resource: "@GdrAvatarBundle/Resources/config/routes/diary.yml"
+    prefix:   /diary
+
+experiences:
+    resource: "@GdrAvatarBundle/Resources/config/routes/experience.yml"
+    prefix:   /experience
+
+managements:
+    resource: "@GdrAvatarBundle/Resources/config/routes/management.yml"
+    prefix:   /management
+
+grimory:
+    resource: "@GdrAvatarBundle/Resources/config/routes/grimory.yml"
+    prefix:   /grimory
+
+skill:
+    resource: "@GdrAvatarBundle/Resources/config/routes/skill.yml"
+    prefix:   /skill
+    
+property:
+    resource: "@GdrAvatarBundle/Resources/config/routes/property.yml"
+    prefix:   /property
+
+enclave_master:
+    resource: "@GdrAvatarBundle/Resources/config/routes/enclave.yml"
+    prefix:   /master
+
+matrimoni:
+    resource: "@GdrAvatarBundle/Resources/config/routes/matrimoni.yml"
+    prefix:   /matrimoni
+
+fato:
+    resource: "@GdrAvatarBundle/Resources/config/routes/fate.yml"
+    prefix:   /fato
+    
+mod_admin:
+    resource: "@GdrAvatarBundle/Resources/config/routes/mod.yml"
+    prefix:   /mod
+
+achievement:
+    resource: "@GdrAvatarBundle/Resources/config/routes/achievement.yml"
+    prefix:   /riconoscimenti
+
+combat:
+    resource: "@GdrAvatarBundle/Resources/config/routes/combat.yml"
+    prefix:   /combattimento

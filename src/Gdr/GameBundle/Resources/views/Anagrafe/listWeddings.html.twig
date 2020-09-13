@@ -1,0 +1,22 @@
+<table id="table-online" class="spaced alternate">
+    <thead>
+    <tr>
+        <th>Nome sposo</th>
+        <th>Nome sposa</th>
+        <th>Officiante</th>
+        <th>Tipo</th>
+        <th>Data</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for wedding in weddings %}
+        <tr>
+            <td>{{ wedding.getGroom.getName }}</td>
+            <td>{{ wedding.getBride.getName }}</td>
+            <td>{{ wedding.getOfficiate }}</td>
+            <td>{{ wedding.getType }}</td>
+            <td>{{ wedding.getCreatedAt|date("d/m/Y")|teon_date(true) }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

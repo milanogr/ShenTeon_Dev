@@ -1,0 +1,37 @@
+missive-index:
+    path: /index/{ajax}
+    defaults: { _controller: GdrGameBundle:Letter:index, ajax: false }
+
+missive-show:
+    path: /show/{id}
+    defaults: { _controller: GdrGameBundle:Letter:show }
+
+missive-create:
+    path: /create/{isForGroup}/{destinatario}/{threadId}
+    defaults: { _controller: GdrGameBundle:Letter:create, isForGroup: false, destinatario: false, threadId: false }
+
+missive-reply:
+    path: /reply/{id}
+    defaults: { _controller: GdrGameBundle:Letter:reply }
+
+missive-inoltra:
+    path: /inoltra/{id}/{isForGroup}
+    defaults: { _controller: GdrGameBundle:Letter:inoltra, isForGroup: false }
+
+missive-delete:
+    path: /delete
+    defaults: { _controller: GdrGameBundle:Letter:delete }
+
+missive-single-delete:
+    path: /single-delete/{id}
+    defaults: { _controller: GdrGameBundle:Letter:deleteSingle }
+
+missive-convert:
+    path: /converti/{id}
+    defaults: { _controller: GdrGameBundle:Letter:convertToItem }
+
+missive-ajax:
+    path: /ajax
+    defaults: { _controller: GdrGameBundle:Letter:showLetterAjax }
+    options:
+        expose: true

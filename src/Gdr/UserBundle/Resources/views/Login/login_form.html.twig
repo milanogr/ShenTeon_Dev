@@ -1,0 +1,19 @@
+<form action="{{ path('login_check') }}" method="post">
+    <div class="row">
+        <div class="large-2 columns"><label>Email:</label></div>
+        <div class="large-10 columns"><input type="text" id="username" name="_username" placeholder="La tua email"/></div>
+    </div>
+    <div class="row">
+        <div class="large-2 columns"><label>Pass:</label></div>
+        <div class="large-10 columns"><input type="password" id="password" name="_password" placeholder="La tua password"/></div>
+    </div>
+    <div class="fullrow">
+        <div class="width-70">
+            <a href="{{ path('user_reset') }}" title="Recupera la tua password">Password dimenticata?</a>
+        </div>
+        <div class="width-30">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+            <button class="small button-primary" type="submit">Entra</button>
+        </div>
+    </div>
+</form>

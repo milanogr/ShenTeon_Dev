@@ -1,0 +1,81 @@
+chat-index:
+    path: /index
+    defaults: { _controller: GdrGameBundle:Chat:index, wantPlay: false }
+    options:
+        expose: true
+
+chat-output:
+    path: /output
+    defaults: { _controller: GdrGameBundle:Chat:getAjaxChats }
+    options:
+        expose: true
+
+chat-input:
+    path: /input
+    defaults: { _controller: GdrGameBundle:Chat:input }
+    options:
+        expose: true
+
+chat-join:
+    path: /join
+    defaults: { _controller: GdrGameBundle:Chat:join }
+
+chat-leave:
+    path: /leave
+    defaults: { _controller: GdrGameBundle:Chat:leave }
+
+chat-pg-infos:
+    path: /infos/personage/{name}
+    defaults: { _controller: GdrGameBundle:Chat:pgInfos }
+
+chat-pg-dress:
+    path: /infos/dress/{name}
+    defaults: { _controller: GdrGameBundle:Chat:pgDress }
+
+chat-pg-items:
+    path: /infos/items/{name}
+    defaults: { _controller: GdrGameBundle:Chat:pgItems }
+
+chat-show-online:
+    path: /online
+    defaults: { _controller: GdrGameBundle:Chat:onlineList }
+
+chat-passa-mori:
+    path: /passaMori/{formSended}
+    defaults: { _controller: GdrGameBundle:Chat:passaMori, formSended: false }
+
+chat-passa-oggetti:
+    path: /passaOggetti/{formSended}
+    defaults: { _controller: GdrGameBundle:Chat:passaOggetti, formSended: false }
+
+chat-roll-dice:
+    path: /roll-dice/
+    defaults: { _controller: GdrGameBundle:Chat:rollDice }
+
+chat-save:
+    path: /save/download
+    defaults: { _controller: GdrGameBundle:Chat:download }
+
+chat-save-show-form:
+    path: /save/form
+    defaults: { _controller: GdrGameBundle:Chat:downloadForm }
+
+chat-bag:
+    path: /bag/show/{id}/{type}
+    defaults: { _controller: GdrGameBundle:Chat:bag }
+
+chat-skill-show:
+    path: /skill/show
+    defaults: { _controller: GdrGameBundle:Chat:showSkill }
+
+chat-skill-use:
+    path: /skill/use/{id}
+    defaults: { _controller: GdrGameBundle:Chat:useSkill }
+
+chat-mod:
+    path: /segnala-moderazione
+    defaults: { _controller: GdrGameBundle:Chat:callMod }
+
+chat-show-item:
+    path: /mostra-oggetto/{name}
+    defaults: { _controller: GdrGameBundle:Chat:showItem }

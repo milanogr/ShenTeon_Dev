@@ -1,0 +1,138 @@
+#forum-container {
+  h1 {
+    font-size: 2em;
+  }
+
+  h4 {
+    width: 100%;
+    text-align: center;
+    font-family: $body-font-family;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    background-color: $table-head-bg;
+    border: 1px solid #793812;
+    margin-bottom: 0;
+    padding: 2px;
+
+    strong {
+      color: $body-font-color;
+    }
+  }
+  table {
+    th {
+      text-align: left;
+    }
+
+    .name {
+      width: 160px;
+      font-weight: 700;
+    }
+    .last-reply {
+      width: 170px;
+    }
+    .date {
+      font-weight: normal;
+      font-size: 11px;
+      font-style: italic;
+      display: block;
+    }
+    .forum-pagination {
+      ul {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  table.table-forum-list {
+    .name {
+      width: 210px;
+    }
+    .today {
+      color: #690000;
+    }
+  }
+
+  table.threads, table.posts {
+    .name {
+      vertical-align: top;
+    }
+    td.body {
+
+      a {
+        font-weight: 700;
+      }
+      .date {
+        padding-top: 2px;
+      }
+    }
+  }
+
+  table.threads {
+    .body {
+      strong {
+        color: $body-font-color;
+      }
+      img {
+        vertical-align: bottom;
+      }
+    }
+    .letture, .risposte {
+      width: 30px;
+      text-align: center;
+    }
+    .last-reply {
+      width: 130px;
+    }
+    .nuovo-img {
+      text-align: center;
+      width: 37px;
+      img {
+        height: 40px;
+      }
+      padding: 0 3px;
+    }
+  }
+
+  table.posts {
+
+    .name {
+      .mod {
+        font-size: 11px;
+        font-style: italic;
+        margin-top: 4px;
+      }
+    }
+
+    .post {
+      min-height: 80px;
+
+      .updated {
+        text-align: right;
+        border-bottom: 4px;
+        border-top: 8px;
+        font-style: italic;
+        font-size: 11px;
+      }
+    }
+
+    .body {
+      background-color: #c6aa86;
+      .chat-row {
+        margin-bottom: 2px;
+      }
+      ul {
+        margin-left: 18px
+      }
+    }
+  }
+
+  table.special {
+    margin-bottom: 0;
+  }
+
+  .special-description {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}

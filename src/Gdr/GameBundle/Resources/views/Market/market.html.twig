@@ -1,0 +1,31 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block modals %}
+    {{ parent() }}
+
+    {% include 'GdrGameBundle:Default:reveal.html.twig' with {name: 'market', size: 'small'} %}
+{% endblock %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/gdrgame/javascripts/market.js') }}"></script>
+{% endblock %}
+
+{% block content -%}
+    <div class="market-container">
+        <h1><span>{{ market.name }} {% if level > 0 %} di livello {{ level }} {% endif %}</span></h1>
+
+        <span class="bankAmount hide">{{ bankAmount }}</span>
+
+        {% include 'GdrGameBundle:Market:filter.html.twig' with {'categories': categories, 'level': level, 'currentCategory': currentCategory, 'position': 'top'} %}
+
+        {% include 'GdrGameBundle:Market:listItems.html.twig' with {'currentCategory': currentCategory, 'paginator': paginator, 'upload_path': upload_path } %}
+
+        {% include 'GdrGameBundle:Market:filter.html.twig' with {'categories': categories, 'level': level, 'currentCategory': currentCategory, 'position': 'bottom'} %}
+    </div>
+{% endblock %}

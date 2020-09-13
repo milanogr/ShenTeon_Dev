@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+
+    <title>
+        {%- if block('title') -%}
+            {{ block('title') }} | Shenteon
+        {%- else -%}
+            Il gioco di ruolo Play by Chat online di ambientazione Fantasy Medievale | Shenteon
+        {%- endif -%}
+    </title>
+
+    <meta name="description"
+          content="Shenteon – L’Eredità delle Lune ti aspetta per dare sfogo alla tua fantasia. Innovativo Gioco di Ruolo Play by Chat gratuito creato e gestito da giocatori appassionati ed esperti. Immergiti nella magia e nelle battaglie dello Shen!">
+
+    {% block stylesheets %}
+        {% stylesheets
+        'bundles/gdrsite/stylesheets/*'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+
+<body>
+
+<!--[if lt IE 9]>
+<p class="chromeframe"><strong>Attenzione</strong>, la tua versione di Internet Explorer non è supportata dal nostro
+    sito. Per evitare di incorrere in problemi di sicurezza ti consigliamo caldamente di cambiare browser oppure di <a
+            href="http://browsehappy.com/">aggiornlo ora</a>.</p>
+<![endif]-->
+
+<div id="container">
+    <header id="header" role="banner">
+        <nav role="navigation">
+            <ul>
+                <li class="icons-home"><a href="{{ path('site_homepage') }}" title="Vai alla homepage del sito">Home</a>
+                </li>
+                <li class="icons-regolamenti"><a href="{{ path('site_regolamenti') }}" title="Vai ai regolamenti">Regolamenti</a>
+                </li>
+                <li class="icons-ambientazione"><a href="{{ path('site_ambientazione') }}"
+                                                   title="Vai all'ambientazione">Ambientazione</a></li>
+                <li class="icons-registrati"><a href="{{ path('user_register') }}"
+                                                title="Registrati e crea il tuo PG">Registrati
+                        e crea il tuo PG</a></li>
+                <li class="icons-login"><a href="{{ path('login') }}"
+                                           title="Effettua il Login al gioco">Login</a></li>
+            </ul>
+        </nav>
+        <nav class="second-nav">
+            <ul>
+                <li class="icons-radio">
+                    <a href="https://www.radiorivendell.com/page/listen/"
+                       title="Ascolta Radio Rivendell - Risorsa esterna - Allowed by www.radiorivendell.com"
+                       target="_blank">Radio</a>
+                </li>
+                <li class="icons-facebook"><a target="_blank" href="https://www.facebook.com/shenteon"
+                                              title="Seguici su facebook">Seguici su facebook</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <div id="footer">
+        <div id="footer-titoli">
+            <ul id="footer-titoli-nav">
+                <li>Aiuto</li>
+                <li>Info</li>
+                <li>Privacy</li>
+                <li>Faq</li>
+            </ul>
+        </div>
+        <nav>
+            <ul id="footer-nav-aiuto">
+                <li><a href="{{ path('user_reset') }}" title="Recupera la tua password">Recupero pass</a></li>
+                <li><a title="Visualizza come contattarci" data-reveal-id="modal-assistenza">Assistenza</a></li>
+            </ul>
+            <ul id="footer-nav-info">
+                <li><a href="{{ path('site_credits') }}" title="Visualizza i credits">Credits</a></li>
+            </ul>
+            <ul id="footer-nav-privacy">
+                <li><a href="#">Privacy policy</a></li>
+            </ul>
+            <ul id="footer-nav-faq">
+                <li><a title="Guarda le FAQ" href="{{ path('site_regolamento', {slug: "faq"}) }}">sul gioco</a></li>
+                <li><a title="Guarda le FAQ" href="{{ path('site_regolamento', {slug: "faq"}) }}">sull'ambientazione</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div id="pegi">
+            <img title="GdR Play by Chat on line" src="{{ asset('bundles/gdrsite/images/pegi/chat-gdr.jpg') }}">
+            <img title="Utenti maggiorenni" src="{{ asset('bundles/gdrsite/images/pegi/maggiorenni.jpg') }}">
+            <img title="In questo Play by Chat non è accettato il gioco di tipo sessuale"
+                 src="{{ asset('bundles/gdrsite/images/pegi/no-sex.jpg') }}">
+            <img title="Possibili descrizioni di violenza"
+                 src="{{ asset('bundles/gdrsite/images/pegi/violenza.jpg') }}">
+        </div>
+
+        <hr>
+
+        <footer>Shenteon {{ "now"|date('Y') }} - L'Eredita' delle Lune</footer>
+    </div>
+</div>
+
+{% block javascripts %}
+    
+    {% javascripts filter='?uglifyjs2'
+    '@GdrSiteBundle/Resources/public/javascripts/vendor/jquery.js'
+    '@GdrSiteBundle/Resources/public/javascripts/foundation/foundation.js'
+    '@GdrSiteBundle/Resources/public/javascripts/foundation/foundation.reveal.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        $(document).foundation();
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-42641047-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <script type='text/javascript'>
+        var ba = document.createElement('script');
+        ba.type = 'text/javascript';
+        ba.async = true;
+        ba.src = 'http://www.browseraggiornato.it/browser-updated.js?t=a&p=tr';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ba, s);
+    </script>
+
+{% endblock %}
+
+{% block modals %}
+    <div id="modal-assistenza" class="reveal-modal small">
+        <h2>Hai bisogno di assistenza?</h2>
+
+        <p>Scrivici a <a href="mailto:gestione@shenteon.com">gestione@shenteon.com</a> per qualsiasi necessità. Ti
+            risponderemo quanto prima.</p>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+{% endblock %}
+</body>
+</html>

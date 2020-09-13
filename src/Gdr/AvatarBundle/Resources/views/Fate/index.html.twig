@@ -1,0 +1,45 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="page-mod">
+        <h1><span>Gestione fato</span></h1>
+
+        <div class="centered-form">
+            <h3>Uccidi PG</h3>
+
+            <form method="post" action="">
+
+                <label>Nome Personaggio</label>
+                {{ form_widget(form.name) }}
+                <div class="error">{{ form_errors(form.name) }}</div>
+                {{ form_rest(form) }}
+
+                <button class="button confirmation-action" type="submit">Uccidi PG</button>
+            </form>
+
+            <h3>Resuscita PG</h3>
+
+            <form method="post" action="">
+                <label>Nome Personaggio</label>
+                {{ form_widget(form2.name) }}
+                <div class="error">{{ form_errors(form2.name) }}</div>
+                {{ form_rest(form2) }}
+
+                <button class="button confirmation-action" type="submit">Resuscita PG</button>
+            </form>
+
+            <p>
+                <stronga>Nota:</stronga>
+                ricordatevi di avvertire il giocatore se è in chat di uscire dalla chat e rientrare dalla stessa.
+            </p>
+        </div>
+    </div>
+{% endblock %}

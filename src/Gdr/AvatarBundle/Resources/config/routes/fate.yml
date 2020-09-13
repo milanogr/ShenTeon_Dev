@@ -1,0 +1,3 @@
+fato-index:
+    path: /
+    defaults: { _controller: GdrAvatarBundle:Fate:Index }

@@ -1,0 +1,95 @@
+{% extends 'GdrSiteBundle::layout.html.twig' %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrSiteBundle/Resources/public/javascripts/age.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="page-create-step2">
+        <h3>Morte definitiva ed arrivo di un parente</h3>
+
+        <form action="" method="POST">
+
+            <div class="left">
+                {{ form_label(form.epitaffio) }}
+                {{ form_widget(form.epitaffio) }}
+                {{ form_errors(form.epitaffio) }}
+
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
+                {{ form_errors(form.name) }}
+
+                {% if changeSurname == true %}
+                    {{ form_label(form.surname) }}
+                    {{ form_widget(form.surname) }}
+                    {{ form_errors(form.surname) }}
+                {% endif %}
+
+                {{ form_label(form.gender) }}
+                {{ form_widget(form.gender) }}
+                {{ form_errors(form.gender) }}
+
+                {{ form_label(form.age) }}
+                {{ form_widget(form.age) }}
+                {{ form_errors(form.age) }}
+
+                <div class="caratteristiche">
+                    <div>
+                        Forza: <span class="forza">{{ raceLevel.strength }}</span>
+                    </div>
+
+                    <div>
+                        Saggezza: <span class="saggezza">{{ raceLevel.wisdom }}</span>
+                    </div>
+                    <span class="race hide">{{ race.id }}</span>
+                </div>
+
+                {{ form_label(form.weight) }}
+                {{ form_widget(form.weight) }}
+                {{ form_errors(form.weight) }}
+
+            </div>
+
+            <div class="right">
+                {{ form_label(form.eyeColor) }}
+                {{ form_widget(form.eyeColor) }}
+                {{ form_errors(form.eyeColor) }}
+
+                {{ form_label(form.skinColor) }}
+                {{ form_widget(form.skinColor) }}
+                {{ form_errors(form.skinColor) }}
+
+                {{ form_label(form.furColor) }}
+                {{ form_widget(form.furColor) }}
+                {{ form_errors(form.furColor) }}
+
+                {{ form_label(form.hairColor) }}
+                {{ form_widget(form.hairColor) }}
+                {{ form_errors(form.hairColor) }}
+
+                {{ form_label(form.squamaColor) }}
+                {{ form_widget(form.squamaColor) }}
+                {{ form_errors(form.squamaColor) }}
+
+                {{ form_label(form.height) }}
+                {{ form_widget(form.height) }}
+                {{ form_errors(form.height) }}
+
+                {{ form_rest(form) }}
+            </div>
+            <div>
+                <input class="button" type="submit" value="Conferma" formnovalidate>
+            </div>
+        </form>
+    </div>
+{% endblock %}

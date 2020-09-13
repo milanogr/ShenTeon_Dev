@@ -1,0 +1,31 @@
+{% set arrayWhispered = chat.receiverWhispered|split(',') %}
+
+        {% for whispered in arrayWhispered %}
+            {% if personage.name == whispered|trim|capitalize %}
+                {% if chat.special == 'mod' %}
+                    <p class="chat-row whisper mod">
+                        <strong>LA MODERAZIONE</strong> ti sussurra: {{ chat.body }}
+                    </p>
+                {% elseif chat.special == 'fate' %}
+                    <p class="chat-row whisper fate">
+                        <strong>IL FATO</strong> ti sussurra: {{ chat.body }}
+                    </p>
+                {% else %}
+                    <p class="chat-row whisper">
+                        <a class="whisper-remove" class="gdrtooltip"
+                           title="Cancella temporaneamente il sussurro">[x]</a>
+                        <strong><span class="sender gdrtooltip"
+                                      title="Clicca per rispondere al sussurro">{{ chat.senderName }}</span></strong> ti
+                        sussurra: {{ chat.body }}
+                    </p>
+                {% endif %}
+
+            {% elseif personage.name == chat.senderName %}
+                <p class="chat-row whisper">
+                    <a class="whisper-remove" href="#" title="Cancella temporaneamente il sussurro">[x]</a>
+                    {% if chat.special == 'mod' %}(MODERAZIONE) {% elseif chat.special == 'fate' %}(FATO) {% endif %}
+                    Avete sussurrato a <strong><span class="sender gdrtooltip"
+                                                     title="Clicca per mandare un sussurro">{{ chat.receiverWhispered }}</span></strong>: {{ chat.body }}
+                </p>
+            {% endif %}
+        {% endfor %}

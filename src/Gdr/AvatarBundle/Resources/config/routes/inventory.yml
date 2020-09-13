@@ -1,0 +1,69 @@
+avatar-inventory:
+    path: /{name}
+    defaults: { _controller: GdrAvatarBundle:Inventory:index }
+
+avatar-inventory-items:
+    path: /items/{name}/category/{category}
+    defaults: { _controller: GdrAvatarBundle:Inventory:items }
+    requirements:
+        category: \d+
+
+avatar-inventory-item:
+    path: /item/{id}
+    defaults: { _controller: GdrAvatarBundle:Inventory:showItem }
+
+avatar-inventory-change-visibility:
+    path: /item/change-visibility/{id}
+    defaults: { _controller: GdrAvatarBundle:Inventory:changeVisibility }
+    requirements:
+        id: \d+
+
+avatar-inventory-change-equipped:
+    path: /item/change-equipped/{id}
+    defaults: { _controller: GdrAvatarBundle:Inventory:changeEquipped }
+    requirements:
+        id: \d+
+
+avatar-inventory-change-dressed:
+    path: /item/change-dressed/{id}
+    defaults: { _controller: GdrAvatarBundle:Inventory:changeDress }
+    requirements:
+        id: \d+
+
+avatar-inventory-sell:
+    path: /item/sell/{id}
+    defaults: { _controller: GdrAvatarBundle:Inventory:sellItem }
+    requirements:
+        id: \d+
+
+avatar-inventory-delete:
+    path: /item/delete/{id}
+    defaults: { _controller: GdrAvatarBundle:Inventory:deleteItem }
+    requirements:
+        id: \d+
+
+avatar-dress-list:
+    path: /dress/{name}
+    defaults: { _controller: GdrAvatarBundle:Inventory:dressList, name: null }
+
+avatar-item-activate:
+    path: /item/activate/{id}
+    defaults: { _controller: GdrAvatarBundle:Inventory:activateItem }
+
+avatar-item-sacrify:
+    path: /item/sacrify/{id}
+    defaults: { _controller: GdrAvatarBundle:Inventory:sacrifyItem }
+
+avatar-bag-list:
+    path: /bag/list/{name}
+    defaults: { _controller: GdrAvatarBundle:Inventory:bagList, name: null }
+
+mini-bag:
+    path: /bag/mini-bag
+    defaults: { _controller: GdrAvatarBundle:Inventory:miniBag }
+    options:
+        expose: true
+
+avatar-item-send:
+    path: /item/send/{id}
+    defaults: { _controller: GdrAvatarBundle:Inventory:sendItem }

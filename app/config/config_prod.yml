@@ -1,0 +1,55 @@
+imports:
+    - { resource: config.yml }
+
+# In production environment you should know that the parameters for URL generation
+# always pass the requirements. Otherwise it would break your link (or even site with
+# strict_requirements = true). So we can disable the requirements check completely for
+# enhanced performance with strict_requirements = null.
+framework:
+    router:
+        strict_requirements: null
+    trusted_hosts: %kernel.trusted_host%
+#    validation:
+#        cache: validator.mapping.cache.doctrine.apc
+    trusted_proxies: [127.0.0.1, 192.0.0.1, 10.0.0.0/8, 46.165.252.196]
+    #templating:
+     #   assets_base_urls: http://shenteon.com/
+
+doctrine:
+    orm:
+        metadata_cache_driver:
+            id: doctrine_cache.providers.delex_apc
+            type: service
+        result_cache_driver:
+            id: doctrine_cache.providers.delex_apc
+            type: service
+        query_cache_driver:
+            id: doctrine_cache.providers.delex_apc
+            type: service
+monolog:
+    handlers:
+        main:
+            type:               fingers_crossed
+            action_level:       error
+            handler:            nested
+#            formatter:          monolog.formatter.ip_request
+#        grouped:
+#            type:               group
+#            members:            [streamed, swift]
+        nested:
+            type:  rotating_file
+            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            max_files: 30
+        #swift:
+        #    type:               swift_mailer
+        #    from_email:         notifiche@shenteon.com
+        #    to_email:           diego.viola1@gmail.com
+        #    subject:            "OOps: errore dal sito"
+        #    level:              error
+        #    formatter:          monolog.formatter.ip_request
+#        login:
+#            type:               stream
+#            path:               "%kernel.logs_dir%/auth.log"
+#            level:              info
+#            channels:           security

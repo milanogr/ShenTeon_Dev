@@ -1,0 +1,44 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-mod">
+
+        <h2><span>Moderazione - Ultimi iscritti</span></h2>
+
+        <div class="form-centered centered-form">
+
+            <p class="text-centered">Questa lista fornisce una panoramica sui personaggi creati negli ultimi 14 giorni.</p>
+
+            <table class="spaced">
+                <tr class="dark">
+                    <th>Personaggio</th>
+                    <th>Creato il</th>
+                    <th>Scrivi</th>
+                </tr>
+                {% for personage in personages %}
+                    <tr>
+                        <td class="dark">
+                            <strong>
+                                <a href="{{ url('avatar-index', {name: personage.0.name}) }}">
+                                    {% if personage.0.gender == 1 %}
+                                        <img title="{{ personage.0.race.name }}" src="{{ uploadPath('race') ~ personage.raceMaleIcon }}">
+                                    {% else %}
+                                        <img title="{{ personage.0.race.name }}" src="{{ uploadPath('race') ~ personage.raceFemaleIcon }}">
+                                    {% endif %}
+                                </a>
+                                {{ personage.0.name }}
+                            </strong>
+                        </td>
+                        <td>{{ personage.0.createdAt|date("d/m/Y") }}</td>
+                        <td class="text-centered"><a href="{{ path("missive-create", {name: personage.0.name}) }}">Scrivi</a> </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

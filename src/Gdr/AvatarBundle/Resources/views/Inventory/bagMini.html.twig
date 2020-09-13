@@ -1,0 +1,80 @@
+<table id="mini-bag">
+    <thead>
+    <tr>
+        <th colspan="2">La tua borsa</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if canView %}
+        {% for inventory in inventories %}
+
+            {% set activeDescription = inventory.itemActiveDescription %}
+            {% set expendableDescription = inventory.itemExpendableDescription %}
+
+            <tr class="item-row">
+                <td class="item-name">
+                    {{ inventory.itemName }}
+                </td>
+                <td class="item-buttons" style="width: 80px; text-align: center">
+
+                    {% if isInGame %}
+                        <a class="bag-show-item gdrtooltip"
+                           href="{{ url('chat-bag', {id: inventory.inventoryId, type: 'show'}) }}"
+                           title="Mostra oggetto in chat">
+                            <img alt="Mostra oggetto"
+                                 src="{{ asset('bundles/gdrgame/images/chat/bag/bag-mostra.png') }}">
+                        </a>
+
+                        {% if inventory.itemActiveDescription is not empty %}
+                            {% if inventory.itemShowActiveDescription %}
+                                {% set actDesc = inventory.itemActiveDescription %}
+                            {% else %}
+                                {% set actDesc = "Effetto Nascosto" %}
+                            {% endif %}
+                            <a class="bag-activate-item gdrtooltip"
+                               href="{{ url('chat-bag', {id: inventory.inventoryId, type: 'activate'}) }}"
+                               title="Attiva in chat - Effetto: {{ actDesc }}">
+                                <img src="{{ asset('bundles/gdrgame/images/chat/bag/bag-attiva.png') }}">
+                            </a>
+                        {% endif %}
+
+                        {% if inventory.itemExpendableDescription is not empty %}
+                            {% if inventory.itemShowExpendableDescription %}
+                                {% set expDesc = inventory.itemExpendableDescription %}
+                            {% else %}
+                                {% set expDesc = "Effetto Nascosto" %}
+                            {% endif %}
+                            <a class="bag-sacrify-item gdrtooltip"
+                               href="{{ url('chat-bag', {id: inventory.inventoryId, type: 'sacrify'}) }}"
+                               title="Sacrifica in chat - Effetto: {{ expDesc }}">
+                                <img alt="Sacrifica oggetto"
+                                     src="{{ asset('bundles/gdrgame/images/chat/bag/bag-sacrifica.png') }}">
+                            </a>
+                        {% endif %}
+
+                        {% if inventory.categoryName == vestito and inventory.inventoryIsDressed == false %}
+                            <a class="bag-dress-item gdrtooltip"
+                               href="{{ url('chat-bag', {id: inventory.inventoryId, type: 'dress'}) }}"
+                               title="Cambia il vestito in chat">
+                                <img alt="Indossa vestito"
+                                     src="{{ asset('bundles/gdrgame/images/chat/bag/bag-indossa.png') }}">
+                            </a>
+                        {% elseif inventory.categoryName == vestito and inventory.inventoryIsDressed == true %}
+                            <a class="gdrtooltip" title="Attualmente indosso">
+                                <img alt="Attualmente indosso"
+                                     src="{{ asset('bundles/gdrgame/images/chat/bag/bag-indossato.jpg') }}">
+                            </a>
+                        {% endif %}
+                    {% else %}
+
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td class="text-centered">Le anime non possono usare la borsa</td>
+        </tr>
+    {% endif %}
+    </tbody>
+</table>

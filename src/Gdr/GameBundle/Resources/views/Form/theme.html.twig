@@ -1,0 +1,35 @@
+{% block form_row %}
+    {% spaceless %}
+        <div class="control-group{% if errors|length > 0 %} error{% endif %}">
+            {{ form_label(form) }}
+            {{ form_widget(form) }}
+            {{ form_errors(form) }}
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            {% if compound %}
+                <div class="alert alert-error">
+                    {% for error in errors %}
+                        <div>{{
+                            error.messagePluralization is null
+                            ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                            : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                            }}</div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {% for error in errors %}
+                    <span class="help-inline">{{
+                        error.messagePluralization is null
+                        ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                        : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                        }}</span>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}

@@ -1,0 +1,33 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/enclavi.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+
+    <div id="enclavi-container">
+        <h1><span>Enclavi di Teon</span></h1>
+
+        {% include '@GdrGame/Enclave/enclaveList.html.twig' with {categoriesEnclave: categoriesEnclave, isClan: false, notOfficial: false} %}
+
+        {% if categoriesUnofficial %}
+            <h1><span>Enclavi non istituzionalizzate</span></h1>
+            {% include '@GdrGame/Enclave/enclaveList.html.twig' with {categoriesEnclave: categoriesUnofficial, isClan: false, notOfficial: true} %}
+        {% endif %}
+
+        <h1><span>Enclavi Razziali di Teon</span></h1>
+
+        {% include '@GdrGame/Enclave/enclaveList.html.twig' with {categoriesEnclave: categoriesClan, unofficial: true, isClan: true, notOfficial: false} %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'GdrSiteBundle::layout.html.twig' %}
+{# {% form_theme form 'EWZRecaptchaBundle:Form:ewz_recaptcha_widget.html.twig' %} #}
+
+{% block content %}
+    <section class="page-register">
+        <article>
+            <section>
+                <h1>Creazione dell'account di gioco</h1>
+
+                <p>
+                    Stai per creare il tuo account di gioco su Shenteon – L’Eredità delle Lune. La creazione del
+                    personaggio sarà possibile solo dopo questo step.
+                </p>
+
+                <form action="{{ path('user_register') }}" method="POST">
+
+                    {{ form_errors(form) }}
+
+                    {{ form_label(form.user.email) }}
+                    {{ form_widget(form.user.email) }}
+                    {{ form_errors(form.user.email) }}
+
+                    {{ form_label(form.user.plainPassword.first) }}
+                    {{ form_widget(form.user.plainPassword.first) }}
+                    {{ form_errors(form.user.plainPassword.first) }}
+
+                    {{ form_label(form.user.plainPassword.second) }}
+                    {{ form_widget(form.user.plainPassword.second) }}
+                    {{ form_errors(form.user.plainPassword.second) }}
+
+                    <label class="required">Accetto i <a href="#" data-reveal-id="termini-modal">termini di servizio</a></label>
+                    {{ form_widget(form.terms) }}
+                    {{ form_errors(form.terms) }}
+
+                    <label class="required">Consenso al <a href="#" data-reveal-id="privacy-modal">trattamento dei dati
+                            personali ai sensi dell'art. 23 D.Lgs 196/03</a></label>
+                    {{ form_widget(form.privacy) }}
+                    {{ form_errors(form.privacy) }}
+
+                    {{ form_label(form.ages) }}
+                    {{ form_widget(form.ages) }}
+                    {{ form_errors(form.ages) }}
+                    <p class="help">*All’interno del gioco è fatto divieto di descrivere scene di sesso esplicito, ma è
+                        facile che si verifichino giocate violente, di combattimento e descrizioni truculente. Per
+                        questo motivo, onde evitare di ledere la sensibilità dei più piccoli, la Gestione ritiene
+                        necessaria la maggiore età per partecipare a Shenteon – L’Eredità delle Lune. Continuando la
+                        Registrazione dichiarate di essere maggiorenni.</p>
+
+                    <label>Quale personaggio ti ha consigliato il gioco?</label>
+                    {{ form_widget(form.referrer) }}
+                    {{ form_errors(form.referrer) }}
+                    <p class="help">*Questo campo non è obbligatorio. Tuttavia, se qualche utente ti ha consigliato il
+                        gioco, è prevista una ricompensa per entrambi una volta che il tuo primo personaggio creato avrà
+                        raggiunto un certo numero di punti esperienza. Ti basta inserire il nome del suo personaggio.
+                    </p>
+
+                    {#{{ form_label(form.recaptcha) }}#}
+                    {#{{ form_widget(form.recaptcha, { 'attr': {#}
+                        {#'options' : {#}
+                            {#'theme': 'light',#}
+                            {#'type': 'image'#}
+                        {#},#}
+                    {#} }) }}#}
+                    {#{{ form_errors(form.recaptcha) }}#}
+
+                    {{ form_rest(form) }}
+
+                    <input type="submit" value="Registrati" formnovalidate class="button">
+                </form>
+            </section>
+        </article>
+    </section>
+{% endblock %}
+
+{% block modals %}
+    <div id="privacy-modal" class="reveal-modal">
+        {% include '@GdrSite/Default/privacy.html.twig' %}
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+    <div id="termini-modal" class="reveal-modal">
+        {% include '@GdrSite/Default/termini.html.twig' %}
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+#stats-container {
+
+  img {
+    display: block;
+    margin: 0 auto 50px auto;
+  }
+
+  table {
+    width: 320px;
+    margin: 0 auto;
+  }
+
+  tbody {
+    tr {
+      td:first-child {
+        font-weight: 700;
+      }
+    }
+  }
+
+}

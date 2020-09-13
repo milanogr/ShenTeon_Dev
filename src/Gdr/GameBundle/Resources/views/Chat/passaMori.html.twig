@@ -1,0 +1,12 @@
+<form id="form-passa-mori" method="post" action="{{ url('chat-passa-mori', {formSended: true}) }}">
+    {{ form_row(form.destinatario) }}
+
+    <label>Mori da passare (in tasca avete {{ mori }} Mori)</label>
+    {{ form_widget(form.mori) }}
+
+    {{ form_rest(form) }}
+
+    <button type="submit">Passa Mori</button>
+
+    <p class="error"></p>
+</form>

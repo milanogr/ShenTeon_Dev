@@ -1,0 +1,17 @@
+{% spaceless %}
+    {% set count = letters|length %}
+    {% if count == 0 %}
+        <a href="{{ path('missive-index') }}" data-sound="off" title="Non ci sono nuove Missive" class="gdrtooltip">
+            <img src="{{ asset('bundles/gdrgame/images/missive-vuote.png') }}">
+        </a>
+
+    {% elseif count == 1 %}
+        <a href="{{ path('missive-index') }}" data-sound="on" title="C'è una nuova Missiva" class="gdrtooltip">
+            <img src="{{ asset('bundles/gdrgame/images/missive-nuove.png') }}">
+        </a>
+    {% else %}
+        <a href="{{ path('missive-index') }}" data-sound="on" title="Ci sono {{ count }} nuove Missive" class="gdrtooltip">
+            <img src="{{ asset('bundles/gdrgame/images/missive-nuove.png') }}">
+        </a>
+    {% endif %}
+{% endspaceless %}

@@ -1,0 +1,8 @@
+parameters:
+    #class.admin.file.type: Gdr\AdministrationBundle\Form\Type\AdminFileType
+
+services:
+    gdr_administration.form.type.admin_file:
+        class: Gdr\AdministrationBundle\Form\Type\AdminFileType
+        tags:
+            - { name: form.type, alias: admin_file }

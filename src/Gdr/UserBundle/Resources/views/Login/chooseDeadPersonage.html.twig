@@ -1,0 +1,70 @@
+{% extends 'GdrSiteBundle::layout.html.twig' %}
+{% block content %}
+    <div class="page-death">
+        <h2>Il tuo personaggio e' morto</h2>
+
+        <p>Questo Personaggio risulta morto da più di 7 giorni (21 in caso di Suicidio). <br>
+            La benevolenza di Evif rende possibile, da ora, il suo ritorno in vita se lo desideri ed al contempo la
+            Gestione, con la sua immensa magnanimità, ti permette di scegliere come procedere nella tua esperienza di
+            gioco. <br> <a href="{{ path('user_choose_pg') }}" class="button">Torna indietro</a>
+        </p>
+
+        <table class="spaced">
+            {% if personage.isSpecialDeath %}
+                <tr>
+                    <td class="dark">
+                        <img src="{{ asset('bundles/gdrsite/images/morte-rinascita.jpg') }}" alt="Rinascita">
+                        <a class="button"
+                           href="{{ path("user_choose_dead_pg_id_action", {id: personage.getId, action: "rinascita"}) }}">Rinascita</a>
+                    </td>
+                    <td>Il tuo Personaggio ritorna in vita, esattamente com’era prima della morte.</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td class="dark">
+                        <img src="{{ asset('bundles/gdrsite/images/morte-rinascita-vecchiaia.jpg') }}" alt="Rinascita">
+                        <a class="button"
+                           href="{{ path("user_choose_dead_pg_id_action", {id: personage.getId, action: "rinascita"}) }}">Rinascita</a>
+                    </td>
+                    <td>Il tuo Personaggio ritorna in vita, com'era prima della morte, ma ringiovanito di 10 anni.</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td class="dark">
+                    <img src="{{ asset('bundles/gdrsite/images/morte-parente.jpg') }}" alt="Rinascita con parente">
+                    <a class="button"
+                       href="{{ path("user_choose_dead_pg_id_action", {id: personage.getId, action: "parente"}) }}">Nuovo
+                        parente</a>
+                </td>
+                <td>Il tuo Personaggio muore definitivamente, viene sepolto nel Cimitero, gli viene dedicata una
+                    lapide ed al suo posto giunge un parente. Manterrai gli Oggetti ed i Vestiti così come le altre
+                    proprietà (fatto salvo per i Vestiti eventuali di Enclave che andranno restituiti ed accessi vari a
+                    sistemi automatizzati del sito, quali ad esempio Libri di Magia o Chiavi di accesso a Forum e Chat).
+                    Perderai inoltre l’eventuale Livello Combattente. <br><br> Avrai a disposizione, automaticamente, un
+                    Cambio
+                    Nome, un Cambio Connotati ed un Cambia Età, mentre il Personaggio manterrà Razza e Cognome del
+                    vecchio, nonché il suo conto in Banca. Il nome del Personaggio morto definitivamente non potrà mai
+                    più essere utilizzato. Manterrai inoltre le caratteristiche acquisite con il gioco quali
+                    l’Esperienza ed i Livelli Razziali.
+                </td>
+            </tr>
+            <tr>
+                <td class="dark">
+                    <img src="{{ asset('bundles/gdrsite/images/morte-definitiva.jpg') }}" alt="Morte definitiva">
+
+                    <a class="button"
+                       href="{{ path("user_choose_dead_pg_id_action", {id: personage.getId, action: "nuovo-pg"}) }}">Morte
+                        definitiva</a>
+                </td>
+                <td>Il tuo Personaggio muore definitivamente, viene sepolto nel Cimitero, gli viene dedicata una
+                    lapide ed al suo posto giunge un Personaggio del tutto nuovo, senza alcun legame di parentela con il
+                    vecchio. Perderai tutti gli Oggetti, tutti i Vestiti e le altre proprietà nonché il conto in Banca e
+                    l’eventuale Livello Combattente.  <br><br> Avrai a disposizione, automaticamente, un Cambio Nome, un Cambio
+                    Cognome, un Cambio Connotati ed un Cambia Età, mentre manterrete la Razza del vecchio Personaggio.
+                    Il nome del Personaggio morto definitivamente non potrà mai più essere utilizzato. Manterrai inoltre
+                    le caratteristiche acquisite con il gioco quali l’Esperienza ed i Livelli Razziali.
+                </td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

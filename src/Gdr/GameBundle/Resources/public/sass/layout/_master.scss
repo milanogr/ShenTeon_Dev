@@ -1,0 +1,44 @@
+input, select {
+  width: 220px;
+}
+
+.list {
+  width: 450px;
+  &.forum {
+    width: 80%;
+  }
+  margin: 0 auto;
+  button, input, select, form {
+    margin: 0;
+  }
+  .actions {
+    a {
+      display: block;
+      margin: 13px 0 0 0;
+    }
+  }
+  span.name {
+    display: block;
+    margin-bottom: 4px;
+  }
+}
+
+.centered-form{
+  width: 400px;
+  margin: 0 auto;
+  .button, input, select {
+    width: 100%;
+  }
+  .error {
+    font-weight: 700;
+    margin-top: -8px;
+    margin-bottom: 5px;
+    ul {
+      list-style: none;
+      margin: 0;
+      li {
+        list-style: none;
+      }
+    }
+  }
+}

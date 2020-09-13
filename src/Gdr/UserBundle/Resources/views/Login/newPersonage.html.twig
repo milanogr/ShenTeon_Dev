@@ -1,0 +1,41 @@
+{% extends 'GdrSiteBundle::layout.html.twig' %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrSiteBundle/Resources/public/javascripts/race.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="page-create-step1">
+        <h1>Creazione Pg - Selezione razza</h1>
+
+        <p>Sei al primo step di creazione del Personaggio! <br>
+            Ora puoi scegliere la sua Razza tra quelle disponibili nel menù a tendina qui sotto. <br>
+            Prima di dare conferma, selezionando una Razza, potrai vederne tutte le caratteristiche, da quelle fisiche a
+            quelle comportamentali sino alle sue Skill.<br>
+            Ti consigliamo di decidere con attenzione. Ogni Razza ha le sue peculiarità. Seleziona quella che
+            maggiormente si avvicina ai tuoi gusti!</p>
+
+        <form action="{{ path('user_new_pg') }}" method="POST">
+
+            {{ form_label(form.race) }}
+            {{ form_widget(form.race) }}
+            {{ form_rest(form) }}
+
+            <input type="submit" value="Conferma" formnovalidate>
+        </form>
+
+        <div class="race-container">
+
+        </div>
+    </div>
+{% endblock %}

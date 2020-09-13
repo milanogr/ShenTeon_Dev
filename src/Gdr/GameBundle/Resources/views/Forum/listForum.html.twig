@@ -1,0 +1,40 @@
+{% set actualForum = null %}
+{% set dayNow = "now"|date("d/m/Y") %}
+        {% for forum in forums %}
+
+            {% if actualForum != forum.name %}
+                {% if loop.first == false %}
+                    </table>
+                {% endif %}
+                <h4 class="forum-title">{{ forum.name }}</h4>
+                <table class="table-forum-list spaced">
+                <tr class="dark">
+                    <th>Nome</th>
+                    <th>Descrizione</th>
+                    <th>Ultima risposta</th>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <td class="dark name">
+                    <a href="{{ path('bacheca-lista-threads', {category: forum.categoryId}) }}">{{ forum.categoryName|upper }}</a>
+                </td>
+                <td>{{ forum.categoryDescription }}</td>
+                <td class="last-reply">
+                    {% if forum.lastThreadTitle %}
+                        {% set dayLastPost = forum.lastPostTime|date('d/m/Y') %}
+                        <div><strong>{{ forum.lastPostAuthor }}</strong></div>
+                        <div>{{ forum.lastThreadTitle|truncate(25) }}</div>
+                        <div class="date {% if dayLastPost == dayNow %}today{% endif %}">{{ forum.lastPostTime|date('d/m/Y H:i') }}</div>
+                    {% else %}
+                        <i>Nessuna risposta</i>
+                    {% endif %}
+
+                </td>
+            </tr>
+
+            {% set actualForum = forum.name %}
+            {% if loop.last %}
+                </table>
+            {% endif %}
+        {% endfor %}

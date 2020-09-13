@@ -1,0 +1,115 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block modals %}
+    {{ parent() }}
+
+    {% include 'GdrGameBundle:Default:reveal.html.twig' with {name: 'bank', size: 'medium'} %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/bank.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block content -%}
+    <div class="bank-container">
+        <h1><span>Banca</span></h1>
+
+        <h4>Totale del tuo conto: <strong class="bank-amount">{{ bankAmount }}</strong> Mori.</h4>
+        <h4>Totale Mori trasportati: <strong><span class="bag-amount">{{ bagAmount }}</span>/10000</strong>.</h4>
+
+        <hr>
+
+        <div class="operations-centered">
+            <div class="bank-deposito-container">
+                <h3>Deposito</h3>
+
+                <form id="bank-deposito">
+                    <label>Mori da depositare*</label>
+                    <input placeholder="Quantità" pattern="\d+" type="text" required="true" class="deposito-quantity">
+                    <button type="submit">Deposita</button>
+                </form>
+            </div>
+
+            <div class="bank-prelievo-container">
+                <h3>Prelievo</h3>
+
+                <form id="bank-prelievo">
+                    <label>Mori da prelevare*</label>
+                    <input placeholder="Quantità" pattern="\d+" type="text" required="true" class="prelievo-quantity">
+                    <button type="submit">Preleva</button>
+                </form>
+            </div>
+
+            <hr>
+
+            <div class="bank-trasferimento-container">
+                <h3>Trasferimento</h3>
+
+                <form id="bank-trasferimento">
+                    <div class="half">
+                        <label>Mori da trasferire*</label>
+                        <input placeholder="Quantità" pattern="\d+" type="text" required="true"
+                               class="trasferimento-quantity">
+                    </div>
+                    <div class="half">
+                        <label>Destinatario*</label>
+                        <input placeholder="Nome del personaggio" type="text" required="true"
+                               class="trasferimento-destinatario">
+                    </div>
+                    <div>
+                        <label>Nota</label>
+                        <input style="width: 95%;" placeholder="Nota opzionale..." type="text" class="trasferimento-nota">
+                    </div>
+                    <button type="submit">Trasferisci</button>
+                </form>
+
+            </div>
+        </div>
+
+        <hr>
+
+        <h3>Ultimi movimenti</h3>
+        {{ knp_pagination_render(paginator) }}
+        <table id="bank-transactions" class="solited">
+            <thead>
+            <tr>
+                <th class="date">Data</th>
+                <th class="type">Tipologia</th>
+                <th class="total">Totale</th>
+                <th class="note">Note</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for transaction in paginator %}
+                {% if transaction.isPlus %}
+                    {% set sign = '+' %}
+                {% else %}
+                    {% set sign = '-' %}
+                {% endif %}
+                <tr>
+                    <td>{{ transaction.createdAt|date('d/m/Y H:i') }}</td>
+                    <td>{{ transaction.typeName }}</td>
+                    <td>{{ sign }} {{ transaction.amount }} Mori</td>
+                    <td>{{ transaction.note }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-centered">Nel tuo conto non ci sono stati ancora dei movimenti.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {{ knp_pagination_render(paginator) }}
+    </div>
+{% endblock %}

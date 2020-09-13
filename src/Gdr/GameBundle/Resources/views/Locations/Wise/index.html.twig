@@ -1,0 +1,44 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/wise.js' %}
+    <script src="{{ asset_url }}"></script>
+
+    <script>
+        $("#wiseTag").select2();
+    </script>
+    {% endjavascripts %}
+{% endblock %}
+{% block content %}
+    <div class="wise-container">
+
+        <h1><span>Il Saggio di Teon</span></h1>
+
+        <div id="wise-container">
+
+            <div id="wise-content">
+                <div class="form">
+
+                    <form action="{{ path('wise.ask') }}" method="post" id="wise-form-ask">
+                        <label for="id">Avemor Teoniano, dimmi una parola, una sola e vediamo se ho qualcosa di interessante da raccontarti!</label>
+                        <input type="text" name="tag" id="tag" required/>
+
+                        <button type="submit" disabled>Chiedi</button>
+                    </form>
+
+                </div>
+                <div class="ajax">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

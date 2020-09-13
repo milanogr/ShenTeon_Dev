@@ -1,0 +1,6 @@
+<div class="form-centered centered-form">
+    <form method="get" action="{{ path(route) }}">
+        <input placeholder="Scrivi il nome del personaggio da cercare" type="text" name="byName"{% if filter.byName is defined %} value="{{ filter.byName }}"{% endif %}>
+        <button type="submit">Cerca il Personaggio</button>
+    </form>
+</div>

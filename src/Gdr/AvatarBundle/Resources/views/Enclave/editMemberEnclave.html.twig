@@ -1,0 +1,31 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="master-container">
+        <h2><span>Gestione - {{ enclave.getName }}</span></h2>
+
+        <a class="button" href="{{ path('master-enclave-index') }}">Torna alla Gestione Enclave</a>
+
+        <hr>
+
+        <h3><span>Cambia il ruolo di {{ member.getName }}</span></h3>
+
+        <form action="{{ path('master-enclave-edit-member', {id: member.id}) }}" method="POST">
+
+            <label>Nuovo Ruolo</label>
+            {{ form_widget(form.enclaveRank) }}
+            {{ form_rest(form) }}
+
+            <br>
+            <button type="submit" class="confirmation-action" formnovalidate>Conferma</button>
+        </form>
+    </div>
+{% endblock %}

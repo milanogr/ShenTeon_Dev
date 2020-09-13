@@ -1,0 +1,11 @@
+biblioteca-index:
+    path: /sezioni
+    defaults: { _controller: GdrGameBundle:Library:index}
+
+biblioteca-show:
+    path: /sezione/{id}
+    defaults: { _controller: GdrGameBundle:Library:show}
+
+biblioteca-show-book:
+    path: /sezione/libro/{id}
+    defaults: { _controller: GdrGameBundle:Library:showBook}

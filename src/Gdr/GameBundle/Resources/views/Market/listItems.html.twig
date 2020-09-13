@@ -1,0 +1,53 @@
+<hr>
+<a class="button right" href="{{ path('market') }}">Torna al Mercato</a>
+<table class="market-item">
+    <thead>
+    <tr>
+        <th>Oggetto</th>
+        <th>Descrizione</th>
+        <th>Qtà</th>
+        <th>Peso</th>
+        <th>Prezzo</th>
+        <th>Acquista</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in paginator %}
+        <tr id="item-{{ item.id }}">
+            <td class="item-preview">
+                <figure>
+                    <figcaption class="item-name">{{ item.name }}</figcaption>
+                    <img src="{{ upload_path }}{{ item.imageName }}" title="{{ item.name }}">
+                    <span class="hide item-id">{{ item.id }}</span>
+                </figure>
+                {% if item.dressIconImageName %}
+                    <img class="dressIcon" src="{{ upload_path }}{{ item.dressIconImageName }}" title="Simbolo">
+                {% endif %}
+            </td>
+            <td>
+                {{ item.shortDescription }}
+                {% if item.showActiveDescription %}
+                    <p class="active-description">
+                        <strong>Effetto:</strong> {{ item.activeDescription }}
+                    </p>
+                {% endif %}
+            </td>
+            <td class="item-quantity">{{ item.quantity }}</td>
+            <td class="item-weight">{{ item.weight }}</td>
+            <td class="item-price">{{ item.price }}</td>
+            <td class="item-buy">
+                <form data-item="{{ item.id }}">
+                    <input value="0" class="buy-quantity" type="text" placeholder="Quantità" pattern="\d*">
+                    <button type="submit">Acquista</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="6" class="text-center">Al momento non ci sono oggetti in vendita per questa categoria.</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a class="button right" href="{{ path('market') }}">Torna al Mercato</a>
+{{ knp_pagination_render(paginator) }}

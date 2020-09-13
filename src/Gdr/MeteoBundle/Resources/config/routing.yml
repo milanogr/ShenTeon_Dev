@@ -1,0 +1,11 @@
+meteo-show:
+    pattern:  /show
+    defaults: { _controller: GdrMeteoBundle:Default:renderCondition }
+    options:
+        expose: true
+
+date-show:
+    pattern: /date
+    defaults: { _controller: GdrMeteoBundle:Default:renderDate }
+    options:
+        expose: true

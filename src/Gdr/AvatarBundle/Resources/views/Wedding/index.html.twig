@@ -1,0 +1,55 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/master.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="wedding-container">
+        <h1><span>Gestione matrimoni</span></h1>
+
+        <div class="centered-form">
+            <h3>Ufficia matrimonio</h3>
+
+            <form action="" method="POST">
+
+                {{ form_label(form.groom) }}
+                {{ form_widget(form.groom) }}
+                {{ form_errors(form.groom) }}
+
+                {{ form_label(form.bride) }}
+                {{ form_widget(form.bride) }}
+                {{ form_errors(form.bride) }}
+
+                {{ form_label(form.type) }}
+                {{ form_widget(form.type) }}
+                {{ form_errors(form.type) }}
+
+                {{ form_rest(form) }}
+
+                <button class="button confirmation-action" type="submit" formnovalidate>Conferma Matrimonio</button>
+            </form>
+
+            <hr>
+
+            <h3>Matrimoni attivi</h3>
+            {% for wedding in paginator %}
+                <div>
+                    {{ wedding.getCreatedAt|date("d/m/Y") }} fra {{ wedding.getGroom.getName }} e {{ wedding.getBride.getName }} - <a class="confirmation-action"
+                            href="{{ path("matrimoni-divorzia", {id: wedding.getId}) }}">DIVORZIA</a>
+                </div>
+            {% endfor %}
+            {{ knp_pagination_render(paginator) }}
+        </div>
+    </div>
+{% endblock %}

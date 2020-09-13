@@ -1,0 +1,37 @@
+{% extends "GdrSiteBundle::layout.html.twig" %}
+
+{% block content %}
+
+    {% if isDay %}
+        {% set img = vich_uploader_asset(meteo.condition, 'image') %}
+    {% else %}
+        {% set img = vich_uploader_asset(meteo.condition, 'imageNight') %}
+    {% endif %}
+
+    <div class="home-teon">
+        <div class="home-left">
+            <div id="teon-container">
+                <img id="teon-tela" src="{{ asset('bundles/gdrsite/images/home/'~ immagine ~'.jpg') }}">
+                {#<img id="teon-tela" src="{{ asset('bundles/gdrsite/images/home/teon_new.jpg') }}">#}
+                <img id="teon-cornice" src="{{ asset('bundles/gdrsite/images/teon-space.png') }}">
+            </div>
+            <div class="condizioni">
+                <img src="{{ vich_uploader_asset(moon.moon, 'image') }}" class="has-tip" title="{{ moon.moon.name }}">
+                <img src="{{ vich_uploader_asset(meteo.wind, 'image') }}" class="has-tip" title="{{ meteo.wind.name }}">
+                <img src="{{ img }}" class="has-tip"
+                     title="{{ meteo.condition.name }} | {{ meteo.temp }}°">
+            </div>
+        </div>
+        <div class="home-right">
+            <p>Avemor Teoniano, o semplice viandante! <br>
+                La Signoria Vi dà il benvenuto a Teon, la città più cosmopolita dello Shen, dove tutte le razze possono
+                trovare il proprio posto e portare avanti la propria storia. Diventerete un ricco mercante od un temuto
+                guerriero? Tenterete la misteriosa via della magia o lascerete tutto in mano al destino? Sta a Voi e a
+                nessun altro. Occhi aperti però, poiché nello Shen molte cose non sono quello che sembrano. Il mistero
+                Vi attende dietro l'angolo, a volte per farVi lo sgambetto, altre solo per soprenderVi.</p>
+        </div>
+    </div>
+
+    {{ include('GdrSiteBundle:News:_news.html.twig') }}
+
+{% endblock %}

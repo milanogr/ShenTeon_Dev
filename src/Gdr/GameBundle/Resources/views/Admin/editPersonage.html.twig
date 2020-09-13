@@ -1,0 +1,33 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block content %}
+    <div class="page-create-step1">
+        <h1><span>Modifica razza pg</span></h1>
+
+        <div class="form-centered centered-form">
+
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="flash-notice">
+                    <p class="text-centered"><strong>{{ flashMessage }}</strong></p>
+                </div>
+            {% endfor %}
+
+            <form action="{{ path('g-edit-pg') }}" method="POST">
+
+                <label>Nome personaggio</label>
+                {{ form_widget(form.personage) }}
+                {{ form_errors(form.personage) }}
+
+                <label>Nuova razza</label>
+                {{ form_widget(form.race) }}
+                {{ form_rest(form) }}
+
+                <button type="submit" formnovalidate>Procedi ai connotati</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

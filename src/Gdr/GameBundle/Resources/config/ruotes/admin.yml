@@ -1,0 +1,29 @@
+g-admin-items:
+    path: /inventario-oggetti
+    defaults: { _controller: GdrGameBundle:Admin:assignItem }
+
+g-show-locations:
+    path: /mostra-locations
+    defaults: { _controller: GdrGameBundle:Admin:chooseLocation }
+
+g-select-location:
+    path: /scegli-location/{id}
+    defaults: { _controller: GdrGameBundle:Admin:showLocation }
+
+g-save-location:
+    path: /salva-location/{id}/{top}/{left}
+    defaults: { _controller: GdrGameBundle:Admin:savePosition }
+    options:
+        expose: true
+
+g-edit-pg:
+    pattern: /modifica-personaggio
+    defaults: { _controller: GdrGameBundle:Admin:editPersonage, step: 1}
+
+g-edit-pg-step:
+    pattern: /modifica-personaggio-2
+    defaults: { _controller: GdrGameBundle:Admin:editPersonage, step: 2}
+
+g-shop-list:
+    path: /lista-botteghe
+    defaults: { _controller: GdrGameBundle:Admin:shopList }

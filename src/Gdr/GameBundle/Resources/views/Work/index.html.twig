@@ -1,0 +1,48 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="works-container">
+        <h1><span>Palazzo del Lavoro</span></h1>
+
+        <img src="{{ asset('bundles/gdrgame/images/casa_lavori.jpg') }}">
+
+        <div class="flash-notice">
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                <p class="text-centered">{{ flashMessage|raw }}</p>
+            {% endfor %}
+        </div>
+
+        <table class="spaced">
+            <tr class="dark">
+                <th>Tipologia di impiego</th>
+                <th>Posti disponibili</th>
+                <th>Paga</th>
+                <th>Lavora</th>
+            </tr>
+
+            {% for work in works %}
+                <tr>
+                    <td class="name dark">{{ work.getName }}</td>
+                    <td class="available">{{ work.getAvailable }}</td>
+                    <td class="pay">{{ work.getPay }}</td>
+                    {% if (already) %}
+                        <td class="worked">Hai già lavorato per oggi</td>
+                    {% elseif(work.getIsFree) %}
+                        <td class="work"><a href="{{ path("lavoro-scegli", {"id": work.getId}) }}" class="button small">Lavora</a>
+                        </td>
+                    {% else %}
+                        <td class="work">Non disponibile</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

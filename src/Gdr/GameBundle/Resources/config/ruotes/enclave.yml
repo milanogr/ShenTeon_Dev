@@ -1,0 +1,19 @@
+enclave-index:
+    path: /index
+    defaults: { _controller: GdrGameBundle:Enclave:index }
+
+enclave-show:
+    path: /show/{id}
+    defaults: { _controller: GdrGameBundle:Enclave:show }
+
+enclave-statute:
+    path: /statute/{id}
+    defaults: { _controller: GdrGameBundle:Enclave:showStatute }
+
+enclave-annex:
+    path: /annex/{id}
+    defaults: { _controller: GdrGameBundle:Enclave:showAnnex }
+
+enclave-nobili:
+    path: /nobili
+    defaults: { _controller: GdrGameBundle:Enclave:showNobili }

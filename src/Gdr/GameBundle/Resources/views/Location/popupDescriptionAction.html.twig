@@ -1,0 +1,5 @@
+{% if location.descriptionMap %}
+    {{ location.descriptionMap|raw }}
+{% else %}
+    <p>Non c'è ancora nessuna descrizione per {{ location.name }}!</p>
+{% endif %}

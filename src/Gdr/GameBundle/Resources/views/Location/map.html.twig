@@ -1,0 +1,60 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/location.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block content %}
+    <div class="general-maps">
+        <h2><span>Mappa testuale rapida</span></h2>
+        <div class="locations-div">
+            <form method="POST">
+                <select id="fast-locations">
+                    <option>Seleziona una chat:</option>
+                    {% for location in locations %}
+                        <option value="{{ location.id }}">
+                            {{ location.name }} {% if location.requireKey %}[Richiede una chiave]{% endif %}
+                        </option>
+                    {% endfor %}
+                </select>
+                <button type="submit">VAI!</button>
+            </form>
+        </div>
+
+        <h2><span>Mappa di Teon</span></h2>
+        <span><i>(click sull'immagine per ingrandire)</i></span>
+
+        {% if isDay %}
+            {% set extra = '' %}
+        {% else %}
+            {% set extra = '_night' %}
+        {% endif %}
+
+        <div class="map-div">
+            <a href="{{ path('change_location', {id: teon.id}) }}">
+                <img title="Vai alla mappa di Teon" class="gdrtooltip"
+                     src="{{ asset('bundles/gdrgame/images/mappe/mappa_mini_teon' ~ extra ~ '.jpg') }}">
+            </a>
+        </div>
+
+        <h2><span>Mappa della Signoria di Teon</span></h2>
+        <span><i>(click sull'immagine per ingrandire)</i></span>
+
+        <div class="map-div">
+            <a href="{{ path('change_location', {id: teonUnder.id}) }}">
+                <img title="Vai alla mappa dei territori esterni" class="gdrtooltip"
+                     src="{{ asset('bundles/gdrgame/images/mappe/mappa_mini_sotterranei.jpg') }}">
+            </a>
+        </div>
+    </div>
+{% endblock %}

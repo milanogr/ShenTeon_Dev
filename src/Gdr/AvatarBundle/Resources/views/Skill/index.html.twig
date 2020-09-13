@@ -1,0 +1,34 @@
+<p class="text-centered">
+    Mano a mano che il tuo Personaggio salirà di Livello di razza avrai la possibilità di scegliere UNA Skill del nuovo
+    livello ottenuto. <br>
+    <strong>Attenzione: </strong> la scelta di una Skill è definitiva
+</p>
+
+<hr>
+
+<div class="container-centered">
+    <div id="skills-container">
+        {% for i in 1..maxLevel %}
+            {{ render(controller('GdrAvatarBundle:Skill:showSkills', {level: i})) }}
+            <hr>
+        {% endfor %}
+    </div>
+    <div id="skills-image">
+        {% set pathSkill = "bundles/gdrgame/images/avatar/SKILL_LIV_" ~ raceLevel ~ ".jpg" %}
+        <img src="{{ asset(pathSkill) }}">
+    </div>
+</div>
+
+<span class="clearfix"></span>
+
+<script>
+    $(function () {
+        $('.skill, .skill-random').tooltipster({
+            theme: '.tooltipster-shadow',
+            maxWidth: 400
+
+        }).on('click', function () {
+            $(this).tooltipster('hide');
+        });
+    });
+</script>

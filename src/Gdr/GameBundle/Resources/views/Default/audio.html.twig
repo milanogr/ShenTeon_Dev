@@ -1,0 +1,9 @@
+{% if isAudioActive %}
+    <a id="toggle-suoni" data-sound="on" class="gdrtooltip" data-href="{{ path("toggle-audio", {change: 1}) }}" title="I suoni sono attivati. Clicca qui per disabilitarli.">
+        <img src="{{ asset("bundles/gdrgame/images/suoni-on.png") }}">
+    </a>
+{% else %}
+    <a id="toggle-suoni" data-sound="off" class="gdrtooltip" data-href="{{ path("toggle-audio", {change: 1}) }}" title="I suoni sono DISATTIVATI. Clicca qui per abilitarli (campana al cambio dell'ora e corvo alla ricezione delle missive).">
+        <img src="{{ asset("bundles/gdrgame/images/suoni-off.png") }}">
+    </a>
+{% endif %}

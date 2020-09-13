@@ -1,0 +1,8 @@
+<a id="marque-toggle" class="gdrtooltip" title="Ferma/Riprendi scorrimento">
+    <img src="{{ asset('bundles/gdrgame/images/ferma-marque.png') }}">
+</a>
+<marquee id="marque-tag" behavior="scroll" scrollamount="3" direction="left">
+    {% for marque in marques %}
+        {{ marque.text }}{% if loop.last == false %} | {% endif %}
+    {% endfor %}
+</marquee>

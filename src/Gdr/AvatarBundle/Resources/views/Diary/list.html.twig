@@ -1,0 +1,35 @@
+<div class="pages-container">
+    {% if paginator.totalItemCount %}
+    <ul class="first-ul">
+        {% for diary in paginator %}
+        <li>
+            <a class="diary-show" href="{{ url('avatar-diary-show', {id: diary.id}) }}">{{ diary.title }}</a> <br>
+            <span>{{ diary.createdAt|localizeddate('none', 'none', 'it_IT', null, "d MMMM Y") }}</span>
+
+            {% if is_owner %}
+                <span><a class="edit" href="{{ url('avatar-diary-edit', {id: diary.id}) }}" title="Modifica la pagina">[modifica]</a></span>
+                <span><a class="delete" href="{{ url('avatar-diary-delete', {id: diary.id}) }}" title="Elimina la pagina">[elimina]</a></span>
+                <abbr title="Info visibile solo a te">
+                    {% if diary.isHidden %}
+                        (pagina visibile solo a te)
+                    {% else %}
+                        (pagina visibile a tutti)
+                    {% endif %}
+                </abbr>
+            {% endif %}
+
+        </li>
+        {% if loop.index == split %}
+    </ul>
+    <ul class="second-ul">
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-centered"><i>Non sono state ancora scritte pagine del diario...</i></p>
+    {% endif %}
+</div>
+
+<span class="clearfix"></span>
+
+{{ knp_pagination_render(paginator) }}

@@ -1,0 +1,9 @@
+<div class="popup-diary">
+    <h3>{{ diary.title }}</h3>
+
+    {{ diary.body|raw }}
+
+    <hr>
+
+    <span class="date">{{ diary.createdAt|localizeddate('none', 'none', 'it_IT', null, "d MMMM Y") }}</span>
+</div>

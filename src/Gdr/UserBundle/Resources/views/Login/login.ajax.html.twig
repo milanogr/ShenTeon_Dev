@@ -1,0 +1,30 @@
+{% if app.user %}
+
+    <a href="{{ path('user_choose_pg') }}" title="Scegli il tuo personaggio">Scegli Personaggio</a>
+    <a href="{{ path('logout') }}" title="Esegui il logout">Logout</a>
+
+{% else %}
+
+    {% if error %}
+        <p class="flash-error">
+            {% if error.message == 'Bad credentials' %}
+                Email e/o password non valide
+            {% else %}
+                {{ error.message }}
+            {% endif %}
+        </p>
+    {% endif %}
+
+    <form action="{{ path('login_check') }}" method="post">
+        <label for="email">Email:</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="_password"/>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+        <button class="button" type="submit">Effettua il login</button>
+    </form>
+
+{% endif %}

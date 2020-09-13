@@ -1,0 +1,41 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/missive.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block content -%}
+    <div id="missive-container">
+
+        <h1><span>Lista delle missive</span></h1>
+
+        <div class="clearfix">
+            <a href="{{ path('missive-create') }}" class="button">
+                Scrivi una nuova missiva
+            </a>
+
+            {% if canWriteML %}
+                <a href="{{ path('missive-create', {isForGroup: true}) }}" class="button">
+                    Scrivi una ML
+                </a>
+            {% endif %}
+
+            <a data-href="{{ path('missive-delete') }}" class="button right" id="letter-delete-submit">
+                Elimina selezionate
+            </a>
+        </div>
+        <div id="letter-ajax-output">
+            {% include '@GdrGame/Letter/list.html.twig' %}
+        </div>
+    </div>
+
+{% endblock %}

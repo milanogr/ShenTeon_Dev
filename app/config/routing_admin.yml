@@ -1,0 +1,18 @@
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+#_wdt:
+#    resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
+#    prefix:   /_wdt
+#
+#_profiler:
+#    resource: "@WebProfilerBundle/Resources/config/routing/profiler.xml"
+#    prefix:   /_profiler
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+
+_main:
+    resource: routing_dev.yml

@@ -1,0 +1,11 @@
+{% extends "GdrSiteBundle::layout.html.twig" %}
+
+{% block title "Le ultime novità dal gioco | Shenteon" %}
+
+{% block content %}
+    <div class="breadcrumb">
+        <a href="{{ path('site_homepage') }}">Homepage</a> &gt; News
+    </div>
+
+    {{ include('@GdrSite/News/_news.html.twig') }}
+{% endblock %}

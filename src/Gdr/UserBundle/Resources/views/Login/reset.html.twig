@@ -1,0 +1,35 @@
+{% extends 'GdrSiteBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <h2>Recupera la tua password</h2>
+
+    <p>Attraverso questo modulo puoi recuperare la password del tuo account, fornendo l'email attraverso cui ti sei
+        registrato.
+        Se non ricordi nemmeno l'email, utilizza il link "assistenza" alla fine della pagina per contattare il supporto. Ogni
+        tentativo verrà salvato nel sistema.</p>
+
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="flash-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="flash-error">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    <form action="{{ path('user_reset') }}" method="post" {{ form_enctype(form) }}>
+
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+        {{ form_errors(form.email) }}
+
+        {{ form_rest(form) }}
+
+        <button type="submit" value="Recupera la password" formnovalidate class="button medium">Recupera la password
+        </button>
+    </form>
+{% endblock %}

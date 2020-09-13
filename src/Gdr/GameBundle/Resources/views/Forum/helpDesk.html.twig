@@ -1,0 +1,14 @@
+{% extends 'GdrGameBundle:Forum:index.html.twig' %}
+
+{% block content %}
+
+    <div id="forum-container">
+        <h1><span>Supporto</span></h1>
+
+        <a class="button" href="{{ path('bacheca-create-thread', {category: category.id}) }}">Crea thread</a>
+
+        {% include '@GdrGame/Forum/listThreads.html.twig' %}
+
+        <a class="button" href="{{ path('bacheca-create-thread', {category: category.id}) }}">Crea thread</a>
+    </div>
+{% endblock %}

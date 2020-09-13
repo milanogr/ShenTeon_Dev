@@ -1,0 +1,31 @@
+{% extends 'GdrGameBundle:Letter:index.html.twig' %}
+
+{% block content -%}
+
+    <div id="missive-container">
+        <h1><span>Rispondi alla missiva</span></h1>
+
+        <a href="{{ path('missive-index') }}" class="button">
+            Torna alla lista
+        </a>
+
+        <form action="" method="post" {{ form_enctype(form) }}>
+            {{ form_errors(form) }}
+
+            {{ form_widget(form.body) }}
+            {{ form_errors(form.body) }}
+
+            {{ form_rest(form) }}
+            <p class="text-centered">
+                <button type="submit">Invia la risposta</button>
+            </p>
+        </form>
+
+        <hr>
+
+        <div id="old-letter">
+            {{ oldLetter|raw }}
+        </div>
+    </div>
+
+{% endblock %}

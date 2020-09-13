@@ -1,0 +1,94 @@
+{
+  "name": "symfony/framework-standard-edition",
+  "license": "MIT",
+  "type": "project",
+  "description": "The \"Symfony Standard Edition\" distribution",
+  "autoload": {
+    "psr-0": { "": "src/", "SymfonyStandard": "app/" },
+    "files": [ "app/AppKernel.php", "app/AppCache.php" ]
+  },
+  "require": {
+    "php"                                  : ">=5.3.9",
+    "ext-pdo_sqlite"                       : "*",
+    "doctrine/doctrine-bundle"             : "~1.5",
+    "doctrine/doctrine-fixtures-bundle"    : "~2.2",
+    "doctrine/orm"                         : "~2.4",
+    "erusev/parsedown"                     : "~1.5",
+    "ezyang/htmlpurifier"                  : "~4.7",
+    "incenteev/composer-parameter-handler" : "~2.1",
+    "ircmaxell/password-compat"            : "~1.0",
+    "leafo/scssphp"                        : "~0.1.5",
+    "patchwork/jsqueeze"                   : "~1.0",
+    "sensio/distribution-bundle"           : "~5.0",
+    "sensio/framework-extra-bundle"        : "~3.0",
+    "symfony/assetic-bundle"               : "~2.6",
+    "symfony/monolog-bundle"               : "~2.7",
+    "symfony/swiftmailer-bundle"           : "~2.3",
+    "symfony/symfony"                      : "~2.8",
+    "twig/extensions"                      : "~1.2",
+
+    "knplabs/knp-components": "1.2.5",
+    "knplabs/knp-menu-bundle": "@stable",
+    "jms/security-extra-bundle": "@stable",
+    "jms/di-extra-bundle": "@stable",
+    "stof/doctrine-extensions-bundle": "dev-master",
+    "doctrine/data-fixtures": "@stable",
+    "knplabs/knp-paginator-bundle"         : "~2.4",
+    "egeloen/ckeditor-bundle": "2.2.1",
+    "friendsofsymfony/jsrouting-bundle": "@stable",
+    "jms/serializer-bundle": "dev-master",
+
+    "sonata-project/cache": "dev-master",
+    "sonata-project/core-bundle": "dev-master",
+    "sonata-project/cache-bundle": "dev-master",
+    "sonata-project/admin-bundle":"dev-master",
+    "sonata-project/doctrine-orm-admin-bundle": "dev-master",
+    "sonata-project/intl-bundle": "dev-master",
+
+    "vich/uploader-bundle": "@stable",
+    "exercise/htmlpurifier-bundle": "dev-master",
+
+    "erivello/simple-html-dom-bundle": "dev-master",
+    "willdurand/faker-bundle": "@stable"
+  },
+  "require-dev": {
+    "sensio/generator-bundle": "~2.3"
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "SymfonyStandard\\Composer::hookRootPackageInstall"
+    ],
+    "post-install-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+    ],
+    "post-update-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+    ]
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "extra": {
+    "symfony-app-dir": "app",
+    "symfony-web-dir": "public_html",
+    "symfony-bin-dir": "bin",
+    "symfony-var-dir": "var",
+    "symfony-assets-install": "relative",
+    "incenteev-parameters": {
+      "file": "app/config/parameters.yml"
+    },
+    "branch-alias": {
+      "dev-master": "2.6-dev"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{% extends 'GdrGameBundle:Forum:index.html.twig' %}
+
+{% block content %}
+    <div id="forum-container">
+
+        <a href="{{ path('bacheca-index') }}" class="button medium">Torna alla Bacheca</a>
+
+        <h1><span>Forum di Enclave</span></h1>
+        {% include '@GdrGame/Forum/listForum.html.twig' with {forums: forums} %}
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+master-enclave-index:
+    path: /enclave-index
+    defaults: { _controller: GdrAvatarBundle:EnclaveMaster:indexEnclave }
+
+master-clan-index:
+    path: /clan-index
+    defaults: { _controller: GdrAvatarBundle:EnclaveMaster:indexClan }
+
+master-enclave-edit-member:
+    path: /enclave-modifica-membro-{id}
+    defaults: { _controller: GdrAvatarBundle:EnclaveMaster:editMemberEnclave }
+
+master-enclave-edit-level:
+    path: /enclave-modifica-livello-{id}
+    defaults: { _controller: GdrAvatarBundle:EnclaveMaster:editMemberLevelEnclave }
+
+master-clan-edit-member:
+    path: /clan-modifica-membro-{id}
+    defaults: { _controller: GdrAvatarBundle:EnclaveMaster:editMemberClan }
+
+master-enclave-delete-member:
+    path: /enclave-elimina-membro-{id}
+    defaults: { _controller: GdrAvatarBundle:EnclaveMaster:deleteMemberEnclave }
+
+master-clan-delete-member:
+    path: /clan-elimina-membro-{id}
+    defaults: { _controller: GdrAvatarBundle:EnclaveMaster:deleteMemberClan }
+
+master-enclave-new:
+    path: /enclave-aggiungi-membro
+    defaults: { _controller: GdrAvatarBundle:EnclaveMaster:addMemberEnclave }
+
+master-clan-new:
+    path: /clan-aggiungi-membro
+    defaults: { _controller: GdrAvatarBundle:EnclaveMaster:addMemberClan }
+
+master-forum-enclave-admin:
+    path: /gestione-forum-enclave
+    defaults: { _controller: GdrAvatarBundle:EnclaveMaster:manageForumEnclave }
+
+master-forum-clan-admin:
+    path: /gestione-forum-clan
+    defaults: { _controller: GdrAvatarBundle:EnclaveMaster:manageForumClan }
+
+master-forum-enclave-edit-category:
+    path: /gestione-forum-enclave/modifica-{id}
+    defaults: { _controller: GdrAvatarBundle:EnclaveMaster:editForumEnclaveCategory }
+
+master-forum-clan-edit-category:
+    path: /gestione-forum-clan/modifica-{id}
+    defaults: { _controller: GdrAvatarBundle:EnclaveMaster:editForumClanCategory }

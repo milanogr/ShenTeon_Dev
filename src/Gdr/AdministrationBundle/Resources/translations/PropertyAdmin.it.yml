@@ -1,0 +1,14 @@
+Property List: Lista Immobili
+Name: Nome
+Type: Tipo
+Image: Immagine
+Description: Descrizione
+Price: Prezzo
+Quantity: Quantità
+Tax: Tassa in Mori
+Frequency Items: Frequenza di produzione (giorni)
+Is Active: Acquistabile?
+Get Type Name: Tipo
+Items: Oggetti
+Max People: Max abitanti
+Chat Image: Immagine per Chat

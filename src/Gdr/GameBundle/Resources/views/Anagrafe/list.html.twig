@@ -1,0 +1,43 @@
+<table id="table-online" class="spaced alternate">
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th>Nome Esteso</th>
+        <th>A Teon dal</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for personage in personages %}
+        <tr>
+            <td>
+                <strong>
+                    <a href="{{ url('avatar-index', {name: personage.0.name}) }}">
+                    {% if personage.0.gender == 1 %}
+                        <img title="{{ personage.0.race.name }}" src="{{ uploadPath('race') ~ personage.raceMaleIcon }}">
+                    {% else %}
+                        <img title="{{ personage.0.race.name }}" src="{{ uploadPath('race') ~ personage.raceFemaleIcon }}">
+                    {% endif %}
+                    </a>
+                    {{ personage.0.name }}
+                </strong>
+            </td>
+            <td>{{ personage.surname }}</td>
+            <td>{{ personage.0.nameExtended }}</td>
+            <td>
+                {% if personage.0.createdAt|date('Y') >= '2013' %}
+                    {{ personage.0.createdAt|date('d/m/Y')|teon_date(true) }}
+                {% else %}
+                    Antico Teoniano
+                {% endif %}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4" class="text-centered">
+                La lista, al momento, è vuota
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

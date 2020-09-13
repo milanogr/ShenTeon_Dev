@@ -1,0 +1,11 @@
+<p class="chat-row meteo gdrtooltip"
+   title="Questa è una stringa del Meteo. Descrive un cambiamento climatico da tenere in considerazione.">
+            <span class="body">
+                {{ chat.body }}
+            </span>
+</p>
+<script>
+    if (typeof Refresh != 'undefined') {
+        Refresh.meteo();
+    }
+</script>

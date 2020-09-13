@@ -1,0 +1,21 @@
+<div class="erario-filter">
+
+    {% if position == 'bottom' %}
+        <hr>
+    {% endif %}
+
+    {% for key, type in types %}
+
+        {% if currentType == key %}
+            {% set class = 'class="active"' %}
+        {% else %}
+            {% set class = '' %}
+        {% endif %}
+
+        <a {{ class|raw }} href="{{ path('erario-index', {type: key}) }}">{{ types[key] }}</a>
+    {% endfor %}
+
+    {% if position == 'top' %}
+        <hr>
+    {% endif %}
+</div>

@@ -1,0 +1,3 @@
+editti-index:
+    path: /visualizza
+    defaults: { _controller: GdrGameBundle:Editti:show}

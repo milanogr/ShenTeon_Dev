@@ -1,0 +1,34 @@
+{% extends '@GdrGame/Enclave/index.html.twig' %}
+
+{% block content %}
+    <div id="enclavi-container">
+        <h1><span>I Nobili di Teon</span></h1>
+
+        <div class="nobili-container">
+
+            <ul>
+                {% for nobile in nobili %}
+                    <li><img src="{{ vich_uploader_asset(nobile, 'icon') }}"></li>
+                    <li>
+                        {% if nobile.personage.gender == 1 %}
+                            <a href="{{ path('avatar-index', {name: nobile.personage.name}) }}">
+                                <img src="{{ uploadPath('race') ~ nobile.personage.race.maleIconName }}">
+                            </a>
+                        {% else %}
+                            <a href="{{ path('avatar-index', {name: nobile.personage.name}) }}">
+                                <img src="{{ uploadPath('race') ~ nobile.personage.race.femaleIconName }}">
+                            </a>
+                        {% endif %}
+                        <span class="rank-name">{{ nobile.name }}</span>
+                        {{ nobile.personage.name }} {{ nobile.personage.surname }}
+                    </li>
+                    {% if loop.last == false %}
+                        <li class="divider">
+                            <img src="{{ asset('bundles/gdrgame/images/divider.png') }}">
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/master.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="master-container">
+        <h1><span>Gestione {{ clan.getName }}</span></h1>
+
+        <a href="{{ path('master-forum-clan-admin') }}">Vai alla Gestione Forum</a>
+
+        <hr>
+
+        <table class="list spaced">
+            {% for member in members %}
+                <tr>
+                    <td>
+                        <span class="name"><strong>{{ member.getName }}</strong> - {{ member.getClanRank.getName }}</span>
+                        <form method="POST" action="{{ path("master-clan-delete-member", {id: member.getId}) }}">
+                            <select name="reason">
+                                <option value="1">Termine Incarico</option>
+                                <option value="2">Dimissioni</option>
+                            </select>
+                            <button type="submit" class="confirmation-action">Dimetti</button>
+                        </form>
+                    </td>
+                    <td class="actions">
+                        <a style="margin-top: 12px" class="button" href="{{ path("master-clan-edit-member", {id: member.getId}) }}">Cambia Ruolo</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td class="text-centered">Non ci sono altri membri per questa Enclave</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <hr>
+
+        <div class="centered-form">
+            <h3>Aggiungi membro</h3>
+
+            <form method="post" action="">
+
+                <label>Nome Personaggio</label>
+                {{ form_widget(form.name) }}
+                <div class="error">{{ form_errors(form.name) }}</div>
+
+                <label>Ruolo</label>
+                {{ form_widget(form.rank) }}
+
+                {{ form_rest(form) }}
+
+                <button class="button confirmation-action" type="submit">Aggiungi membro all'Enclave Razziale</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+<table>
+    <thead>
+    <tr>
+        <th>Immobile ed ubicazione</th>
+        <th>Descrizione</th>
+        {% if currentType == 1 %}
+            <th>Massimo abitanti</th>
+        {% else %}
+            <th>Spesa mensile</th>
+        {% endif %}
+        <th>Quantità</th>
+        <th>Prezzo</th>
+        <th>Acquista</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for property in paginator %}
+        <tr>
+            <td class="immobile">
+                {{ property.name }}
+                <img src="{{ vich_uploader_asset(property, 'image') }}" alt="{{ property.name }}">
+            </td>
+            <td>{{ property.description }}</td>
+            {% if currentType == 1 %}
+            <td class="max-people">{{ property.maxPeople }}</td>
+            {% else %}
+                <td class="rendita"></td>
+            {% endif %}
+            <td class="quantity">{{ property.quantity }}</td>
+            <td class="price">{{ property.price }}</td>
+            <td class="buy"><button class="button small" data-href="">Compra</button></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

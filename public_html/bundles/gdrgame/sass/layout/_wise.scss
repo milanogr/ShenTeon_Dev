@@ -1,0 +1,45 @@
+#wise-container {
+  width: 646px;
+  height: 430px;
+  margin: 0 auto;
+  background: url(/bundles/gdrgame/images/wise/vecchio_saggio_2.png);
+}
+
+#wise-content {
+  width: 273px;
+  margin-left: 348px;
+  height: 404px;
+  padding-top: 33px;
+
+  .form {
+    height: 90px;
+  }
+
+  form {
+    @include clearfix;
+
+    margin-bottom: 20px;
+
+    input[type=text]{
+      width: 153px;
+      float: left;
+      margin-bottom: 0;
+    }
+    button {
+      float: left;
+      height: 26px;
+      line-height: 1px;
+      margin-left: 3px;
+      margin-bottom: 0;
+    }
+    label {
+      line-height: 1.2;
+      margin-bottom: 5px;
+    }
+  }
+
+  .ajax {
+    height: 277px;
+    overflow: auto;
+  }
+}

@@ -1,0 +1,7 @@
+lavoro-index:
+    path: /lista
+    defaults: { _controller: GdrGameBundle:Work:index}
+
+lavoro-scegli:
+    path: /scegli/{id}
+    defaults: { _controller: GdrGameBundle:Work:work}

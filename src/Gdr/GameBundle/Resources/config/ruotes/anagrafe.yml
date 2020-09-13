@@ -1,0 +1,11 @@
+anagrafe-index:
+    path: /index
+    defaults: { _controller: GdrGameBundle:Anagrafe:index }
+
+anagrafe-divorzi:
+    path: /divorzi
+    defaults: { _controller: GdrGameBundle:Anagrafe:divorces }
+
+anagrafe-matrimoni:
+    path: /matrimoni
+    defaults: { _controller: GdrGameBundle:Anagrafe:wedding }

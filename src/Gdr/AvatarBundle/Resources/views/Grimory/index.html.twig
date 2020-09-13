@@ -1,0 +1,124 @@
+<div class="text-centered">
+    <h4>Punti MANA totali a disposizione: <strong>{{ maxMana }}</strong></h4>
+</div>
+
+<hr>
+
+<div id="grimory-centered">
+    <div id="grimory-left"></div>
+    <div id="button-levels" class="clearfix">
+        <h3>Scegliete i vostri incanti</h3>
+
+        {% set lastLevel = 1 %}
+        {% for book in books %}
+
+            <div class="flotted">
+                <a href="{{ url('grimory-categories', {level: loop.index}) }}" class="button large open-categories">Incanti
+                    liv. {{ loop.index }} <i>({{ render(controller('GdrAvatarBundle:Grimory:totalSpellsLearned', {level: loop.index})) }} selezionati)</i></a>
+            </div>
+            {% set lastLevel = loop.index + 1 %}
+        {% endfor %}
+
+        {% if lastLevel > 6 %}
+            {% set lastLevel = 6 %}
+        {% endif %}
+
+        {% for i in lastLevel..6 %}
+            <div class="flotted">
+                <button class="button large" disabled=true>Incanti liv. {{ i }}</button>
+            </div>
+        {% endfor %}
+
+        <div class="text-centered">
+            {% if canStudy and books is not empty %}
+                <a href="{{ url('grimory-study') }}" class="button large study">STUDIA selezionati</a>
+            {% elseif books is empty %}
+                <button class="button large disabled" disabled=true>Non avete le conoscenze adatte per lo studio di incanti</button>
+            {% else %}
+                <button class="button large disabled" disabled=true>Avete studiato i vostri incanti. Potrete studiare nuovamente dal prossimo sorgere del sole [ore 5.00 am]</button><br>
+            {% endif %}
+        </div>
+    </div>
+    <div id="grimory-right"></div>
+</div>
+
+
+<hr>
+
+<div class="clearfix centered-spells">
+    <div id="spells-learned">
+        <h3>Incanti attualmente studiati</h3>
+
+        <p class="hint">(incanti attualmente utilizzabili in chat)</p>
+
+        <table class="table-spells-studied solited">
+            <thead>
+            <tr>
+                <th>Incanto</th>
+                <th>Categoria</th>
+                <th class="level">Lanciato</th>
+                <th class="level">Lvl.</th>
+                <th class="mana">Mana</th>
+            </tr>
+            </thead>
+            {% set totalManaStudied = 0 %}
+            {% for spell in spellsStudied %}
+                {% set totalManaStudied = totalManaStudied + spell.level %}
+                <tr>
+                    <td><a class="show-spell-description" title="Visualizza la descrizione dell'incanto" href="{{ url('grimory-show-spell', {id: spell.id}) }}">{{ spell.name }}</a></td>
+                    <td class="category">{{ spell.category }}</td>
+                    <td class="level">{% if spell.isUsed %}Sì{% else %}No{% endif %}</td>
+                    <td class="level">{{ spell.level }}</td>
+                    <td class="mana">{{ spell.level }}</td>
+                </tr>
+                {% if loop.last %}
+                    <tr>
+                        <td colspan="4"><strong>Totale mana utilizzato:</strong></td>
+                        <td class="mana"><strong>{{ totalManaStudied }} su {{ maxMana }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+
+        {% if spellsStudied is empty %}
+            <p><i>Non avete studiato ancora nessun incanto.</i></p>
+        {% endif %}
+    </div>
+
+    <div id="spells-selected">
+        <h3>Incanti attualmente selezionati</h3>
+
+        <p class="hint">(incanti che diventeranno disponibili in chat una volta studiati)</p>
+
+        <table class="table-spells-selected solited">
+            <thead>
+            <tr>
+                <th>Incanto</th>
+                <th class="category">Categoria</th>
+                <th class="level">Lvl.</th>
+                <th class="mana">Mana</th>
+            </tr>
+            </thead>
+            {% set totalManaSelected = 0 %}
+            {% for spell in spellsSelected %}
+                {% set totalManaSelected = totalManaSelected + spell.level %}
+                <tr>
+                    <td>{{ spell.name }}</td>
+                    <td>{{ spell.category }}</td>
+                    <td class="level">{{ spell.level }}</td>
+                    <td class="mana">{{ spell.level }}</td>
+                </tr>
+                {% if loop.last %}
+                    <tr>
+                        <td colspan="3"><strong>Totale mana che sarà utilizzato:</strong></td>
+                        <td class="mana"><strong>{{ totalManaSelected }} su {{ maxMana }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+
+        {% if spellsSelected is empty %}
+            <p><i>Non avete selezionato ancora nessun incanto.</i></p>
+        {% endif %}
+    </div>
+</div>

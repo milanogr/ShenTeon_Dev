@@ -1,0 +1,105 @@
+{% extends '@GdrGame/Default/index.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/foundation/foundation.section.js'
+    '@GdrGameBundle/Resources/public/javascripts/avatar.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="avatar-container">
+        <div class="wrapper-avatar section-container tabs" data-section="tabs">
+            <section>
+                <p class="title" data-section-title><a
+                            href="{{ url('avatar-index', {name: personage.name}) }}">{{ personage.name }}</a></p>
+
+                <div class="content tab-avatar" data-section-content>
+                    {% include '@GdrAvatar/Default/avatar.html.twig' with { personage: personage } %}
+                </div>
+            </section>
+            <section>
+                <p class="title" data-section-title><a href="{{ url('avatar-inventory', {name: personage.name}) }}">Inventario</a>
+                </p>
+
+                <div class="content tab-inventario" data-section-content></div>
+            </section>
+            <section>
+                <p class="title" data-section-title><a href="{{ url('avatar-dress-list', {name: personage.name}) }}">Vestiti</a>
+                </p>
+
+                <div class="content tab-vestiti" data-pagination=true data-section-content></div>
+            </section>
+            <section>
+                <p class="title" data-section-title><a
+                            href="{{ url('avatar-bag-list', {name: personage.name}) }}">Borsa</a>
+                </p>
+
+                <div class="content tab-bag" data-section-content></div>
+            </section>
+            <section>
+                <p class="title" data-section-title><a href="{{ url('property-index', {name: personage.name}) }}">Proprietà</a>
+                </p>
+
+                <div class="content tab-property" data-pagination=true data-section-content></div>
+            </section>
+            <section>
+                <p class="title" data-section-title><a href="{{ url('avatar-diary-list', {name: personage.name}) }}">Diario</a>
+                </p>
+
+                <div class="content tab-diary" data-section-content></div>
+            </section>
+            <section>
+                <p class="title" data-section-title><a href="{{ url('avatar-experience', {name: personage.name}) }}">Esperienze</a>
+                </p>
+
+                <div class="content tab-experience" data-section-content></div>
+            </section>
+            <section>
+                <p class="title" data-section-title><a href="{{ url('avatar-achivement-index', {name: personage.name}) }}">Riconoscimenti</a>
+                </p>
+
+                <div class="content tab-achievement tab-inventario" data-section-content></div>
+            </section>
+            {% if is_owner %}
+                <section>
+                    <p class="title" data-section-title><a href="{{ url('skill-index') }}">Skill</a>
+                    </p>
+
+                    <div class="content tab-skill" data-section-content></div>
+                </section>
+
+                <section>
+                    <p class="title" data-section-title><a href="{{ url('combat-index') }}">Combattimento</a>
+                    </p>
+
+                    <div class="content tab-combat" data-section-content></div>
+                </section>
+
+                <section>
+                    <p class="title" data-section-title><a href="{{ url('grimory-index') }}">Grimorio</a>
+                    </p>
+
+                    <div class="content tab-grimory" data-section-content></div>
+                </section>
+
+                <section>
+                    <p class="title" data-section-title><a href="{{ url('avatar-management') }}">Gestione</a>
+                    </p>
+
+                    <div class="content tab-management" data-section-content></div>
+                </section>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

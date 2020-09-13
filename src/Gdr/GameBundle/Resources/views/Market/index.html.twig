@@ -1,0 +1,138 @@
+{% extends 'GdrGameBundle:Default:innerContent.html.twig' %}
+
+{% block goBack %}
+    {{ render(controller('GdrGameBundle:Location:renderGoBack')) }}
+{% endblock %}
+
+{% block content -%}
+    <div class="market-container">
+        <h1><span>Il mercato</span></h1>
+
+        <p class="text-centered">
+            A Teon giungono, da ogni parte dello Shen, prodotti e materie prime di ogni tipo che vanno ad aggiungersi a
+            quelli realizzati nella cittadina.
+            La Signoria contratta personalmente con questi mercanti per permettere alla popolazione di usufruire di
+            tutti questi beni a prezzi accessibili e coerenti.
+        </p>
+
+        <p class="text-centered">Esistono tuttavia tipologie di merci difficilmente reperibili ed alcune di queste
+            addirittura illegali.
+            Non è chiaro dove questi prodotti possano essere reperiti.</p>
+
+        <div id="markets-centered">
+            <table id="emporium">
+                <thead>
+                <tr>
+                    <th><img alt="Emporio" src="{{ asset('bundles/gdrgame/images/market/emporium.jpg') }}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in 0..check.maxEmporiumLevel %}
+                    <tr>
+                        <td>
+                            {% if i == 0 %}
+                                <a href="{{ path('market-items', {'livello': i, 'mercato': emporio.id}) }}">Visita
+                                    l'Emporio
+                                    della città</a>
+                            {% else %}
+                                <a href="{{ path('market-items', {'livello': i, 'mercato': emporio.id}) }}">Visita
+                                    l'Emporio
+                                    di livello {{ i }}</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <table id="black-market">
+                <thead>
+                <tr>
+                    <th>
+                        {% if check.maxBlackMarketLevel %}
+                            <img alt="Mercato Nero"
+                                 src="{{ asset('bundles/gdrgame/images/market/black_market.jpg') }}">
+                        {% else %}
+                            <img alt="Mercato Nero"
+                                 src="{{ asset('bundles/gdrgame/images/market/black-market-disabled.jpg') }}">
+                        {% endif %}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if check.maxBlackMarketLevel > 0 %}
+                    {% for i in 1..check.maxBlackMarketLevel %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('market-items', {'livello': i, 'mercato': nero.id}) }}">Visita
+                                    il Mercato Nero di
+                                    livello {{ i }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td><a class="help gdrtooltip" href="#"
+                               title="In giro si può sentir parlare, ogni tanto, di un mercato nero...ma al momento ne sai troppo poco.">Il
+                                mercato nero...</a></td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+
+            <table id="potion-market">
+                <thead>
+                <tr>
+                    <th>
+                        {% if check.maxPotionMarketLevel %}
+                            <img alt="Mercato Pozioni"
+                                 src="{{ asset('bundles/gdrgame/images/market/potion-market.jpg') }}">
+                        {% else %}
+                            <img alt="Mercato Pozioni"
+                                 src="{{ asset('bundles/gdrgame/images/market/potion-market-disabled.jpg') }}">
+                        {% endif %}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if check.maxPotionMarketLevel > 0 %}
+                    {% for i in 1..check.maxPotionMarketLevel %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('market-items', {'livello': i, 'mercato': pozioni.id}) }}">Accedi
+                                    al Mercato Pozioni di
+                                    livello {{ i }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td><a class="help gdrtooltip" href="#"
+                               title="In giro si può sentir parlare, ogni tanto, del Mercato Pozioni...ma al momento ne sai troppo poco.">Il
+                                mercato delle Pozioni...</a></td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="enclave-markets-container">
+            {% if enclave %}
+                <a href="{{ path('market-items', {'mercato': 4}) }}">
+                    <img class="gdrtooltip" src="{{ asset('bundles/gdrgame/images/market/Mercato_Enclave_ON.png') }}" title="Accedi al mercato de {{ enclave.name }}">
+                </a>
+            {% else %}
+                <img class="gdrtooltip" src="{{  asset('bundles/gdrgame/images/market/Mercato_Enclave_OFF.png') }}" title="Non fai parte di nessuna Enclave">
+            {% endif %}
+
+            {% if clan %}
+                <a href="{{ path('market-items', {'mercato': 5}) }}">
+                    <img class="gdrtooltip" src="{{ asset('bundles/gdrgame/images/market/Mercato_Enclave_Razziale_ON.png') }}" title="Accedi al mercato de {{ clan.name }}">
+                </a>
+            {% else %}
+                <img class="gdrtooltip" src="{{ asset('bundles/gdrgame/images/market/Mercato_Enclave_Razziale_OFF.png') }}" title="Non fai parte di nessuna Enclave Razziale">
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

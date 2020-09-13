@@ -1,0 +1,33 @@
+site_default:
+    pattern:  /temp/manutenzione
+    defaults: { _controller: GdrSiteBundle:Default:default }
+site_homepage:
+    pattern:  /
+    defaults: { _controller: GdrSiteBundle:Default:index }
+site_regolamenti:
+    pattern:  /regolamenti.html
+    defaults: { _controller: GdrSiteBundle:Default:showRegolamenti }
+site_regolamento:
+    pattern:  /regolamento/{slug}.html
+    defaults: { _controller: GdrSiteBundle:Default:showRegolamento }
+site_ambientazione:
+    pattern:  /ambientazione.html
+    defaults: { _controller: GdrSiteBundle:Default:showAmbientazione }
+site_credits:
+    pattern:  /credits.html
+    defaults: { _controller: GdrSiteBundle:Default:showCredits }
+site_gdronline:
+    pattern: /EGA069.html
+    defaults: { _controller: GdrSiteBundle:Default:gdrOnline }
+site_mail:
+    pattern: /mail.html
+    defaults: { _controller: GdrSiteBundle:Default:mail }
+site_privacy:
+    pattern: /privacy-policy.html
+    defaults: { _controller: GdrSiteBundle:Default:showPrivacy }
+site_news:
+    pattern: /news/{slug}.html
+    defaults: { _controller: GdrSiteBundle:Default:showNews }
+site_list_news:
+    pattern: /news.html
+    defaults: { _controller: GdrSiteBundle:Default:showListNews }

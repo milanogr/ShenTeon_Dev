@@ -1,0 +1,9 @@
+{% if isToRead %}
+    <a href="{{ path('bacheca-special', {name: 'Strillone'}) }}"
+       title="Nuovi messaggi dallo Strillone!"
+       class="gdrtooltip no-square"><img src="{{ asset('bundles/gdrgame/images/star-special-forum.png') }}"> Strillone <img src="{{ asset('bundles/gdrgame/images/star-special-forum.png') }}"></a>
+{% else %}
+    <a href="{{ path('bacheca-special', {name: 'Strillone'}) }}"
+       title="Mostra i messaggi dello Strillone"
+       class="gdrtooltip">Strillone</a>
+{% endif %}

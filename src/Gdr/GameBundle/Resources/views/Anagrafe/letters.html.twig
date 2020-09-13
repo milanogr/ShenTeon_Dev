@@ -1,0 +1,14 @@
+<ul class="letters">
+    {% for letter in 'a'..'z' %}
+        {% set class="" %}
+        {% if filter.byLetter is defined %}
+            {% if letter|upper == filter.byLetter %}
+                {% set class="active" %}
+            {% endif %}
+        {% endif %}
+        <li>
+            <a class="gdrtooltip {{ class }}" title="Filtra per la lettera '{{ letter|upper }}'"
+               href="{{ path(route, {byLetter: letter|upper}) }}">{{ letter|upper }}</a>
+        </li>
+    {% endfor %}
+</ul>

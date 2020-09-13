@@ -1,0 +1,12 @@
+<section class="news-container">
+    {% for n in news %}
+        {#{% if loop.first == false %}#}
+            <div class="divider"></div>
+        {#{% endif %}#}
+        <article>
+            <h2>{{ n.title }}</h2>
+            <div class="date">{{ n.createdAt|date("d/m/Y") }}</div>
+            <p>{{ n.preBody }} <a href="{{ path('site_news', {slug: n.slug}) }}">Leggi tutto &rarr;</a></p>
+        </article>
+    {% endfor %}
+</section>

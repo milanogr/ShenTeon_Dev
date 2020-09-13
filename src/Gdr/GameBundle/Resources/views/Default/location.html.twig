@@ -1,0 +1,22 @@
+<figure>
+    <figcaption>{{ location.name }}</figcaption>
+
+    {% if isProperty %}
+        <img src="{{ vich_uploader_asset(image, 'chatImage') }}" alt="{{ location.name }}">
+    {% elseif image %}
+        <img src="{{ vich_uploader_asset(image, 'image') }}" alt="{{ location.name }}">
+    {% else %}
+        <img src="http://placehold.it/210x110" alt="Immagine mancante" title="Immagine mancante">
+    {% endif %}
+</figure>
+
+<a id="show-location-modal" class="view-description gdrtooltip" data-href="{{ path('location-info') }}"
+   title="Leggi la descrizione della location">Descrizione</a>
+<a id="show-map-modal" class="view-map gdrtooltip" data-href="{{ path('location-map-description') }}"
+   title="Visualizza la mappa del luogo">Mappa</a>
+{% if location.subChat %}
+    <a id="change-location-chat" class="gdrtooltip button small" title='Entra nella chat "{{ location.subChat }}"'
+       data-location="{{ location.subchat.id }}">{{ location.subChat }}</a>
+{% endif %}
+
+<a id="hideSx" class="gdrtooltip" title="Clicca per avere più spazio"></a>

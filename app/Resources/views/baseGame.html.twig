@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+
+    <title>
+        {%- if block('title') -%}
+            {{ block('title') }} | Shenteon
+        {%- else -%}
+            Il gioco di ruolo Play by Chat online di ambientazione Fantasy Medievale | Shenteon
+        {%- endif -%}
+    </title>
+
+    <meta name="description"
+          content="Shenteon – L’Eredità delle Lune è un innovativo Gioco di Ruolo Play by Chat gratuito ad ambientazione fantasy medievale, creato e gestito da giocatori appassionati ed esperti. Immergiti nella magia e nelle battaglie dello Shen!">
+    <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+
+    {% block stylesheets %}
+        {% stylesheets
+        'bundles/gdrgame/stylesheets/*'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+
+    <script src="{{ asset('bundles/gdrgame/javascripts/vendor/custom.modernizr.js') }}"></script>
+</head>
+
+<body>
+
+<div id="container">
+    <div id="layout-left-wrap">
+        <div id="layout-left">
+            <div id="location">
+                {% block location %}
+                    {{ render(controller('GdrGameBundle:Location:renderLocation')) }}
+                {% endblock %}
+            </div>
+
+            <nav id="menu-book-on">
+                <div class="wrap-left">
+                    <ul class="left">
+                        <li><a class="gdrtooltip" href="{{ path('avatar-index') }}" title="Visualizza il tuo avatar">Avatar</a>
+                        </li>
+                        <li><a class="gdrtooltip mappa" href="{{ path('location_map') }}"
+                               title="Apri la mappa">Mappa</a></li>
+                        <li><a class="gdrtooltip" href="{{ path("editti-index") }}" title="Leggi gli editti">Editti</a>
+                        </li>
+                        <li>{{ render(controller('GdrGameBundle:Default:renderAraldo')) }}</li>
+                        <li><a class="gdrtooltip" href="{{ path('bacheca-index') }}" title="Apri la bacheca">Bacheca</a>
+                        </li>
+                        <li><a class="gdrtooltip nosquare" href="{{ path("biblioteca-index") }}"
+                               title="Apri la biblioteca">Biblioteca</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <ul class="wrap-right">
+                    <li><a class="gdrtooltip" href="{{ path('enclave-index') }}"
+                           title="Visualizza le Enclavi">Enclavi</a></li>
+                    <li><a class="gdrtooltip" href="{{ path('anagrafe-index') }}"
+                           title="Visualizza l'Anagrafe">Anagrafe</a></li>
+                    <li><a href="{{ path('enclave-nobili') }}" title="Visualizza i Nobili di Teon"
+                           class="gdrtooltip">Nobili</a></li>
+                    <li><a class="gdrtooltip" href="{{ path('bank-index') }}" title="Accedi alla Banca">Banca</a></li>
+                    <li><a class="gdrtooltip" href="{{ path('erario-index', {type:1}) }}" title="Accedi all'Erario">Erario</a>
+                    </li>
+                    <li><a class="gdrtooltip" href="{{ path('market') }}" title="Accedi al Mercato">Mercato</a></li>
+                </ul>
+            </nav>
+
+            <nav id="menu-book-off">
+                <div class="wrap-left">
+                    <ul class="left">
+                        <li><a class="gdrtooltip" href="{{ path("manuale-index") }}" title="Visualizza il Manuale di gioco">Manuale di gioco</a></li>
+                        <li>{{ render(controller('GdrGameBundle:Default:renderStrillone')) }}</li>
+                        <li><a class="gdrtooltip" href="{{ path('online-index') }}" title="Visualizza i Presenti">Presenti</a>
+                        </li>
+                        <li><a class="gdrtooltip" href="#" title="Non implementato">Statistiche</a></li>
+                    </ul>
+                </div>
+
+                <ul class="wrap-right">
+                    <li><a class="gdrtooltip" href="{{ path('bacheca-helpdesk', {type: 'gestione'}) }}"
+                           title="Scrivi alla Gestione">Scrivi alla gestione</a></li>
+                    <li><a class="gdrtooltip" href="{{ path('bacheca-helpdesk', {type: 'moderazione'}) }}"
+                           title="Scrivi alla Moderazione">Scrivi alla moderazione</a></li>
+                    <li><a class="gdrtooltip" href="{{ path('bacheca-helpdesk', {type: 'fato'}) }}"
+                           title="Scrivi al Fato">Scrivi al fato</a></li>
+                </ul>
+            </nav>
+
+            <div id="bag-mini"></div>
+
+            <div id="buttons">
+                <ul>
+                    <li id="letter-ajax"
+                        class="letter">{{ render(controller('GdrGameBundle:Letter:showLetterAjax')) }}</li>
+                    {{ render(controller('GdrMeteoBundle:Default:renderCondition')) }}
+                    {{ render(controller('GdrMeteoBundle:Default:renderMoon')) }}
+                    <li class="suoni">
+                        {{ render(controller('GdrGameBundle:Default:renderAudio')) }}
+                    </li>
+                </ul>
+            </div>
+
+            <div id="actual-date">
+                <span class="date">{{ render(controller('GdrMeteoBundle:Default:renderDate')) }}</span>
+                <span class="time" data-timestamp="{{ date()|date('U') }}"></span>
+            </div>
+
+            <a id="ribbon-borsa" href="{{ path('mini-bag') }}" title="Visualizza la tua borsa"
+               class="gdrtooltip">Borsa</a>
+            <a id="ribbon-on"
+               title="Tutte le informazioni che troverai qui possono essere conosciute dal tuo personaggio"
+               class="active gdrtooltip">On</a>
+            <a id="ribbon-off" title="Tutte le informazioni che troverai qui non fanno parte del gioco"
+               class="gdrtooltip">Off</a>
+            <a id="ribbon-esci" href="{{ path('logout') }}" title="Esci dal gioco" class="gdrtooltip">Esci</a>
+
+            <div id="refresh-characters">
+                <span>Porte cittadine</span>
+
+                <div class="target-ajax">
+                    {{ render(controller('GdrGameBundle:Online:showLoggedInOut')) }}
+                </div>
+            </div>
+
+            <div id="riepilogo-pg">
+                {{ render(controller('GdrAvatarBundle:Default:miniAvatar')) }}
+            </div>
+        </div>
+    </div>
+
+    <div id="layout-right">
+        <div id="top-row">
+            <div class="relative">
+                <div class="top-left">
+                    {% block goBack %}{% endblock %}
+                </div>
+                <div class="top-right">
+                    <div class='marquee-top' id="marque"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div id="inner-content">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block modals %}
+    {% include 'GdrGameBundle:Default:reveal.html.twig' with {name: 'large', size: 'large'} %}
+    {% include 'GdrGameBundle:Default:reveal.html.twig' with {name: 'medium', size: 'medium'} %}
+    {% include 'GdrGameBundle:Default:reveal.html.twig' with {name: 'small', size: 'small'} %}
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    {% javascripts filter='?uglifyjs2'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/jquery.js'
+    '@GdrGameBundle/Resources/public/javascripts/foundation/foundation.js'
+    '@GdrGameBundle/Resources/public/javascripts/foundation/foundation-reveal.js'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/mousewheel.js'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/jquery.tooltipster.min.js'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/onResizeStop.jquery.js'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/jquery.form.min.js'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/jquery.mCustomScrollbar.min.js'
+    '@GdrGameBundle/Resources/public/javascripts/foundation/foundation.placeholder.js'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/jquery.equalHeight.js'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/jquery.hoverIntent.js'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/select2.js'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/select2-it.js'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/jquery.marquee.js'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/jquery.cookie.js'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/ion.sound.min.js'
+    '@GdrGameBundle/Resources/public/javascripts/vendor/jquery.nicescroll.js'
+    '@GdrGameBundle/Resources/public/javascripts/onLoad.js'
+    '@GdrGameBundle/Resources/public/javascripts/gioco.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <!-- <script src="{{ asset('bundles/gdrgame/javascripts/vendor/selectivizr.min.js') }}"></script> -->
+
+{% endblock %}
+</body>
+</html>

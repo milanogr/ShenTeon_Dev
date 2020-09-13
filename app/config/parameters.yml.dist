@@ -1,0 +1,34 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     shenteon_gdr
+    database_user:     shenteon_gdr
+    database_password: LyCKaF7J95D6CShu
+
+    mailer_transport: smtp
+    mailer_host: shenteon.com
+    mailer_user: gestione@shenteon.com
+    mailer_password: Um3ogRw37hLX#
+    mailer_encryption: ssl
+    mailer_port: 465
+
+
+    locale:            it
+    secret:            8eb83fe916d7bdf9e563336ecb84d4e8
+
+    online_minutes:    1440
+    user_inactivity:   1440
+
+    race_upload_path: /uploads/race
+    item_upload_path: /uploads/items
+    skill_upload_path: /uploads/skill
+    enclave_upload_path: /uploads/enclave
+    general_upload_path: /uploads/general
+    meteo_upload_path: /uploads/meteo
+    book_upload_path: /uploads/book
+    moon_image: /uploads/moon
+    personage_upload_path: /uploads/avatar
+    location_upload_path: /uploads/location
+
+    kernel.trusted_host: ['^(.*\.)?shenteon.com$', '^(.*\.)?gdr.dev$']
