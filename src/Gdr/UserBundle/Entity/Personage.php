@@ -151,7 +151,27 @@ class Personage
      * )
      */
     private $relationship;
+	
+	 /**
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      max = "100",
+     *      maxMessage = "Troppo lungo"
+     * )
+     */
+    private $music;
 
+	 /**
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      max = "100",
+     *      maxMessage = "Troppo lungo"
+     * )
+     */
+    private $musicName;
+	
     /**
      * @var string
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -173,6 +193,13 @@ class Personage
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $clanRank;
+	
+	
+	 /**
+     * @ORM\ManyToOne(targetEntity="Gdr\GameBundle\Entity\EnclaveRank")
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    private $familyRank;
 
     /**
      * @ORM\OneToOne(targetEntity="Gdr\UserBundle\Entity\Online", mappedBy="personage")
@@ -301,6 +328,11 @@ class Personage
      * @ORM\Column(type="boolean")
      */
     private $hideClan = false;
+	
+	/**
+     * @ORM\Column(type="boolean")
+     */
+    private $hideFamily = false;
 
     /**
      * @ORM\Column(type="boolean")
@@ -399,6 +431,8 @@ class Personage
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $fateNote;
+	
+		
 
     public function __toString()
     {
@@ -798,6 +832,31 @@ class Personage
     {
         return $this->clanRank;
     }
+	
+	
+	 /**
+     * Set familyRank
+     *
+     * @param \Gdr\GameBundle\Entity\EnclaveRank $familyRank
+     *
+     * @return Personage
+     */
+    public function setFamilyRank(\Gdr\GameBundle\Entity\EnclaveRank $familynRank = null)
+    {
+        $this->familyRank = $familyRank;
+
+        return $this;
+    }
+
+    /**
+     * Get familyRank
+     *
+     * @return \Gdr\GameBundle\Entity\EnclaveRank
+     */
+    public function getFamilyRank()
+    {
+        return $this->familyRank;
+    }
 
     /**
      * Add lettersSended
@@ -1010,6 +1069,55 @@ class Personage
     {
         return $this->friendship;
     }
+	
+	/**
+     * Set music
+     *
+     * @param string $music
+     *
+     * @return Personage
+     */
+    public function setMusic($music)
+    {
+        $this->music = $music;
+
+        return $this;
+    }
+
+    /**
+     * Get music
+     *
+     * @return string
+     */
+    public function getMusic()
+    {
+        return $this->music;
+    }
+
+	/**
+     * Set musicName
+     *
+     * @param string $musicName
+     *
+     * @return Personage
+     */
+    public function setMusicName($musicName)
+    {
+        $this->musicName = $musicName;
+
+        return $this;
+    }
+
+    /**
+     * Get musicName
+     *
+     * @return string
+     */
+    public function getMusicName()
+    {
+        return $this->musicName;
+    }
+	
 
 
     /**
@@ -1199,6 +1307,23 @@ class Personage
     {
         $this->hideClan = $hideClan;
     }
+	
+
+	/**
+     * @return mixed
+     */
+    public function getHideFamily()
+    {
+        return $this->hideFamily;
+    }
+
+    /**
+     * @param mixed $hideFamily
+     */
+    public function setHideFamily($hideFamily)
+    {
+        $this->hideFamily = $hideFamily;
+    }
 
     // ------------
 
@@ -1217,6 +1342,16 @@ class Personage
         $rank = $this->getClanRank();
         if (null !== $rank) {
             return $this->getClanRank()->getEnclave();
+        } else {
+            return false;
+        }
+    }
+	
+ public function hasFamily()
+    {
+        $rank = $this->getFamilyRank();
+        if (null !== $rank) {
+            return $this->getFamilyRank()->getEnclave();
         } else {
             return false;
         }
