@@ -38,6 +38,7 @@ class ManagementCommonType extends AbstractType
 			->add('musicName', null, array('label' => 'Autore e Nome della tua colonna sonora'))
 			->add('hideEnclave', null, array('label' => 'Nasconditi da Enclave'))
             ->add('hideClan', null, array('label' => 'Nasconditi da Enclave Razziale'))
+		->add('hideFamily', null, array('label' => 'Nasconditi da Enclave Familiare'))
             ->add('description', 'textarea', array('label' => 'Descrizione estesa'))
 			
 		;
