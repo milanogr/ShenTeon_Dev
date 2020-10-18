@@ -30,19 +30,13 @@ class ManagementCommonType extends AbstractType
     {
         $builder
             ->add('avatar', null, array('label' => 'Carica immagine avatar (300x300, max 300KB)'))
-			->add('nameExtended', null, array('label' => 'Nome esteso'))
+            ->add('nameExtended', null, array('label' => 'Nome esteso'))
             ->add('activity', null, array('label' => 'Attività'))
             ->add('relationship', null, array('label' => 'Parentele'))
             ->add('friendship', null, array('label' => 'Amicizie'))
-			->add('music', null, array('label' => 'Musica - Inserisci codice alfanumerico di un url di YouTube'))
-			->add('musicName', null, array('label' => 'Autore e Nome della tua colonna sonora'))
-			->add('hideEnclave', null, array('label' => 'Nasconditi da Enclave'))
+            ->add('hideEnclave', null, array('label' => 'Nasconditi da Enclave'))
             ->add('hideClan', null, array('label' => 'Nasconditi da Enclave Razziale'))
-		->add('hideFamily', null, array('label' => 'Nasconditi da Enclave Familiare'))
-            ->add('description', 'textarea', array('label' => 'Descrizione estesa'))
-			
-		;
-		
+            ->add('description', 'textarea', array('label' => 'Descrizione estesa'));
 
         if ($this->race->getMaleRealIconName() && $this->race->getFemaleRealIconName()) {
             $builder->add(
